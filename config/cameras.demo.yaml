@@ -1,0 +1,24 @@
+cameras:
+  - id: demo_alert_camera
+    display_name: ул. Заки Валиди - ул. Аксакова (демо уведомления)
+    source_kind: demo
+    demo_observations_file: config/demo/demo_alert_camera.json
+    stable_cycles: 2
+    poll_interval_seconds: 3
+    demo_loop: true
+
+  - id: demo_busy_camera
+    display_name: г. Уфа, Менделеева, 130 Камера 5 (демо занято)
+    source_kind: demo
+    demo_observations_file: config/demo/demo_busy_camera.json
+    stable_cycles: 2
+    poll_interval_seconds: 3
+    demo_loop: true
+
+  - id: demo_free_camera
+    display_name: ул. Георгия Мушникова - бульвар Баландина (демо свободно)
+    source_kind: demo
+    demo_observations_file: config/demo/demo_free_camera.json
+    stable_cycles: 2
+    poll_interval_seconds: 3
+    demo_loop: true

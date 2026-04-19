@@ -1,0 +1,15 @@
+.env
+.pytest_cache/
+__pycache__/
+*.pyc
+runtime/parking_bot.db
+runtime/camera_report.json
+runtime/camera_profile.json
+runtime/frames/*.jpg
+runtime/frames/*.jpeg
+runtime/frames/*.png
+train
+test
+valid
+*.jpg
+

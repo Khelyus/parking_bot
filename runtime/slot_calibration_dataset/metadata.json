@@ -1,0 +1,1378 @@
+{
+  "exported": 57,
+  "skipped": 13,
+  "class_counts": {
+    "space-empty": 29,
+    "space-occupied": 28
+  },
+  "samples": [
+    {
+      "camera_id": "mendeleeva_130_cam_9",
+      "slot_id": "upper_1",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mendeleeva_130_cam_9_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\mendeleeva_130_cam_9__upper_1__mendeleeva_130_cam_9_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.9909337759017944,
+      "slot_box": [
+        19,
+        309,
+        170,
+        640
+      ],
+      "crop_box": [
+        0,
+        216,
+        212,
+        700
+      ],
+      "empty_probability": 0.9909337759017944,
+      "occupied_probability": 0.009066266939043999,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mendeleeva_130_cam_9",
+      "slot_id": "upper_2",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mendeleeva_130_cam_9_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\mendeleeva_130_cam_9__upper_2__mendeleeva_130_cam_9_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.9908081889152527,
+      "slot_box": [
+        170,
+        319,
+        311,
+        610
+      ],
+      "crop_box": [
+        131,
+        238,
+        350,
+        662
+      ],
+      "empty_probability": 0.9908081889152527,
+      "occupied_probability": 0.009191778488457203,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mendeleeva_130_cam_9",
+      "slot_id": "upper_3",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mendeleeva_130_cam_9_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\mendeleeva_130_cam_9__upper_3__mendeleeva_130_cam_9_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.9946855306625366,
+      "slot_box": [
+        314,
+        300,
+        499,
+        610
+      ],
+      "crop_box": [
+        262,
+        213,
+        551,
+        666
+      ],
+      "empty_probability": 0.9946855306625366,
+      "occupied_probability": 0.005314407404512167,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mendeleeva_130_cam_9",
+      "slot_id": "upper_4",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mendeleeva_130_cam_9_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\mendeleeva_130_cam_9__upper_4__mendeleeva_130_cam_9_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.9882885217666626,
+      "slot_box": [
+        499,
+        300,
+        629,
+        610
+      ],
+      "crop_box": [
+        463,
+        213,
+        665,
+        666
+      ],
+      "empty_probability": 0.9882885217666626,
+      "occupied_probability": 0.011711416766047478,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mendeleeva_130_cam_9",
+      "slot_id": "upper_6",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mendeleeva_130_cam_9_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\mendeleeva_130_cam_9__upper_6__mendeleeva_130_cam_9_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        750,
+        285,
+        885,
+        589
+      ],
+      "crop_box": [
+        712,
+        200,
+        923,
+        644
+      ],
+      "empty_probability": 0.31162962317466736,
+      "occupied_probability": 0.6883703470230103,
+      "vehicle_score": 2.9,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mendeleeva_130_cam_9",
+      "slot_id": "upper_7",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mendeleeva_130_cam_9_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\mendeleeva_130_cam_9__upper_7__mendeleeva_130_cam_9_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        875,
+        290,
+        1009,
+        579
+      ],
+      "crop_box": [
+        837,
+        209,
+        1047,
+        631
+      ],
+      "empty_probability": 0.11082255095243454,
+      "occupied_probability": 0.8891773819923401,
+      "vehicle_score": 2.9,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mendeleeva_130_cam_9",
+      "slot_id": "upper_8",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mendeleeva_130_cam_9_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\mendeleeva_130_cam_9__upper_8__mendeleeva_130_cam_9_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        1004,
+        300,
+        1119,
+        570
+      ],
+      "crop_box": [
+        972,
+        224,
+        1151,
+        619
+      ],
+      "empty_probability": 0.2672244906425476,
+      "occupied_probability": 0.7327755093574524,
+      "vehicle_score": 2.9,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mendeleeva_130_cam_9",
+      "slot_id": "upper_10",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mendeleeva_130_cam_9_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\mendeleeva_130_cam_9__upper_10__mendeleeva_130_cam_9_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.8223371505737305,
+      "slot_box": [
+        1224,
+        290,
+        1340,
+        549
+      ],
+      "crop_box": [
+        1192,
+        217,
+        1372,
+        596
+      ],
+      "empty_probability": 0.8223371505737305,
+      "occupied_probability": 0.17766278982162476,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mendeleeva_130_cam_9",
+      "slot_id": "east_1",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mendeleeva_130_cam_9_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\mendeleeva_130_cam_9__east_1__mendeleeva_130_cam_9_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        1480,
+        500,
+        1580,
+        720
+      ],
+      "crop_box": [
+        1452,
+        438,
+        1608,
+        760
+      ],
+      "empty_probability": 0.09581009298563004,
+      "occupied_probability": 0.9041898846626282,
+      "vehicle_score": 2.9,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mendeleeva_130_cam_9",
+      "slot_id": "lower_1",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mendeleeva_130_cam_9_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\mendeleeva_130_cam_9__lower_1__mendeleeva_130_cam_9_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.9990383386611938,
+      "slot_box": [
+        249,
+        849,
+        470,
+        1080
+      ],
+      "crop_box": [
+        187,
+        784,
+        532,
+        1080
+      ],
+      "empty_probability": 0.9990383386611938,
+      "occupied_probability": 0.000961662211921066,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mendeleeva_130_cam_9",
+      "slot_id": "lower_2",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mendeleeva_130_cam_9_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\mendeleeva_130_cam_9__lower_2__mendeleeva_130_cam_9_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.9988873600959778,
+      "slot_box": [
+        455,
+        789,
+        714,
+        1080
+      ],
+      "crop_box": [
+        382,
+        708,
+        787,
+        1080
+      ],
+      "empty_probability": 0.9988873600959778,
+      "occupied_probability": 0.0011126981116831303,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mendeleeva_130_cam_9",
+      "slot_id": "lower_3",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mendeleeva_130_cam_9_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\mendeleeva_130_cam_9__lower_3__mendeleeva_130_cam_9_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.8922719955444336,
+      "slot_box": [
+        729,
+        760,
+        979,
+        1080
+      ],
+      "crop_box": [
+        659,
+        670,
+        1049,
+        1080
+      ],
+      "empty_probability": 0.8922719955444336,
+      "occupied_probability": 0.10772797465324402,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mendeleeva_130_cam_5",
+      "slot_id": "upper_2",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mendeleeva_130_cam_5_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\mendeleeva_130_cam_5__upper_2__mendeleeva_130_cam_5_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.9903870224952698,
+      "slot_box": [
+        960,
+        194,
+        1248,
+        388
+      ],
+      "crop_box": [
+        879,
+        140,
+        1329,
+        423
+      ],
+      "empty_probability": 0.9903870224952698,
+      "occupied_probability": 0.009612901136279106,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mendeleeva_130_cam_5",
+      "slot_id": "upper_3",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mendeleeva_130_cam_5_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\mendeleeva_130_cam_5__upper_3__mendeleeva_130_cam_5_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.996326744556427,
+      "slot_box": [
+        1171,
+        129,
+        1420,
+        302
+      ],
+      "crop_box": [
+        1101,
+        81,
+        1490,
+        333
+      ],
+      "empty_probability": 0.996326744556427,
+      "occupied_probability": 0.003673276863992214,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mendeleeva_130_cam_5",
+      "slot_id": "upper_4",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mendeleeva_130_cam_5_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\mendeleeva_130_cam_5__upper_4__mendeleeva_130_cam_5_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.9714041352272034,
+      "slot_box": [
+        1420,
+        118,
+        1689,
+        324
+      ],
+      "crop_box": [
+        1345,
+        60,
+        1764,
+        361
+      ],
+      "empty_probability": 0.9714041352272034,
+      "occupied_probability": 0.0285958144813776,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mendeleeva_130_cam_5",
+      "slot_id": "lower_1",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mendeleeva_130_cam_5_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\mendeleeva_130_cam_5__lower_1__mendeleeva_130_cam_5_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.999396800994873,
+      "slot_box": [
+        1152,
+        550,
+        1555,
+        874
+      ],
+      "crop_box": [
+        1039,
+        459,
+        1668,
+        932
+      ],
+      "empty_probability": 0.999396800994873,
+      "occupied_probability": 0.0006031859666109085,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mushnikova_balandina",
+      "slot_id": "near_1",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mushnikova_balandina_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\mushnikova_balandina__near_1__mushnikova_balandina_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        1056,
+        507,
+        1152,
+        604
+      ],
+      "crop_box": [
+        1029,
+        480,
+        1179,
+        621
+      ],
+      "empty_probability": 0.011241210624575615,
+      "occupied_probability": 0.9887588024139404,
+      "vehicle_score": 2.9,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mushnikova_balandina",
+      "slot_id": "near_2",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mushnikova_balandina_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\mushnikova_balandina__near_2__mushnikova_balandina_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        1123,
+        518,
+        1219,
+        615
+      ],
+      "crop_box": [
+        1096,
+        491,
+        1246,
+        632
+      ],
+      "empty_probability": 0.00233090715482831,
+      "occupied_probability": 0.9976690411567688,
+      "vehicle_score": 2.565463917525773,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mushnikova_balandina",
+      "slot_id": "near_3",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mushnikova_balandina_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\mushnikova_balandina__near_3__mushnikova_balandina_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 0.993687093257904,
+      "slot_box": [
+        1190,
+        529,
+        1286,
+        626
+      ],
+      "crop_box": [
+        1163,
+        502,
+        1313,
+        643
+      ],
+      "empty_probability": 0.006312952842563391,
+      "occupied_probability": 0.993687093257904,
+      "vehicle_score": 1.2929616265750288,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mushnikova_balandina",
+      "slot_id": "near_4",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mushnikova_balandina_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\mushnikova_balandina__near_4__mushnikova_balandina_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 0.9674062728881836,
+      "slot_box": [
+        1257,
+        540,
+        1353,
+        637
+      ],
+      "crop_box": [
+        1230,
+        513,
+        1380,
+        654
+      ],
+      "empty_probability": 0.03259378299117088,
+      "occupied_probability": 0.9674062728881836,
+      "vehicle_score": 0.6774243282001752,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mushnikova_balandina",
+      "slot_id": "near_5",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mushnikova_balandina_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\mushnikova_balandina__near_5__mushnikova_balandina_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        1324,
+        550,
+        1420,
+        648
+      ],
+      "crop_box": [
+        1297,
+        523,
+        1447,
+        666
+      ],
+      "empty_probability": 0.008006780408322811,
+      "occupied_probability": 0.9919931888580322,
+      "vehicle_score": 2.7535714285714286,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mushnikova_balandina",
+      "slot_id": "near_6",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mushnikova_balandina_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\mushnikova_balandina__near_6__mushnikova_balandina_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        1392,
+        561,
+        1488,
+        658
+      ],
+      "crop_box": [
+        1365,
+        534,
+        1515,
+        675
+      ],
+      "empty_probability": 0.0023473664186894894,
+      "occupied_probability": 0.9976527094841003,
+      "vehicle_score": 2.9,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mushnikova_balandina",
+      "slot_id": "near_7",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mushnikova_balandina_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\mushnikova_balandina__near_7__mushnikova_balandina_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        1459,
+        572,
+        1555,
+        669
+      ],
+      "crop_box": [
+        1432,
+        545,
+        1582,
+        686
+      ],
+      "empty_probability": 0.13552197813987732,
+      "occupied_probability": 0.8644780516624451,
+      "vehicle_score": 2.7693914900106757,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mushnikova_balandina",
+      "slot_id": "far_1",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mushnikova_balandina_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\mushnikova_balandina__far_1__mushnikova_balandina_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        1430,
+        491,
+        1526,
+        577
+      ],
+      "crop_box": [
+        1403,
+        467,
+        1553,
+        592
+      ],
+      "empty_probability": 0.03960618004202843,
+      "occupied_probability": 0.9603938460350037,
+      "vehicle_score": 1.7629090040601862,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "mushnikova_balandina",
+      "slot_id": "far_2",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mushnikova_balandina_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\mushnikova_balandina__far_2__mushnikova_balandina_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        1497,
+        480,
+        1593,
+        567
+      ],
+      "crop_box": [
+        1470,
+        456,
+        1620,
+        583
+      ],
+      "empty_probability": 0.16503962874412537,
+      "occupied_probability": 0.8349603414535522,
+      "vehicle_score": 2.7989224137931035,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "zaki_validi_aksakova",
+      "slot_id": "row_1",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\zaki_validi_aksakova_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\zaki_validi_aksakova__row_1__zaki_validi_aksakova_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.9561697244644165,
+      "slot_box": [
+        960,
+        334,
+        1017,
+        421
+      ],
+      "crop_box": [
+        944,
+        310,
+        1033,
+        437
+      ],
+      "empty_probability": 0.9561697244644165,
+      "occupied_probability": 0.043830256909132004,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "zaki_validi_aksakova",
+      "slot_id": "row_2",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\zaki_validi_aksakova_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\zaki_validi_aksakova__row_2__zaki_validi_aksakova_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.9861889481544495,
+      "slot_box": [
+        1008,
+        329,
+        1065,
+        415
+      ],
+      "crop_box": [
+        992,
+        305,
+        1081,
+        430
+      ],
+      "empty_probability": 0.9861889481544495,
+      "occupied_probability": 0.013811047188937664,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "zaki_validi_aksakova",
+      "slot_id": "row_3",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\zaki_validi_aksakova_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\zaki_validi_aksakova__row_3__zaki_validi_aksakova_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.9973681569099426,
+      "slot_box": [
+        1056,
+        318,
+        1113,
+        405
+      ],
+      "crop_box": [
+        1040,
+        294,
+        1129,
+        421
+      ],
+      "empty_probability": 0.9973681569099426,
+      "occupied_probability": 0.0026319283060729504,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "zaki_validi_aksakova",
+      "slot_id": "row_4",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\zaki_validi_aksakova_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\zaki_validi_aksakova__row_4__zaki_validi_aksakova_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.9949368238449097,
+      "slot_box": [
+        1104,
+        307,
+        1161,
+        394
+      ],
+      "crop_box": [
+        1088,
+        283,
+        1177,
+        410
+      ],
+      "empty_probability": 0.9949368238449097,
+      "occupied_probability": 0.005063201766461134,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "zaki_validi_aksakova",
+      "slot_id": "row_5",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\zaki_validi_aksakova_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\zaki_validi_aksakova__row_5__zaki_validi_aksakova_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.9914795160293579,
+      "slot_box": [
+        1152,
+        297,
+        1209,
+        388
+      ],
+      "crop_box": [
+        1136,
+        272,
+        1225,
+        404
+      ],
+      "empty_probability": 0.9914795160293579,
+      "occupied_probability": 0.008520466275513172,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "zaki_validi_aksakova",
+      "slot_id": "row_7",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\zaki_validi_aksakova_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\zaki_validi_aksakova__row_7__zaki_validi_aksakova_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        1248,
+        280,
+        1305,
+        372
+      ],
+      "crop_box": [
+        1232,
+        254,
+        1321,
+        389
+      ],
+      "empty_probability": 0.4037592113018036,
+      "occupied_probability": 0.596240758895874,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 2.112356979405034
+    },
+    {
+      "camera_id": "zaki_validi_aksakova",
+      "slot_id": "row_8",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\zaki_validi_aksakova_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\zaki_validi_aksakova__row_8__zaki_validi_aksakova_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        1296,
+        275,
+        1353,
+        367
+      ],
+      "crop_box": [
+        1280,
+        249,
+        1369,
+        384
+      ],
+      "empty_probability": 0.39672571420669556,
+      "occupied_probability": 0.6032742857933044,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 2.2342105263157896
+    },
+    {
+      "camera_id": "zaki_validi_aksakova",
+      "slot_id": "row_9",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\zaki_validi_aksakova_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\zaki_validi_aksakova__row_9__zaki_validi_aksakova_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        1344,
+        264,
+        1401,
+        361
+      ],
+      "crop_box": [
+        1328,
+        237,
+        1417,
+        378
+      ],
+      "empty_probability": 0.5230293869972229,
+      "occupied_probability": 0.4769706726074219,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 2.2175257731958764
+    },
+    {
+      "camera_id": "zaki_validi_aksakova",
+      "slot_id": "row_10",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\zaki_validi_aksakova_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\zaki_validi_aksakova__row_10__zaki_validi_aksakova_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.8241257667541504,
+      "slot_box": [
+        1392,
+        259,
+        1449,
+        351
+      ],
+      "crop_box": [
+        1376,
+        233,
+        1465,
+        368
+      ],
+      "empty_probability": 0.8241257667541504,
+      "occupied_probability": 0.1758742481470108,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "zaki_validi_aksakova",
+      "slot_id": "row_11",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\zaki_validi_aksakova_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\zaki_validi_aksakova__row_11__zaki_validi_aksakova_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.849490225315094,
+      "slot_box": [
+        1440,
+        253,
+        1497,
+        345
+      ],
+      "crop_box": [
+        1424,
+        227,
+        1513,
+        362
+      ],
+      "empty_probability": 0.849490225315094,
+      "occupied_probability": 0.1505097597837448,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "zaki_validi_aksakova",
+      "slot_id": "row_12",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\zaki_validi_aksakova_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\zaki_validi_aksakova__row_12__zaki_validi_aksakova_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.8802562355995178,
+      "slot_box": [
+        1488,
+        243,
+        1555,
+        334
+      ],
+      "crop_box": [
+        1469,
+        218,
+        1574,
+        350
+      ],
+      "empty_probability": 0.8802562355995178,
+      "occupied_probability": 0.1197436973452568,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "zaki_validi_aksakova",
+      "slot_id": "row_13",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\zaki_validi_aksakova_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\zaki_validi_aksakova__row_13__zaki_validi_aksakova_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.998005211353302,
+      "slot_box": [
+        1536,
+        237,
+        1603,
+        324
+      ],
+      "crop_box": [
+        1517,
+        213,
+        1622,
+        340
+      ],
+      "empty_probability": 0.998005211353302,
+      "occupied_probability": 0.0019948275294154882,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "slot_id": "left_1",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\bakalinskaya_27_vk6__left_1__bakalinskaya_27_vk6_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        326,
+        302,
+        499,
+        442
+      ],
+      "crop_box": [
+        278,
+        263,
+        547,
+        467
+      ],
+      "empty_probability": 0.057665739208459854,
+      "occupied_probability": 0.9423342943191528,
+      "vehicle_score": 2.5936251032204787,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "slot_id": "left_2",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\bakalinskaya_27_vk6__left_2__bakalinskaya_27_vk6_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        326,
+        378,
+        518,
+        518
+      ],
+      "crop_box": [
+        272,
+        339,
+        572,
+        543
+      ],
+      "empty_probability": 0.005738851614296436,
+      "occupied_probability": 0.9942611455917358,
+      "vehicle_score": 2.85375,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "slot_id": "left_3",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\bakalinskaya_27_vk6__left_3__bakalinskaya_27_vk6_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        326,
+        453,
+        537,
+        604
+      ],
+      "crop_box": [
+        267,
+        411,
+        596,
+        631
+      ],
+      "empty_probability": 0.021649129688739777,
+      "occupied_probability": 0.978350818157196,
+      "vehicle_score": 2.9,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "slot_id": "left_4",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\bakalinskaya_27_vk6__left_4__bakalinskaya_27_vk6_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        326,
+        540,
+        556,
+        702
+      ],
+      "crop_box": [
+        262,
+        495,
+        620,
+        731
+      ],
+      "empty_probability": 0.2882709801197052,
+      "occupied_probability": 0.7117289900779724,
+      "vehicle_score": 2.5980193236714975,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "slot_id": "left_5",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\bakalinskaya_27_vk6__left_5__bakalinskaya_27_vk6_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        345,
+        637,
+        595,
+        820
+      ],
+      "crop_box": [
+        275,
+        586,
+        665,
+        853
+      ],
+      "empty_probability": 0.3428382873535156,
+      "occupied_probability": 0.6571617722511292,
+      "vehicle_score": 2.9,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "slot_id": "top_left_1",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\bakalinskaya_27_vk6__top_left_1__bakalinskaya_27_vk6_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        230,
+        108,
+        364,
+        205
+      ],
+      "crop_box": [
+        192,
+        81,
+        402,
+        222
+      ],
+      "empty_probability": 0.026503654196858406,
+      "occupied_probability": 0.9734963178634644,
+      "vehicle_score": 2.2447145714725343,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "slot_id": "top_left_2",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\bakalinskaya_27_vk6__top_left_2__bakalinskaya_27_vk6_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        326,
+        97,
+        460,
+        194
+      ],
+      "crop_box": [
+        288,
+        70,
+        498,
+        211
+      ],
+      "empty_probability": 0.016650229692459106,
+      "occupied_probability": 0.9833498001098633,
+      "vehicle_score": 2.2116171718725957,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "slot_id": "top_left_3",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\bakalinskaya_27_vk6__top_left_3__bakalinskaya_27_vk6_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        422,
+        86,
+        556,
+        183
+      ],
+      "crop_box": [
+        384,
+        59,
+        594,
+        200
+      ],
+      "empty_probability": 0.09771430492401123,
+      "occupied_probability": 0.9022856950759888,
+      "vehicle_score": 2.5630866287121097,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "slot_id": "center_1",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\bakalinskaya_27_vk6__center_1__bakalinskaya_27_vk6_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        844,
+        356,
+        960,
+        475
+      ],
+      "crop_box": [
+        812,
+        323,
+        992,
+        496
+      ],
+      "empty_probability": 0.9977760910987854,
+      "occupied_probability": 0.0022239540703594685,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 2.1219066937119675
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "slot_id": "center_2",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\bakalinskaya_27_vk6__center_2__bakalinskaya_27_vk6_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.9980524778366089,
+      "slot_box": [
+        940,
+        356,
+        1075,
+        475
+      ],
+      "crop_box": [
+        902,
+        323,
+        1113,
+        496
+      ],
+      "empty_probability": 0.9980524778366089,
+      "occupied_probability": 0.0019475215813145041,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0012449424214130097
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "slot_id": "center_3",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\bakalinskaya_27_vk6__center_3__bakalinskaya_27_vk6_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        1056,
+        378,
+        1190,
+        496
+      ],
+      "crop_box": [
+        1018,
+        345,
+        1228,
+        517
+      ],
+      "empty_probability": 0.049224622547626495,
+      "occupied_probability": 0.9507753252983093,
+      "vehicle_score": 1.6675209627316185,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "slot_id": "upper_right_1",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\bakalinskaya_27_vk6__upper_right_1__bakalinskaya_27_vk6_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.9250648021697998,
+      "slot_box": [
+        1228,
+        129,
+        1363,
+        237
+      ],
+      "crop_box": [
+        1190,
+        99,
+        1401,
+        256
+      ],
+      "empty_probability": 0.9250648021697998,
+      "occupied_probability": 0.07493516057729721,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "slot_id": "upper_right_2",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\bakalinskaya_27_vk6__upper_right_2__bakalinskaya_27_vk6_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.9715009927749634,
+      "slot_box": [
+        1324,
+        118,
+        1459,
+        226
+      ],
+      "crop_box": [
+        1286,
+        88,
+        1497,
+        245
+      ],
+      "empty_probability": 0.9715009927749634,
+      "occupied_probability": 0.0284990593791008,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "slot_id": "upper_right_3",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\bakalinskaya_27_vk6__upper_right_3__bakalinskaya_27_vk6_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        1420,
+        108,
+        1555,
+        216
+      ],
+      "crop_box": [
+        1382,
+        78,
+        1593,
+        235
+      ],
+      "empty_probability": 0.9263527989387512,
+      "occupied_probability": 0.07364723086357117,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 2.1158024691358026
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "slot_id": "right_2",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\bakalinskaya_27_vk6__right_2__bakalinskaya_27_vk6_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.9749250411987305,
+      "slot_box": [
+        1440,
+        313,
+        1574,
+        475
+      ],
+      "crop_box": [
+        1402,
+        268,
+        1612,
+        504
+      ],
+      "empty_probability": 0.9749250411987305,
+      "occupied_probability": 0.025074997916817665,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "slot_id": "right_3",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\bakalinskaya_27_vk6__right_3__bakalinskaya_27_vk6_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.9935777187347412,
+      "slot_box": [
+        1536,
+        334,
+        1708,
+        507
+      ],
+      "crop_box": [
+        1488,
+        286,
+        1756,
+        538
+      ],
+      "empty_probability": 0.9935777187347412,
+      "occupied_probability": 0.0064222547225654125,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "slot_id": "bottom_1",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-occupied\\bakalinskaya_27_vk6__bottom_1__bakalinskaya_27_vk6_raw.jpg",
+      "label": "space-occupied",
+      "confidence": 1.0,
+      "slot_box": [
+        576,
+        766,
+        748,
+        961
+      ],
+      "crop_box": [
+        528,
+        711,
+        796,
+        996
+      ],
+      "empty_probability": 0.13850291073322296,
+      "occupied_probability": 0.8614970445632935,
+      "vehicle_score": 2.9,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "slot_id": "bottom_2",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\bakalinskaya_27_vk6__bottom_2__bakalinskaya_27_vk6_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.996008038520813,
+      "slot_box": [
+        825,
+        777,
+        1017,
+        972
+      ],
+      "crop_box": [
+        771,
+        722,
+        1071,
+        1007
+      ],
+      "empty_probability": 0.996008038520813,
+      "occupied_probability": 0.003991919569671154,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "slot_id": "bottom_4",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\bakalinskaya_27_vk6__bottom_4__bakalinskaya_27_vk6_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.9912309646606445,
+      "slot_box": [
+        1305,
+        799,
+        1516,
+        1015
+      ],
+      "crop_box": [
+        1246,
+        739,
+        1575,
+        1054
+      ],
+      "empty_probability": 0.9912309646606445,
+      "occupied_probability": 0.008769073523581028,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "slot_id": "bottom_5",
+      "frame_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg",
+      "exported_path": "C:\\Users\\vadim\\Desktop\\элина\\runtime\\slot_calibration_dataset\\space-empty\\bakalinskaya_27_vk6__bottom_5__bakalinskaya_27_vk6_raw.jpg",
+      "label": "space-empty",
+      "confidence": 0.9895461201667786,
+      "slot_box": [
+        1574,
+        820,
+        1804,
+        1058
+      ],
+      "crop_box": [
+        1510,
+        753,
+        1868,
+        1080
+      ],
+      "empty_probability": 0.9895461201667786,
+      "occupied_probability": 0.010453942231833935,
+      "vehicle_score": 0.0,
+      "local_vehicle_score": 0.0
+    }
+  ]
+}

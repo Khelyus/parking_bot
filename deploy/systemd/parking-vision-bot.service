@@ -1,0 +1,17 @@
+[Unit]
+Description=Parking Vision Notification Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/pi/parking-vision-notification-bot
+EnvironmentFile=/home/pi/parking-vision-notification-bot/.env
+ExecStart=/home/pi/parking-vision-notification-bot/.venv/bin/python -m parking_bot --demo
+Restart=always
+RestartSec=10
+User=pi
+Group=pi
+
+[Install]
+WantedBy=multi-user.target

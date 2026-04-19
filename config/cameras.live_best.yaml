@@ -1,0 +1,8 @@
+cameras:
+  - id: zaki_validi_aksakova
+    map_url: http://maps.ufanet.ru/ufa#001-999-111
+    source_transport: hls
+    min_confidence: 0.05
+    detection_image_size: 1280
+    detection_roi: 0.55,0.22,0.92,0.50
+    stable_cycles: 2

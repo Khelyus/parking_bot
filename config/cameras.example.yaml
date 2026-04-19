@@ -1,0 +1,7 @@
+cameras:
+  - id: demo_camera
+    map_url: http://maps.ufanet.ru/ufa#1549441947OXE898
+    min_confidence: 0.05
+    stable_cycles: 2
+    min_free_spaces: 1
+    enabled: true

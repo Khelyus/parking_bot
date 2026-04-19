@@ -1,0 +1,18 @@
+{
+  "observations": [
+    {
+      "availability": "free",
+      "free_count": 1,
+      "occupied_count": 0,
+      "raw_frame_path": "../../runtime/frames/zaki_validi_aksakova_raw.jpg",
+      "annotated_frame_path": "../../runtime/frames/zaki_validi_aksakova_annotated.jpg"
+    },
+    {
+      "availability": "free",
+      "free_count": 1,
+      "occupied_count": 0,
+      "raw_frame_path": "../../runtime/frames/zaki_validi_aksakova_raw.jpg",
+      "annotated_frame_path": "../../runtime/frames/zaki_validi_aksakova_annotated.jpg"
+    }
+  ]
+}

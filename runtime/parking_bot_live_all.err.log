@@ -1,0 +1,788 @@
+2026-04-13 14:27:37,375 INFO [telegram.ext.Application] Application started
+2026-04-13 14:28:24,921 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_9, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 14:28:30,068 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_5, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 14:31:20,197 WARNING [parking_bot.service] HLS frame extraction failed for zaki_validi_aksakova, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 14:33:12,870 ERROR [telegram.ext.Application] No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_application.py", line 1315, in process_update
+    await coroutine
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_handlers\basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\Desktop\элина\parking_bot\telegram_bot.py", line 189, in callback_handler
+    await query.answer()
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_callbackquery.py", line 190, in answer
+    return await self.get_bot().answer_callback_query(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 970, in answer_callback_query
+    return await super().answer_callback_query(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 4445, in answer_callback_query
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 704, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 370, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 733, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.BadRequest: Query is too old and response timeout expired or query id is invalid
+2026-04-13 14:33:12,982 ERROR [telegram.ext.Application] No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_application.py", line 1315, in process_update
+    await coroutine
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_handlers\basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\Desktop\элина\parking_bot\telegram_bot.py", line 189, in callback_handler
+    await query.answer()
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_callbackquery.py", line 190, in answer
+    return await self.get_bot().answer_callback_query(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 970, in answer_callback_query
+    return await super().answer_callback_query(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 4445, in answer_callback_query
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 704, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 370, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 733, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.BadRequest: Query is too old and response timeout expired or query id is invalid
+2026-04-13 14:33:22,683 INFO [telegram.ext.Application] Application started
+2026-04-13 14:33:42,689 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_9, falling back to snapshot API: <urlopen error timed out>
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFEF0939DED  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFEF2F1E8D7  Unknown               Unknown  Unknown
+ntdll.dll          00007FFEF3F8C48C  Unknown               Unknown  Unknown
+2026-04-13 14:34:20,480 INFO [telegram.ext.Application] Application started
+2026-04-13 14:35:11,191 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_9, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 14:35:12,287 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_5, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 14:36:55,373 WARNING [parking_bot.service] HLS frame extraction failed for ufa_arena_1, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 14:38:17,855 INFO [telegram.ext.Application] Application started
+2026-04-13 14:38:48,913 INFO [telegram.ext.Application] Application started
+2026-04-13 14:39:57,319 WARNING [parking_bot.service] HLS frame extraction failed for salavat_square, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 14:43:54,412 WARNING [parking_bot.service] HLS frame extraction failed for salavat_square, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 14:43:59,179 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_9, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 14:44:14,799 WARNING [parking_bot.service] HLS frame extraction failed for sports_palace_square, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 14:56:33,374 WARNING [parking_bot.service] HLS frame extraction failed for ufa_arena_1, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 14:57:16,057 WARNING [parking_bot.service] HLS frame extraction failed for mushnikova_balandina, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 14:57:21,926 WARNING [parking_bot.service] HLS frame extraction failed for kirova_parhomenko, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 15:05:41,980 WARNING [parking_bot.service] HLS frame extraction failed for bakalinskaya_27_vk7, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 15:05:43,903 WARNING [parking_bot.service] HLS frame extraction failed for zaki_validi_aksakova, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 15:06:22,775 WARNING [parking_bot.service] Camera polling failed for bakalinskaya_27_vk7: <urlopen error timed out>
+2026-04-13 15:06:42,904 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_5, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 15:06:42,904 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_9, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 15:09:06,549 WARNING [parking_bot.service] HLS frame extraction failed for kirova_parhomenko, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 15:09:37,755 WARNING [parking_bot.service] HLS frame extraction failed for lesotehnikuma_luganskaya, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 15:09:59,986 WARNING [parking_bot.service] HLS frame extraction failed for mushnikova_balandina, falling back to snapshot API: Command '['C:\\Users\\vadim\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe', '-y', '-loglevel', 'error', '-protocol_whitelist', 'file,http,https,tcp,tls,crypto', '-allowed_extensions', 'ALL', '-rw_timeout', '15000000', '-live_start_index', '-1', '-i', 'http://136.169.226.80/001-999-098/index.fmp4.m3u8?token=f9761038016f4921bd1056c090d262ca', '-frames:v', '1', '-update', '1', 'C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mushnikova_balandina_raw.jpg']' timed out after 60 seconds
+2026-04-13 15:10:25,870 WARNING [parking_bot.service] HLS frame extraction failed for bakalinskaya_27_vk6, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 15:10:29,545 WARNING [parking_bot.service] HLS frame extraction failed for zaki_validi_aksakova, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 15:26:07,305 WARNING [parking_bot.service] HLS frame extraction failed for bakalinskaya_27_vk6, falling back to snapshot API: <urlopen error timed out>
+2026-04-13 15:47:12,614 INFO [telegram.ext.Application] Application started
+2026-04-13 16:14:57,663 INFO [telegram.ext.Application] Application started
+2026-04-13 16:34:59,219 ERROR [telegram.ext] Network Retry Loop (Bootstrap Initialize Application): Timed out: Timed out. Failed run number 0 of 0. Aborting.
+Traceback (most recent call last):
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\connection.py", line 124, in _connect
+    stream = await self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_backends\auto.py", line 31, in connect_tcp
+    return await self._backend.connect_tcp(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_backends\anyio.py", line 113, in connect_tcp
+    with map_exceptions(exc_map):
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_httpxrequest.py", line 279, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 136, in do_action
+    await action_cb()
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_application.py", line 489, in initialize
+    await self.bot.initialize()
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 316, in initialize
+    await super().initialize()
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 857, in initialize
+    await self.get_me()
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 2008, in get_me
+    return await super().get_me(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 990, in get_me
+    result = await self._post(
+             ^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 704, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 370, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 733, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 305, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_httpxrequest.py", line 296, in do_request
+    raise TimedOut from err
+telegram.error.TimedOut: Timed out
+Traceback (most recent call last):
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\connection.py", line 124, in _connect
+    stream = await self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_backends\auto.py", line 31, in connect_tcp
+    return await self._backend.connect_tcp(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_backends\anyio.py", line 113, in connect_tcp
+    with map_exceptions(exc_map):
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_httpxrequest.py", line 279, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_application.py", line 1054, in __run
+    loop.run_until_complete(self._bootstrap_initialize(max_retries=bootstrap_retries))
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_application.py", line 1014, in _bootstrap_initialize
+    await network_retry_loop(
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 136, in do_action
+    await action_cb()
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_application.py", line 489, in initialize
+    await self.bot.initialize()
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 316, in initialize
+    await super().initialize()
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 857, in initialize
+    await self.get_me()
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 2008, in get_me
+    return await super().get_me(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 990, in get_me
+    result = await self._post(
+             ^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 704, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 370, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 733, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 305, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_httpxrequest.py", line 296, in do_request
+    raise TimedOut from err
+telegram.error.TimedOut: Timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\vadim\Desktop\элина\parking_bot\__main__.py", line 5, in <module>
+    main()
+  File "C:\Users\vadim\Desktop\элина\parking_bot\main.py", line 79, in main
+    application.run_polling(allowed_updates=Update.ALL_TYPES)
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_application.py", line 839, in run_polling
+    return self.__run(
+           ^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_application.py", line 1081, in __run
+    loop.run_until_complete(self.post_shutdown(self))
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\Desktop\элина\parking_bot\telegram_bot.py", line 31, in post_shutdown
+    monitor = _get_service(application)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\Desktop\элина\parking_bot\telegram_bot.py", line 54, in _get_service
+    return application_or_context.bot_data["service"]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+KeyError: 'service'
+2026-04-13 16:36:03,595 INFO [telegram.ext.Application] Application started
+2026-04-13 16:39:17,579 ERROR [telegram.ext.Application] No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\connection.py", line 101, in handle_async_request
+    raise exc
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\connection.py", line 124, in _connect
+    stream = await self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_backends\auto.py", line 31, in connect_tcp
+    return await self._backend.connect_tcp(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_backends\anyio.py", line 113, in connect_tcp
+    with map_exceptions(exc_map):
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_httpxrequest.py", line 279, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_application.py", line 1315, in process_update
+    await coroutine
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_handlers\basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\Desktop\элина\parking_bot\telegram_bot.py", line 204, in callback_handler
+    await query.answer()
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_callbackquery.py", line 190, in answer
+    return await self.get_bot().answer_callback_query(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 970, in answer_callback_query
+    return await super().answer_callback_query(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 4445, in answer_callback_query
+    return await self._post(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 704, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 370, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 733, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 305, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_httpxrequest.py", line 296, in do_request
+    raise TimedOut from err
+telegram.error.TimedOut: Timed out
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFEF0939DED  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFEF2F1E8D7  Unknown               Unknown  Unknown
+ntdll.dll          00007FFEF3F8C48C  Unknown               Unknown  Unknown
+^C2026-04-13 16:41:40,138 INFO [telegram.ext.Application] Application started
+2026-04-13 16:57:01,979 WARNING [parking_bot.service] HLS frame extraction failed for bakalinskaya_27_vk6, falling back to snapshot API: Command '['C:\\Users\\vadim\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe', '-y', '-loglevel', 'error', '-protocol_whitelist', 'file,http,https,tcp,tls,crypto', '-allowed_extensions', 'ALL', '-rw_timeout', '15000000', '-live_start_index', '-1', '-i', 'http://136.169.226.80/1558354706LVS590/index.fmp4.m3u8?token=87c5ca10e1724142a7d43af6a22d5725', '-frames:v', '1', '-update', '1', 'C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\bakalinskaya_27_vk6_raw.jpg']' timed out after 60 seconds
+2026-04-13 17:15:39,862 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_5, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mendeleeva_130_cam_5: [tcp @ 000001f2bad888c0] Connection to tcp://136.169.226.80:80 failed: Error number -138 occurred
+[in#0 @ 000001f2bad84dc0] Error opening input: Error number -138 occurred
+Error opening input file http://136.169.226.80/1549441947OXE841/index.fmp4.m3u8?token=5227ed4fb48e4a799d080db9611c3ef4.
+Error opening input files: Error number -138 occurred
+2026-04-13 17:41:15,959 WARNING [parking_bot.service] HLS frame extraction failed for salavat_square, falling back to snapshot API: ffmpeg could not extract a frame from HLS for salavat_square: [in#0 @ 000001d731024dc0] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-011/index.fmp4.m3u8?token=7146bde44caa49088b6fe59a35350e94.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 17:41:15,997 WARNING [parking_bot.service] HLS frame extraction failed for park_pobedy, falling back to snapshot API: ffmpeg could not extract a frame from HLS for park_pobedy: [in#0 @ 000002cc83f64dc0] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-998-001-005/index.fmp4.m3u8?token=74ed0048812d426f9b0e9f8c5b92bea0.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 17:41:28,638 WARNING [parking_bot.service] HLS frame extraction failed for ufa_arena_1, falling back to snapshot API: ffmpeg could not extract a frame from HLS for ufa_arena_1: [in#0 @ 0000023267824dc0] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-157/index.fmp4.m3u8?token=3c424aabfdb14aceb1465dd026c85f6a.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 17:41:29,534 WARNING [parking_bot.service] HLS frame extraction failed for mushnikova_balandina, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mushnikova_balandina: [in#0 @ 0000020707194dc0] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-098/index.fmp4.m3u8?token=08c05044750641c3862d7eb248de3d99.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 17:41:37,760 WARNING [parking_bot.service] HLS frame extraction failed for lesotehnikuma_luganskaya, falling back to snapshot API: ffmpeg could not extract a frame from HLS for lesotehnikuma_luganskaya: [in#0 @ 000001586ebe4dc0] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-139/index.fmp4.m3u8?token=67739fd5b1524e18958118438b492467.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 17:41:37,897 WARNING [parking_bot.service] HLS frame extraction failed for zaki_validi_aksakova, falling back to snapshot API: ffmpeg could not extract a frame from HLS for zaki_validi_aksakova: [in#0 @ 0000023a0bef4dc0] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-111/index.fmp4.m3u8?token=84f90628e1734712a7088163ef906f67.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 17:41:44,428 WARNING [parking_bot.service] HLS frame extraction failed for bakalinskaya_27_vk6, falling back to snapshot API: ffmpeg could not extract a frame from HLS for bakalinskaya_27_vk6: [in#0 @ 0000020894a14dc0] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1558354706LVS590/index.fmp4.m3u8?token=87c5ca10e1724142a7d43af6a22d5725.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 17:42:04,660 WARNING [parking_bot.service] HLS frame extraction failed for bakalinskaya_27_vk7, falling back to snapshot API: ffmpeg could not extract a frame from HLS for bakalinskaya_27_vk7: [in#0 @ 000001f3782c50c0] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1558354706LVS615/index.fmp4.m3u8?token=5502dbd5347e498692fcd24ce305c2fe.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 17:43:36,307 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_9, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mendeleeva_130_cam_9: [in#0 @ 000002c7a5404dc0] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1549441947OXE898/index.fmp4.m3u8?token=c829a41d462c47428973e64fac22945f.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 17:43:36,356 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_5, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mendeleeva_130_cam_5: [in#0 @ 0000013c3d6f4dc0] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1549441947OXE841/index.fmp4.m3u8?token=5227ed4fb48e4a799d080db9611c3ef4.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 18:36:50,309 WARNING [parking_bot.service] HLS frame extraction failed for lesotehnikuma_luganskaya, falling back to snapshot API: ffmpeg could not extract a frame from HLS for lesotehnikuma_luganskaya: [in#0 @ 0000023b92a74dc0] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-139/index.fmp4.m3u8?token=60d6947d7e8d4909adcca710755d7b5b.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 18:36:55,363 WARNING [parking_bot.service] HLS frame extraction failed for zaki_validi_aksakova, falling back to snapshot API: ffmpeg could not extract a frame from HLS for zaki_validi_aksakova: [in#0 @ 000002d16cd74dc0] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-111/index.fmp4.m3u8?token=0d51f747dbea4953bd7d89b6094585f3.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 18:37:45,429 WARNING [parking_bot.service] HLS frame extraction failed for salavat_square, falling back to snapshot API: ffmpeg could not extract a frame from HLS for salavat_square: [in#0 @ 0000020f087b4dc0] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-011/index.fmp4.m3u8?token=96932c36cf644feca2f7d8130a047291.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 18:37:45,782 WARNING [parking_bot.service] HLS frame extraction failed for park_pobedy, falling back to snapshot API: ffmpeg could not extract a frame from HLS for park_pobedy: [in#0 @ 000002967c274dc0] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-998-001-005/index.fmp4.m3u8?token=d0605207922e4810a245043ec84f1090.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 18:37:50,329 WARNING [parking_bot.service] HLS frame extraction failed for ufa_arena_1, falling back to snapshot API: ffmpeg could not extract a frame from HLS for ufa_arena_1: [in#0 @ 0000028807724dc0] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-157/index.fmp4.m3u8?token=f46c7f2818b04711b459dd511781db61.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 18:37:50,565 WARNING [parking_bot.service] HLS frame extraction failed for mushnikova_balandina, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mushnikova_balandina: [in#0 @ 000001b093ef4dc0] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-098/index.fmp4.m3u8?token=22d21aad062e4a0dadd4a685f5c033d4.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 18:42:37,635 WARNING [parking_bot.service] HLS frame extraction failed for bakalinskaya_27_vk6, falling back to snapshot API: ffmpeg could not extract a frame from HLS for bakalinskaya_27_vk6: [in#0 @ 000001c503674dc0] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1558354706LVS590/index.fmp4.m3u8?token=0b6d8f03681b4747bf150b1a9a840a08.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 18:43:03,615 WARNING [parking_bot.service] HLS frame extraction failed for bakalinskaya_27_vk7, falling back to snapshot API: ffmpeg could not extract a frame from HLS for bakalinskaya_27_vk7: [in#0 @ 000001d84c944dc0] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1558354706LVS615/index.fmp4.m3u8?token=ed29385fa28f4b949ede3379ef80ee25.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 18:43:38,346 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_5, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mendeleeva_130_cam_5: [in#0 @ 0000015683934dc0] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1549441947OXE841/index.fmp4.m3u8?token=71bec08ed76c48999eba460fd76904ba.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 18:43:38,454 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_9, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mendeleeva_130_cam_9: [in#0 @ 0000028d05ea4dc0] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1549441947OXE898/index.fmp4.m3u8?token=d05f97a289e748a0b7e44d56e9080538.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 18:48:53,271 WARNING [parking_bot.service] HLS frame extraction failed for bakalinskaya_27_vk6, falling back to snapshot API: ffmpeg could not extract a frame from HLS for bakalinskaya_27_vk6: [tcp @ 0000022f8e3d1e00] Connection to tcp://136.169.226.80:80 failed: Error number -138 occurred
+[hls @ 0000022f8e3c51c0] Error when loading first segment 'http://136.169.226.80/1558354706LVS590/tracks-v1/seg-0-7842775.hls.fmp4?token=b996df45c8744ea9be6a0852c834611c'
+[in#0 @ 0000022f8e3c4dc0] Error opening input: Error number -138 occurred
+Error opening input file http://136.169.226.80/1558354706LVS590/index.fmp4.m3u8?token=b996df45c8744ea9be6a0852c834611c.
+Error opening input files: Error number -138 occurred
+2026-04-13 19:07:52,297 WARNING [parking_bot.service] Vehicle detector did not find any vehicles for slot camera mendeleeva_130_cam_5; falling back
+2026-04-13 19:07:56,678 WARNING [parking_bot.service] Vehicle detector did not find any vehicles for slot camera mendeleeva_130_cam_5; falling back
+2026-04-13 19:08:01,669 WARNING [parking_bot.service] Vehicle detector did not find any vehicles for slot camera mendeleeva_130_cam_5; falling back
+2026-04-13 19:08:09,226 WARNING [parking_bot.service] Vehicle detector did not find any vehicles for slot camera mendeleeva_130_cam_5; falling back
+2026-04-13 19:08:17,592 WARNING [parking_bot.service] Vehicle detector did not find any vehicles for slot camera mendeleeva_130_cam_5; falling back
+2026-04-13 19:09:12,728 WARNING [parking_bot.service] Vehicle detector did not find any vehicles for slot camera mendeleeva_130_cam_5; falling back
+2026-04-13 19:09:25,113 WARNING [parking_bot.service] Vehicle detector did not find any vehicles for slot camera mendeleeva_130_cam_5; falling back
+2026-04-13 19:09:31,979 WARNING [parking_bot.service] Vehicle detector did not find any vehicles for slot camera mendeleeva_130_cam_5; falling back
+2026-04-13 19:09:41,523 WARNING [parking_bot.service] Vehicle detector did not find any vehicles for slot camera mendeleeva_130_cam_5; falling back
+2026-04-13 19:09:58,607 WARNING [parking_bot.service] Vehicle detector did not find any vehicles for slot camera mendeleeva_130_cam_5; falling back
+2026-04-13 19:11:03,539 INFO [telegram.ext.Application] Application started
+2026-04-13 19:30:33,418 INFO [telegram.ext.Application] Application started
+2026-04-13 19:46:28,116 INFO [telegram.ext.Application] Application started
+2026-04-13 20:00:01,145 WARNING [parking_bot.service] HLS frame extraction failed for mushnikova_balandina, falling back to snapshot API: Command '['C:\\Users\\vadim\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe', '-y', '-loglevel', 'error', '-protocol_whitelist', 'file,http,https,tcp,tls,crypto', '-allowed_extensions', 'ALL', '-rw_timeout', '15000000', '-live_start_index', '-1', '-i', 'http://136.169.226.80/001-999-098/index.fmp4.m3u8?token=07f51dbbc0314a488fd7a83295b0b973', '-frames:v', '1', '-update', '1', 'C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\mushnikova_balandina_raw.jpg']' timed out after 60 seconds
+2026-04-13 20:01:39,173 INFO [telegram.ext.Application] Application started
+2026-04-13 20:09:34,925 WARNING [parking_bot.service] HLS frame extraction failed for ufa_arena_1, falling back to snapshot API: ffmpeg could not extract a frame from HLS for ufa_arena_1: [tcp @ 00000235b23725c0] Connection to tcp://136.169.226.80:80 failed: Error number -138 occurred
+[hls @ 00000235b2365b40] Error when loading first segment 'http://136.169.226.80/001-999-157/tracks-v1/seg-0-7854268.hls.fmp4?token=5da82c1f3edd43589dee26e001c49cb9'
+[in#0 @ 00000235b2365740] Error opening input: Error number -138 occurred
+Error opening input file http://136.169.226.80/001-999-157/index.fmp4.m3u8?token=5da82c1f3edd43589dee26e001c49cb9.
+Error opening input files: Error number -138 occurred
+2026-04-13 20:14:07,812 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_5, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mendeleeva_130_cam_5: [tcp @ 000002359c8cabc0] Connection to tcp://136.169.226.80:80 failed: Error number -138 occurred
+[in#0 @ 000002359c8b5740] Error opening input: Error number -138 occurred
+Error opening input file http://136.169.226.80/1549441947OXE841/index.fmp4.m3u8?token=7615486e3e8d4684a363c3a96db8a8dd.
+Error opening input files: Error number -138 occurred
+2026-04-13 20:24:23,968 INFO [telegram.ext.Application] Application started
+2026-04-13 20:25:54,590 INFO [telegram.ext.Application] Application started
+2026-04-13 20:35:46,346 ERROR [telegram.ext.Application] No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_async\http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_backends\anyio.py", line 32, in read
+    with map_exceptions(exc_map):
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_httpxrequest.py", line 279, in do_request
+    res = await self._client.request(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_application.py", line 1315, in process_update
+    await coroutine
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_handlers\basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\Desktop\элина\parking_bot\telegram_bot.py", line 211, in callback_handler
+    await _show_cached_camera_status(update, context, camera_id)
+  File "C:\Users\vadim\Desktop\элина\parking_bot\telegram_bot.py", line 299, in _show_cached_camera_status
+    await _send_camera_status_message(context, update.effective_chat.id, camera_id, status)
+  File "C:\Users\vadim\Desktop\элина\parking_bot\telegram_bot.py", line 367, in _send_camera_status_message
+    await context.bot.send_photo(
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 3204, in send_photo
+    return await super().send_photo(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 1612, in send_photo
+    return await self._send_message(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 630, in _send_message
+    result = await super()._send_message(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 820, in _send_message
+    result = await self._post(
+             ^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 704, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 370, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 733, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 305, in _request_wrapper
+    code, payload = await self.do_request(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\vadim\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_httpxrequest.py", line 296, in do_request
+    raise TimedOut from err
+telegram.error.TimedOut: Timed out
+2026-04-13 20:51:30,687 WARNING [parking_bot.service] HLS frame extraction failed for ufa_arena_1, falling back to snapshot API: Command '['C:\\Users\\vadim\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe', '-y', '-loglevel', 'error', '-protocol_whitelist', 'file,http,https,tcp,tls,crypto', '-allowed_extensions', 'ALL', '-rw_timeout', '15000000', '-live_start_index', '-1', '-i', 'http://136.169.226.80/001-999-157/index.fmp4.m3u8?token=721dcea956a14b14a563693f0bbb4adc', '-frames:v', '1', '-update', '1', 'C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\ufa_arena_1_raw.jpg']' timed out after 60 seconds
+2026-04-13 20:52:33,027 INFO [telegram.ext.Application] Application started
+2026-04-13 21:42:02,686 WARNING [parking_bot.service] HLS frame extraction failed for zaki_validi_aksakova, falling back to snapshot API: ffmpeg could not extract a frame from HLS for zaki_validi_aksakova: [tcp @ 00000274d344abc0] Connection to tcp://136.169.226.80:80 failed: Error number -138 occurred
+[in#0 @ 00000274d3435740] Error opening input: Error number -138 occurred
+Error opening input file http://136.169.226.80/001-999-111/index.fmp4.m3u8?token=f27d67ed77ea418db24bbbd0ff71e788.
+Error opening input files: Error number -138 occurred
+2026-04-13 21:51:58,291 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_9, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mendeleeva_130_cam_9: [in#0 @ 00000237c6425740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1549441947OXE898/index.fmp4.m3u8?token=cea001d83f894aa1bafe3443767379ce.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 21:51:58,291 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_5, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mendeleeva_130_cam_5: [in#0 @ 000001ac829e5740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1549441947OXE841/index.fmp4.m3u8?token=88fe295c735844d0be9b268515c0cab3.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 21:52:11,351 WARNING [parking_bot.service] HLS frame extraction failed for ufa_arena_1, falling back to snapshot API: ffmpeg could not extract a frame from HLS for ufa_arena_1: [in#0 @ 00000206c25b5740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-157/index.fmp4.m3u8?token=24338f74a393414cb20096b20213e7f7.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 21:52:15,767 WARNING [parking_bot.service] HLS frame extraction failed for mushnikova_balandina, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mushnikova_balandina: [in#0 @ 00000261adab5740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-098/index.fmp4.m3u8?token=56450eb0ee5d43b6b197f245f5f809a5.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 21:52:20,761 WARNING [parking_bot.service] HLS frame extraction failed for lesotehnikuma_luganskaya, falling back to snapshot API: ffmpeg could not extract a frame from HLS for lesotehnikuma_luganskaya: [in#0 @ 0000024c08085740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-139/index.fmp4.m3u8?token=9d59c7f9eb1a41f68e5a3fd83a301ff9.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 21:52:28,643 WARNING [parking_bot.service] HLS frame extraction failed for bakalinskaya_27_vk6, falling back to snapshot API: ffmpeg could not extract a frame from HLS for bakalinskaya_27_vk6: [in#0 @ 000001b8a6505740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1558354706LVS590/index.fmp4.m3u8?token=769a55547fbb4dc796deb66ae306e809.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 21:52:42,963 WARNING [parking_bot.service] HLS frame extraction failed for zaki_validi_aksakova, falling back to snapshot API: ffmpeg could not extract a frame from HLS for zaki_validi_aksakova: [in#0 @ 0000028f13d25740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-111/index.fmp4.m3u8?token=f27d67ed77ea418db24bbbd0ff71e788.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 21:52:53,843 WARNING [parking_bot.service] HLS frame extraction failed for bakalinskaya_27_vk7, falling back to snapshot API: ffmpeg could not extract a frame from HLS for bakalinskaya_27_vk7: [in#0 @ 0000024693925740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1558354706LVS615/index.fmp4.m3u8?token=8f0060e4f41f4332a03280565c69a2e5.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 22:32:21,568 WARNING [parking_bot.service] HLS frame extraction failed for zaki_validi_aksakova, falling back to snapshot API: Command '['C:\\Users\\vadim\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe', '-y', '-loglevel', 'error', '-protocol_whitelist', 'file,http,https,tcp,tls,crypto', '-allowed_extensions', 'ALL', '-rw_timeout', '15000000', '-live_start_index', '-1', '-i', 'http://136.169.226.80/001-999-111/index.fmp4.m3u8?token=4879bfa6756e49278fa257029d475016', '-frames:v', '1', '-update', '1', 'C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\zaki_validi_aksakova_raw.jpg']' timed out after 60 seconds
+2026-04-13 22:47:55,696 WARNING [parking_bot.service] HLS frame extraction failed for mushnikova_balandina, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mushnikova_balandina: [in#0 @ 0000023937115740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-098/index.fmp4.m3u8?token=c12ee89a69f3423bab1919992f879e10.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 22:48:07,372 WARNING [parking_bot.service] HLS frame extraction failed for lesotehnikuma_luganskaya, falling back to snapshot API: ffmpeg could not extract a frame from HLS for lesotehnikuma_luganskaya: [in#0 @ 00000155b79a5740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-139/index.fmp4.m3u8?token=e25924f50c53477c9c9d03c3d0876a60.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 22:49:07,551 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_5, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mendeleeva_130_cam_5: [in#0 @ 000001c5dcce5740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1549441947OXE841/index.fmp4.m3u8?token=a528b6b4658c443cb7ac713efda3ff9a.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 22:49:07,960 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_9, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mendeleeva_130_cam_9: [in#0 @ 0000013735435740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1549441947OXE898/index.fmp4.m3u8?token=4e0c46114a9e46ec8faed1e0b48080ef.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 22:49:20,790 WARNING [parking_bot.service] HLS frame extraction failed for ufa_arena_1, falling back to snapshot API: ffmpeg could not extract a frame from HLS for ufa_arena_1: [in#0 @ 000001d682ce5740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-157/index.fmp4.m3u8?token=8306c1bda0f54c52892c93c26e51636e.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 22:53:17,563 WARNING [parking_bot.service] HLS frame extraction failed for bakalinskaya_27_vk7, falling back to snapshot API: ffmpeg could not extract a frame from HLS for bakalinskaya_27_vk7: [in#0 @ 0000021e9bf95740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1558354706LVS615/index.fmp4.m3u8?token=84a670e1207c4334984d042fde51f2c5.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 22:54:59,161 WARNING [parking_bot.service] HLS frame extraction failed for zaki_validi_aksakova, falling back to snapshot API: ffmpeg could not extract a frame from HLS for zaki_validi_aksakova: [in#0 @ 000002b5b1675740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-111/index.fmp4.m3u8?token=4879bfa6756e49278fa257029d475016.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 22:55:13,914 WARNING [parking_bot.service] HLS frame extraction failed for bakalinskaya_27_vk6, falling back to snapshot API: ffmpeg could not extract a frame from HLS for bakalinskaya_27_vk6: [in#0 @ 000001fcb89d5740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1558354706LVS590/index.fmp4.m3u8?token=bc29054bf44d4c569f44fd6724f69101.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 23:16:49,254 WARNING [parking_bot.service] HLS frame extraction failed for lesotehnikuma_luganskaya, falling back to snapshot API: Command '['C:\\Users\\vadim\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe', '-y', '-loglevel', 'error', '-protocol_whitelist', 'file,http,https,tcp,tls,crypto', '-allowed_extensions', 'ALL', '-rw_timeout', '15000000', '-live_start_index', '-1', '-i', 'http://136.169.226.80/001-999-139/index.fmp4.m3u8?token=0b81a2ff6a414b71994dc6ebabf3d3a4', '-frames:v', '1', '-update', '1', 'C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\lesotehnikuma_luganskaya_raw.jpg']' timed out after 60 seconds
+2026-04-13 23:45:30,167 WARNING [parking_bot.service] HLS frame extraction failed for ufa_arena_1, falling back to snapshot API: ffmpeg could not extract a frame from HLS for ufa_arena_1: [in#0 @ 0000023fa5f05740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-157/index.fmp4.m3u8?token=0b36ce6bbb5a4c7cb1334c3118de07dc.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 23:45:41,957 WARNING [parking_bot.service] HLS frame extraction failed for mushnikova_balandina, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mushnikova_balandina: [in#0 @ 00000172b1ec5740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-098/index.fmp4.m3u8?token=5b1bdeb15dad4d7c8abbbf9558b7dfb5.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 23:45:55,245 WARNING [parking_bot.service] HLS frame extraction failed for lesotehnikuma_luganskaya, falling back to snapshot API: ffmpeg could not extract a frame from HLS for lesotehnikuma_luganskaya: [in#0 @ 0000029340bf5740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-139/index.fmp4.m3u8?token=0b81a2ff6a414b71994dc6ebabf3d3a4.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 23:46:56,351 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_9, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mendeleeva_130_cam_9: [in#0 @ 000001b29e575740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1549441947OXE898/index.fmp4.m3u8?token=8b31d54bf33e4b17818b4fa56ef5cd37.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 23:46:56,359 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_5, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mendeleeva_130_cam_5: [in#0 @ 000001cfce105740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1549441947OXE841/index.fmp4.m3u8?token=e48f0c485b4a4a76a72d8d246bdb8870.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 23:54:49,359 WARNING [parking_bot.service] HLS frame extraction failed for zaki_validi_aksakova, falling back to snapshot API: ffmpeg could not extract a frame from HLS for zaki_validi_aksakova: [in#0 @ 0000023437da5740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-111/index.fmp4.m3u8?token=b3fc4ab2df9c4c7084b358a40aada805.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 23:54:51,961 WARNING [parking_bot.service] HLS frame extraction failed for bakalinskaya_27_vk7, falling back to snapshot API: ffmpeg could not extract a frame from HLS for bakalinskaya_27_vk7: [in#0 @ 000002bfd64c5740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1558354706LVS615/index.fmp4.m3u8?token=3151b6f30d4940fa8cff2a9f90557b43.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-13 23:56:23,809 WARNING [parking_bot.service] HLS frame extraction failed for bakalinskaya_27_vk6, falling back to snapshot API: ffmpeg could not extract a frame from HLS for bakalinskaya_27_vk6: [in#0 @ 000002cf855f5740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1558354706LVS590/index.fmp4.m3u8?token=5e78a9d4874144509802fb0042989e57.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-14 00:42:53,961 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_5, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mendeleeva_130_cam_5: [in#0 @ 0000027db1975740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1549441947OXE841/index.fmp4.m3u8?token=46ca549da86a41819f5b629c073ddaac.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-14 00:42:53,961 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_9, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mendeleeva_130_cam_9: [in#0 @ 0000014775c65740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1549441947OXE898/index.fmp4.m3u8?token=eceb4f73245b4ecca340f5d4eae58bb7.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-14 00:43:06,858 WARNING [parking_bot.service] HLS frame extraction failed for ufa_arena_1, falling back to snapshot API: ffmpeg could not extract a frame from HLS for ufa_arena_1: [in#0 @ 00000230fde35740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-157/index.fmp4.m3u8?token=162041018d48481186432e566467dfdb.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-14 00:43:15,959 WARNING [parking_bot.service] HLS frame extraction failed for lesotehnikuma_luganskaya, falling back to snapshot API: ffmpeg could not extract a frame from HLS for lesotehnikuma_luganskaya: [in#0 @ 000001de08f25740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-139/index.fmp4.m3u8?token=1c290abc2d1f4f498a25d8e0d94ed264.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-14 00:43:33,232 WARNING [parking_bot.service] HLS frame extraction failed for mushnikova_balandina, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mushnikova_balandina: [in#0 @ 0000026908815740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-098/index.fmp4.m3u8?token=0732466520374f6483e6584e5340fe9f.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-14 00:52:50,580 WARNING [parking_bot.service] HLS frame extraction failed for zaki_validi_aksakova, falling back to snapshot API: ffmpeg could not extract a frame from HLS for zaki_validi_aksakova: [in#0 @ 000001914d785740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-111/index.fmp4.m3u8?token=a6cbe1c940824213851237d03d0e6b07.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-14 00:52:58,762 WARNING [parking_bot.service] HLS frame extraction failed for bakalinskaya_27_vk6, falling back to snapshot API: ffmpeg could not extract a frame from HLS for bakalinskaya_27_vk6: [in#0 @ 0000021cc4c95740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1558354706LVS590/index.fmp4.m3u8?token=3dbfb675eb0c46139acc45028026287a.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-14 00:54:58,960 WARNING [parking_bot.service] HLS frame extraction failed for bakalinskaya_27_vk7, falling back to snapshot API: ffmpeg could not extract a frame from HLS for bakalinskaya_27_vk7: [in#0 @ 000001b2958b5740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1558354706LVS615/index.fmp4.m3u8?token=7bb8708eaffa471c96db59ddaaa3af2f.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-14 00:57:47,373 WARNING [parking_bot.service] HLS frame extraction failed for zaki_validi_aksakova, falling back to snapshot API: Command '['C:\\Users\\vadim\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe', '-y', '-loglevel', 'error', '-protocol_whitelist', 'file,http,https,tcp,tls,crypto', '-allowed_extensions', 'ALL', '-rw_timeout', '15000000', '-live_start_index', '-1', '-i', 'http://136.169.226.80/001-999-111/index.fmp4.m3u8?token=6357cf2df2754f22a197b812077fbb5d', '-frames:v', '1', '-update', '1', 'C:\\Users\\vadim\\Desktop\\элина\\runtime\\frames\\zaki_validi_aksakova_raw.jpg']' timed out after 60 seconds
+2026-04-14 01:40:04,274 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_5, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mendeleeva_130_cam_5: [tcp @ 000001d2fc36abc0] Connection to tcp://136.169.226.80:80 failed: Error number -138 occurred
+[in#0 @ 000001d2fc355740] Error opening input: Error number -138 occurred
+Error opening input file http://136.169.226.80/1549441947OXE841/index.fmp4.m3u8?token=94a8328dab5f4a49bb1c41c44c7506e3.
+Error opening input files: Error number -138 occurred
+2026-04-14 01:40:06,297 WARNING [parking_bot.service] HLS frame extraction failed for ufa_arena_1, falling back to snapshot API: ffmpeg could not extract a frame from HLS for ufa_arena_1: [in#0 @ 0000017b8e7b5740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-157/index.fmp4.m3u8?token=22793bcb5a4446e6bbd80dc6ad61ab84.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-14 01:40:16,180 WARNING [parking_bot.service] HLS frame extraction failed for mushnikova_balandina, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mushnikova_balandina: [in#0 @ 0000021916e25740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-098/index.fmp4.m3u8?token=cba032c46e1743b9ae9b1a6a52f8cd19.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-14 01:40:17,358 WARNING [parking_bot.service] HLS frame extraction failed for lesotehnikuma_luganskaya, falling back to snapshot API: ffmpeg could not extract a frame from HLS for lesotehnikuma_luganskaya: [in#0 @ 0000024ec0005740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-139/index.fmp4.m3u8?token=a1f2c1af5e9b4ac7800bb60b286f1330.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-14 01:41:49,760 WARNING [parking_bot.service] HLS frame extraction failed for mendeleeva_130_cam_9, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mendeleeva_130_cam_9: [in#0 @ 0000022022085740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1549441947OXE898/index.fmp4.m3u8?token=3a66ba23223a47d1a28332c68322eca2.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-14 01:50:35,628 WARNING [parking_bot.service] HLS frame extraction failed for zaki_validi_aksakova, falling back to snapshot API: ffmpeg could not extract a frame from HLS for zaki_validi_aksakova: [in#0 @ 0000024ae6e25740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/001-999-111/index.fmp4.m3u8?token=6357cf2df2754f22a197b812077fbb5d.
+Error opening input files: Server returned 403 Forbidden (access denied)
+2026-04-14 01:50:45,767 WARNING [parking_bot.service] HLS frame extraction failed for bakalinskaya_27_vk6, falling back to snapshot API: ffmpeg could not extract a frame from HLS for bakalinskaya_27_vk6: [in#0 @ 000001a7eca65740] Error opening input: Server returned 403 Forbidden (access denied)
+Error opening input file http://136.169.226.80/1558354706LVS590/index.fmp4.m3u8?token=7cff2fa5f93045d9ac091831cbb2a93a.
+Error opening input files: Server returned 403 Forbidden (access denied)
+Traceback (most recent call last):
+  File "C:\Users\vadim\Desktop\элина\parking_bot\main.py", line 80, in main
+    from telegram import Update
+ModuleNotFoundError: No module named 'telegram'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\vadim\Desktop\элина\parking_bot\__main__.py", line 5, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\vadim\Desktop\элина\parking_bot\main.py", line 82, in main
+    raise RuntimeError(
+        "python-telegram-bot is not installed. Run 'python -m pip install -r requirements.txt' first."
+    ) from exc
+RuntimeError: python-telegram-bot is not installed. Run 'python -m pip install -r requirements.txt' first.

@@ -1,0 +1,11 @@
+2026-04-15 10:06:18,109 INFO [apscheduler.scheduler] Scheduler started
+2026-04-15 10:06:18,111 INFO [telegram.ext.Application] Application started
+2026-04-15 10:07:34,210 WARNING [parking_bot.service] HLS frame extraction failed for mushnikova_balandina, falling back to snapshot API: ffmpeg could not extract a frame from HLS for mushnikova_balandina: [tcp @ 0000024623520c80] Connection to tcp://136.169.226.80:80 failed: Error number -138 occurred
+[hls @ 00000246234f1640] Error when loading first segment 'http://136.169.226.80/001-999-098/tracks-v1/seg-0-9492751.hls.fmp4?token=6f0fa18f4d004c3eaf131155f2802629'
+[in#0 @ 00000246234f1240] Error opening input: Error number -138 occurred
+Error opening input file http://136.169.226.80/001-999-098/index.fmp4.m3u8?token=6f0fa18f4d004c3eaf131155f2802629.
+Error opening input files: Error number -138 occurred
+2026-04-15 10:09:25,892 WARNING [parking_bot.service] HLS frame extraction failed for ufa_arena_1, falling back to snapshot API: ffmpeg could not extract a frame from HLS for ufa_arena_1: [tcp @ 00000177152ec280] Connection to tcp://136.169.226.80:80 failed: Error number -138 occurred
+[in#0 @ 00000177152e1180] Error opening input: Error number -138 occurred
+Error opening input file http://136.169.226.80/001-999-157/index.fmp4.m3u8?token=18cacff0f25045de8dc63843c534d835.
+Error opening input files: Error number -138 occurred
