@@ -19,6 +19,12 @@ class Settings:
     frames_dir: Path
     timezone: str
     telegram_bot_token: str
+    telegram_proxy: str | None
+    telegram_connect_timeout_seconds: float
+    telegram_read_timeout_seconds: float
+    telegram_write_timeout_seconds: float
+    telegram_pool_timeout_seconds: float
+    telegram_bootstrap_retries: int
     poll_interval_seconds: int
     monitor_workers: int
     image_width: int
@@ -75,6 +81,12 @@ def load_settings(
         frames_dir=root / os.getenv("FRAMES_DIR", "runtime/frames"),
         timezone=os.getenv("TIMEZONE", "Europe/Moscow"),
         telegram_bot_token=token,
+        telegram_proxy=os.getenv("TELEGRAM_PROXY", "").strip() or None,
+        telegram_connect_timeout_seconds=_env_float("TELEGRAM_CONNECT_TIMEOUT_SECONDS", 20.0),
+        telegram_read_timeout_seconds=_env_float("TELEGRAM_READ_TIMEOUT_SECONDS", 30.0),
+        telegram_write_timeout_seconds=_env_float("TELEGRAM_WRITE_TIMEOUT_SECONDS", 30.0),
+        telegram_pool_timeout_seconds=_env_float("TELEGRAM_POOL_TIMEOUT_SECONDS", 5.0),
+        telegram_bootstrap_retries=_env_int("TELEGRAM_BOOTSTRAP_RETRIES", 3),
         poll_interval_seconds=_env_int("POLL_INTERVAL_SECONDS", 30),
         monitor_workers=_env_int("MONITOR_WORKERS", 2),
         image_width=_env_int("IMAGE_WIDTH", 400),

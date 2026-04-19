@@ -86,4 +86,7 @@ def main() -> None:
     from parking_bot.telegram_bot import build_application
 
     application = build_application(settings, service)
-    application.run_polling(allowed_updates=Update.ALL_TYPES)
+    application.run_polling(
+        allowed_updates=Update.ALL_TYPES,
+        bootstrap_retries=settings.telegram_bootstrap_retries,
+    )

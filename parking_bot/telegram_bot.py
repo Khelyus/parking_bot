@@ -12,6 +12,7 @@ from telegram.ext import (
     MessageHandler,
     filters,
 )
+from telegram.request import HTTPXRequest
 
 from parking_bot.repository import SQLiteRepository
 from parking_bot.service import CameraMonitorService
@@ -32,9 +33,26 @@ def build_application(settings: Settings, service: CameraMonitorService) -> Appl
         if monitor is not None:
             await monitor.stop()
 
+    request = HTTPXRequest(
+        connect_timeout=settings.telegram_connect_timeout_seconds,
+        read_timeout=settings.telegram_read_timeout_seconds,
+        write_timeout=settings.telegram_write_timeout_seconds,
+        pool_timeout=settings.telegram_pool_timeout_seconds,
+        proxy=settings.telegram_proxy,
+    )
+    get_updates_request = HTTPXRequest(
+        connect_timeout=settings.telegram_connect_timeout_seconds,
+        read_timeout=settings.telegram_read_timeout_seconds,
+        write_timeout=settings.telegram_write_timeout_seconds,
+        pool_timeout=settings.telegram_pool_timeout_seconds,
+        proxy=settings.telegram_proxy,
+    )
+
     app = (
         Application.builder()
         .token(settings.telegram_bot_token)
+        .request(request)
+        .get_updates_request(get_updates_request)
         .concurrent_updates(8)
         .post_init(post_init)
         .post_shutdown(post_shutdown)
