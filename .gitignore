@@ -11,5 +11,4 @@ runtime/frames/*.png
 train
 test
 valid
-*.jpg
 
