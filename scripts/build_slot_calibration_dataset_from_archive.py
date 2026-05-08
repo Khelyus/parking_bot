@@ -28,14 +28,20 @@ def _require_cv2() -> Any:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Build a pseudo-labeled Ufanet slot calibration dataset.")
-    parser.add_argument("--project-root", default=".")
-    parser.add_argument("--frames-dir", default="runtime/frames")
+    parser = argparse.ArgumentParser(
+        description="Build a pseudo-labeled slot calibration dataset from archived training frames."
+    )
+    parser.add_argument(
+        "--project-root",
+        default=str(PROJECT_ROOT),
+        help="Project root. Relative paths are resolved from the repository root, not from cwd.",
+    )
+    parser.add_argument("--frames-dir", default="runtime/training_frames")
     parser.add_argument("--output-dir", default="runtime/slot_calibration_dataset")
     parser.add_argument(
         "--cameras",
         nargs="*",
-        help="Optional camera ids to include. Defaults to all enabled slot cameras with raw frames.",
+        help="Optional camera ids to include. Defaults to all enabled slot cameras with archived frames.",
     )
     parser.add_argument(
         "--min-empty-probability",
@@ -50,16 +56,21 @@ def parse_args() -> argparse.Namespace:
         help="Minimum final confidence for confidently occupied slot samples.",
     )
     parser.add_argument(
-        "--min-vehicle-score",
-        type=float,
-        default=1.00,
-        help="Minimum slot/vehicle match score for confident occupied labels.",
-    )
-    parser.add_argument(
         "--max-empty-vehicle-score",
         type=float,
         default=0.12,
         help="Maximum vehicle score still considered confidently empty.",
+    )
+    parser.add_argument(
+        "--limit-per-camera",
+        type=int,
+        default=0,
+        help="Optional cap on archived frames per camera. 0 means no cap.",
+    )
+    parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="Delete existing output class folders before exporting a fresh dataset.",
     )
     return parser.parse_args()
 
@@ -96,7 +107,6 @@ def _pseudo_label_slot(
     vehicles: list[Any],
     min_empty_probability: float,
     min_occupied_probability: float,
-    min_vehicle_score: float,
     max_empty_vehicle_score: float,
 ) -> tuple[str, float, dict[str, float]] | None:
     prediction = service._predict_slot_status(image, slot_box)
@@ -141,16 +151,42 @@ def _pseudo_label_slot(
     return None
 
 
+def _prepare_output_dir(output_dir: Path, *, overwrite: bool) -> None:
+    if overwrite and output_dir.exists():
+        for child in output_dir.iterdir():
+            if child.is_dir():
+                for nested in child.rglob("*"):
+                    if nested.is_file():
+                        nested.unlink()
+                for nested_dir in sorted(
+                    [path for path in child.rglob("*") if path.is_dir()],
+                    reverse=True,
+                ):
+                    nested_dir.rmdir()
+                child.rmdir()
+            elif child.name == "metadata.json":
+                child.unlink()
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+
 def main() -> None:
     args = parse_args()
-    project_root = Path(args.project_root).resolve()
+    raw_project_root = Path(args.project_root)
+    if raw_project_root.is_absolute():
+        project_root = raw_project_root.resolve()
+    else:
+        project_root = (PROJECT_ROOT / raw_project_root).resolve()
     frames_dir = (project_root / args.frames_dir).resolve()
     output_dir = (project_root / args.output_dir).resolve()
-    output_dir.mkdir(parents=True, exist_ok=True)
+    if not frames_dir.exists():
+        raise RuntimeError(f"Archived frames directory was not found: {frames_dir}")
+
+    _prepare_output_dir(output_dir, overwrite=bool(args.overwrite))
 
     cv2 = _require_cv2()
     service = _build_service(project_root)
     selected_cameras = set(args.cameras or [])
+    per_camera_limit = args.limit_per_camera if args.limit_per_camera > 0 else None
 
     metadata: list[dict[str, object]] = []
     exported = 0
@@ -163,66 +199,73 @@ def main() -> None:
         if selected_cameras and camera.id not in selected_cameras:
             continue
 
-        frame_path = frames_dir / f"{camera.id}_raw.jpg"
-        if not frame_path.exists():
+        camera_frames_dir = frames_dir / camera.id
+        if not camera_frames_dir.exists():
             continue
 
-        image = service._load_frame_image(frame_path)
-        vehicles = (
-            service.vehicle_detector.detect_image(
-                image,
-                confidence=service.settings.vehicle_confidence,
-                image_size=max(1280, camera.detection_image_size or 0) or None,
+        frame_paths = sorted(path for path in camera_frames_dir.iterdir() if path.is_file())
+        if per_camera_limit is not None:
+            frame_paths = frame_paths[:per_camera_limit]
+        if not frame_paths:
+            continue
+
+        print(f"Processing {camera.id}: {len(frame_paths)} archived frames")
+        for frame_path in frame_paths:
+            image = service._load_frame_image(frame_path)
+            vehicles = (
+                service.vehicle_detector.detect_image(
+                    image,
+                    confidence=service.settings.vehicle_confidence,
+                    image_size=max(1280, camera.detection_image_size or 0) or None,
+                )
+                if service.vehicle_detector is not None
+                else []
             )
-            if service.vehicle_detector is not None
-            else []
-        )
 
-        for slot in camera.parking_slots:
-            slot_box = service._resolve_slot_geometry(image.shape[:2], slot)
-            labeled = _pseudo_label_slot(
-                service=service,
-                image=image,
-                slot_box=slot_box,
-                vehicles=vehicles,
-                min_empty_probability=args.min_empty_probability,
-                min_occupied_probability=args.min_occupied_probability,
-                min_vehicle_score=args.min_vehicle_score,
-                max_empty_vehicle_score=args.max_empty_vehicle_score,
-            )
-            if labeled is None:
-                skipped += 1
-                continue
+            for slot in camera.parking_slots:
+                slot_box = service._resolve_slot_geometry(image.shape[:2], slot)
+                labeled = _pseudo_label_slot(
+                    service=service,
+                    image=image,
+                    slot_box=slot_box,
+                    vehicles=vehicles,
+                    min_empty_probability=args.min_empty_probability,
+                    min_occupied_probability=args.min_occupied_probability,
+                    max_empty_vehicle_score=args.max_empty_vehicle_score,
+                )
+                if labeled is None:
+                    skipped += 1
+                    continue
 
-            label, confidence, metrics = labeled
-            crop_box = service._expand_slot_crop_box(slot_box, image.shape[:2])
-            crop = service._extract_slot_crop(image, slot_box)
-            if crop.size == 0:
-                skipped += 1
-                continue
+                label, confidence, metrics = labeled
+                crop_box = service._expand_slot_crop_box(slot_box, image.shape[:2])
+                crop = service._extract_slot_crop(image, slot_box)
+                if crop.size == 0:
+                    skipped += 1
+                    continue
 
-            class_dir = output_dir / label
-            class_dir.mkdir(parents=True, exist_ok=True)
-            filename = f"{camera.id}__{slot.id}__{frame_path.stem}.jpg"
-            target_path = class_dir / filename
-            cv2.imwrite(str(target_path), crop)
+                class_dir = output_dir / label
+                class_dir.mkdir(parents=True, exist_ok=True)
+                filename = f"{camera.id}__{slot.id}__{frame_path.stem}.jpg"
+                target_path = class_dir / filename
+                cv2.imwrite(str(target_path), crop)
 
-            metadata.append(
-                {
-                    "camera_id": camera.id,
-                    "slot_id": slot.id,
-                    "frame_path": str(frame_path),
-                    "exported_path": str(target_path),
-                    "label": label,
-                    "confidence": confidence,
-                    "slot_box": slot_box.bounds,
-                    "crop_box": crop_box,
-                    "angle_degrees": slot.angle_degrees,
-                    **metrics,
-                }
-            )
-            class_counts[label] += 1
-            exported += 1
+                metadata.append(
+                    {
+                        "camera_id": camera.id,
+                        "slot_id": slot.id,
+                        "frame_path": str(frame_path),
+                        "exported_path": str(target_path),
+                        "label": label,
+                        "confidence": confidence,
+                        "slot_box": slot_box.bounds,
+                        "crop_box": crop_box,
+                        "angle_degrees": slot.angle_degrees,
+                        **metrics,
+                    }
+                )
+                class_counts[label] += 1
+                exported += 1
 
     metadata_path = output_dir / "metadata.json"
     metadata_path.write_text(

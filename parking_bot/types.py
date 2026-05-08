@@ -123,6 +123,15 @@ class Detection:
 class ParkingSlot:
     id: str
     box: tuple[float, float, float, float]
+    angle_degrees: float = 0.0
+
+
+@dataclass(slots=True)
+class SlotGeometry:
+    bounds: tuple[int, int, int, int]
+    center: tuple[float, float]
+    size: tuple[float, float]
+    angle_degrees: float = 0.0
 
 
 @dataclass(slots=True)

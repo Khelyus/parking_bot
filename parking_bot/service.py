@@ -5,6 +5,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, tzinfo
 from email.utils import parsedate_to_datetime
 import logging
+import math
 import os
 from pathlib import Path
 import re
@@ -22,7 +23,15 @@ from parking_bot.settings import Settings
 from parking_bot.slot_classifier import SlotPrediction, SlotStatusClassifier
 from parking_bot.state_machine import AvailabilityStabilizer
 from parking_bot.time_utils import resolve_timezone
-from parking_bot.types import Availability, CameraObservation, CameraStatusRecord, Detection, ResolvedCamera
+from parking_bot.types import (
+    Availability,
+    CameraObservation,
+    CameraStatusRecord,
+    Detection,
+    ParkingSlot,
+    ResolvedCamera,
+    SlotGeometry,
+)
 
 if TYPE_CHECKING:
     from telegram import Bot
@@ -394,17 +403,17 @@ class CameraMonitorService:
 
         slot_detections: list[Detection] = []
         for slot in camera.parking_slots:
-            slot_box = self._resolve_roi_bounds(image.shape[:2], slot.box)
-            matched_vehicle = self._match_vehicle_to_slot(slot_box, vehicle_detections)
-            slot_prediction = self._predict_slot_status(image, slot_box)
+            slot_geometry = self._resolve_slot_geometry(image.shape[:2], slot)
+            matched_vehicle = self._match_vehicle_to_slot(slot_geometry, vehicle_detections)
+            slot_prediction = self._predict_slot_status(image, slot_geometry)
             vehicle_score = (
-                self._slot_vehicle_match_score(slot_box, matched_vehicle.box)
+                self._slot_vehicle_match_score(slot_geometry, matched_vehicle.box)
                 if matched_vehicle is not None
                 else 0.0
             )
             local_vehicle_score = self._detect_local_vehicle_score(
                 image,
-                slot_box,
+                slot_geometry,
                 base_vehicle_score=vehicle_score,
                 slot_prediction=slot_prediction,
             )
@@ -417,7 +426,7 @@ class CameraMonitorService:
                 Detection(
                     label=label,
                     confidence=confidence,
-                    box=slot_box,
+                    box=slot_geometry.bounds,
                 )
             )
 
@@ -441,25 +450,23 @@ class CameraMonitorService:
     def _predict_slot_status(
         self,
         image: Any,
-        slot_box: tuple[int, int, int, int],
+        slot_shape: tuple[int, int, int, int] | SlotGeometry,
     ) -> SlotPrediction | None:
         if self.slot_classifier is None:
             return None
         try:
-            crop_box = self._expand_slot_crop_box(slot_box, image.shape[:2])
-            x1, y1, x2, y2 = crop_box
-            crop = image[y1:y2, x1:x2]
+            crop = self._extract_slot_crop(image, slot_shape)
             if crop.size == 0:
                 return None
             return self.slot_classifier.predict_image(crop)
         except Exception as exc:
-            logger.warning("Slot classifier failed for crop %s: %s", slot_box, exc)
+            logger.warning("Slot classifier failed for slot %s: %s", self._slot_bounds(slot_shape), exc)
             return None
 
     def _detect_local_vehicle_score(
         self,
         image: Any,
-        slot_box: tuple[int, int, int, int],
+        slot_shape: tuple[int, int, int, int] | SlotGeometry,
         *,
         base_vehicle_score: float,
         slot_prediction: SlotPrediction | None,
@@ -472,8 +479,9 @@ class CameraMonitorService:
         ):
             return 0.0
 
+        slot_geometry = self._coerce_slot_geometry(slot_shape)
         crop_box = self._expand_slot_crop_box(
-            slot_box,
+            slot_geometry,
             image.shape[:2],
             padding_scale_x=0.40,
             padding_scale_y_top=0.42,
@@ -500,13 +508,13 @@ class CameraMonitorService:
             return 0.0
 
         remapped_detections = self._remap_detections(local_detections, offset=(x1, y1))
-        local_match = self._match_vehicle_to_slot(slot_box, remapped_detections)
+        local_match = self._match_vehicle_to_slot(slot_geometry, remapped_detections)
         if local_match is not None:
-            return self._slot_vehicle_match_score(slot_box, local_match.box)
+            return self._slot_vehicle_match_score(slot_geometry, local_match.box)
 
         return max(
             (
-                self._box_overlap_ratio(slot_box, detection.box)
+                self._slot_box_overlap_ratio(slot_geometry, detection.box)
                 for detection in remapped_detections
             ),
             default=0.0,
@@ -535,26 +543,180 @@ class CameraMonitorService:
 
     def _expand_slot_crop_box(
         self,
-        slot_box: tuple[int, int, int, int],
+        slot_shape: tuple[int, int, int, int] | SlotGeometry,
         image_shape: tuple[int, int],
         *,
         padding_scale_x: float = 0.28,
         padding_scale_y_top: float = 0.28,
         padding_scale_y_bottom: float = 0.18,
     ) -> tuple[int, int, int, int]:
+        expanded_geometry = self._expand_slot_geometry(
+            self._coerce_slot_geometry(slot_shape),
+            image_shape,
+            padding_scale_x=padding_scale_x,
+            padding_scale_y_top=padding_scale_y_top,
+            padding_scale_y_bottom=padding_scale_y_bottom,
+        )
+        return expanded_geometry.bounds
+
+    def _coerce_slot_geometry(
+        self,
+        slot_shape: tuple[int, int, int, int] | SlotGeometry,
+    ) -> SlotGeometry:
+        if isinstance(slot_shape, SlotGeometry):
+            return slot_shape
+        x1, y1, x2, y2 = slot_shape
+        width = max(1.0, float(x2 - x1))
+        height = max(1.0, float(y2 - y1))
+        center = ((x1 + x2) / 2, (y1 + y2) / 2)
+        return SlotGeometry(
+            bounds=(x1, y1, x2, y2),
+            center=center,
+            size=(width, height),
+            angle_degrees=0.0,
+        )
+
+    def _resolve_slot_geometry(
+        self,
+        image_shape: tuple[int, int],
+        slot: ParkingSlot,
+    ) -> SlotGeometry:
+        bounds = self._resolve_roi_bounds(image_shape, slot.box)
+        x1, y1, x2, y2 = bounds
+        width = max(1.0, float(x2 - x1))
+        height = max(1.0, float(y2 - y1))
+        return SlotGeometry(
+            bounds=bounds,
+            center=((x1 + x2) / 2, (y1 + y2) / 2),
+            size=(width, height),
+            angle_degrees=float(slot.angle_degrees),
+        )
+
+    def _slot_bounds(
+        self,
+        slot_shape: tuple[int, int, int, int] | SlotGeometry,
+    ) -> tuple[int, int, int, int]:
+        return self._coerce_slot_geometry(slot_shape).bounds
+
+    def _slot_polygon(
+        self,
+        slot_shape: tuple[int, int, int, int] | SlotGeometry,
+    ) -> Any:
+        np = _require_numpy()
+        slot_geometry = self._coerce_slot_geometry(slot_shape)
+        center_x, center_y = slot_geometry.center
+        width, height = slot_geometry.size
+        half_width = width / 2
+        half_height = height / 2
+        radians = math.radians(slot_geometry.angle_degrees)
+        cos_angle = math.cos(radians)
+        sin_angle = math.sin(radians)
+        corners: list[tuple[float, float]] = []
+        for dx, dy in (
+            (-half_width, -half_height),
+            (half_width, -half_height),
+            (half_width, half_height),
+            (-half_width, half_height),
+        ):
+            corners.append(
+                (
+                    center_x + (dx * cos_angle) - (dy * sin_angle),
+                    center_y + (dx * sin_angle) + (dy * cos_angle),
+                )
+            )
+        return np.array(corners, dtype=np.float32)
+
+    def _slot_area(
+        self,
+        slot_shape: tuple[int, int, int, int] | SlotGeometry,
+    ) -> float:
+        slot_geometry = self._coerce_slot_geometry(slot_shape)
+        return max(1.0, slot_geometry.size[0] * slot_geometry.size[1])
+
+    def _bounds_from_polygon(
+        self,
+        polygon: Any,
+        image_shape: tuple[int, int],
+    ) -> tuple[int, int, int, int]:
         image_height, image_width = image_shape
-        x1, y1, x2, y2 = slot_box
-        width = max(1, x2 - x1)
-        height = max(1, y2 - y1)
+        min_x = max(0, min(image_width - 1, int(math.floor(float(polygon[:, 0].min())))))
+        min_y = max(0, min(image_height - 1, int(math.floor(float(polygon[:, 1].min())))))
+        max_x = max(min_x + 1, min(image_width, int(math.ceil(float(polygon[:, 0].max())))))
+        max_y = max(min_y + 1, min(image_height, int(math.ceil(float(polygon[:, 1].max())))))
+        return (min_x, min_y, max_x, max_y)
+
+    def _expand_slot_geometry(
+        self,
+        slot_geometry: SlotGeometry,
+        image_shape: tuple[int, int],
+        *,
+        padding_scale_x: float = 0.28,
+        padding_scale_y_top: float = 0.28,
+        padding_scale_y_bottom: float = 0.18,
+    ) -> SlotGeometry:
+        width = max(1.0, slot_geometry.size[0])
+        height = max(1.0, slot_geometry.size[1])
         padding_x = max(6, round(width * padding_scale_x))
         padding_y_top = max(6, round(height * padding_scale_y_top))
         padding_y_bottom = max(6, round(height * padding_scale_y_bottom))
-        return (
-            max(0, x1 - padding_x),
-            max(0, y1 - padding_y_top),
-            min(image_width, x2 + padding_x),
-            min(image_height, y2 + padding_y_bottom),
+        expanded_width = width + padding_x * 2
+        expanded_height = height + padding_y_top + padding_y_bottom
+        center_x, center_y = slot_geometry.center
+        center_shift_local_y = (padding_y_bottom - padding_y_top) / 2
+        radians = math.radians(slot_geometry.angle_degrees)
+        shifted_center = (
+            center_x - (center_shift_local_y * math.sin(radians)),
+            center_y + (center_shift_local_y * math.cos(radians)),
         )
+        expanded = SlotGeometry(
+            bounds=slot_geometry.bounds,
+            center=shifted_center,
+            size=(expanded_width, expanded_height),
+            angle_degrees=slot_geometry.angle_degrees,
+        )
+        return SlotGeometry(
+            bounds=self._bounds_from_polygon(self._slot_polygon(expanded), image_shape),
+            center=expanded.center,
+            size=expanded.size,
+            angle_degrees=expanded.angle_degrees,
+        )
+
+    def _extract_slot_crop(
+        self,
+        image: Any,
+        slot_shape: tuple[int, int, int, int] | SlotGeometry,
+        *,
+        padding_scale_x: float = 0.28,
+        padding_scale_y_top: float = 0.28,
+        padding_scale_y_bottom: float = 0.18,
+    ) -> Any:
+        cv2 = _require_cv2()
+        expanded_geometry = self._expand_slot_geometry(
+            self._coerce_slot_geometry(slot_shape),
+            image.shape[:2],
+            padding_scale_x=padding_scale_x,
+            padding_scale_y_top=padding_scale_y_top,
+            padding_scale_y_bottom=padding_scale_y_bottom,
+        )
+        output_width = max(1, round(expanded_geometry.size[0]))
+        output_height = max(1, round(expanded_geometry.size[1]))
+        if abs(expanded_geometry.angle_degrees) < 1e-3:
+            x1, y1, x2, y2 = expanded_geometry.bounds
+            return image[y1:y2, x1:x2]
+
+        np = _require_numpy()
+        source = self._slot_polygon(expanded_geometry).astype(np.float32)
+        destination = np.array(
+            [
+                [0, 0],
+                [output_width - 1, 0],
+                [output_width - 1, output_height - 1],
+                [0, output_height - 1],
+            ],
+            dtype=np.float32,
+        )
+        matrix = cv2.getPerspectiveTransform(source, destination)
+        return cv2.warpPerspective(image, matrix, (output_width, output_height))
 
     def _resolve_slot_status(
         self,
@@ -940,13 +1102,13 @@ class CameraMonitorService:
 
     def _match_vehicle_to_slot(
         self,
-        slot_box: tuple[int, int, int, int],
+        slot_shape: tuple[int, int, int, int] | SlotGeometry,
         vehicles: list[Detection],
     ) -> Detection | None:
         best_match: Detection | None = None
         best_score = 0.0
         for vehicle in vehicles:
-            score = self._slot_vehicle_match_score(slot_box, vehicle.box)
+            score = self._slot_vehicle_match_score(slot_shape, vehicle.box)
             if score < 0.55:
                 continue
             if (
@@ -960,39 +1122,78 @@ class CameraMonitorService:
 
     def _slot_vehicle_match_score(
         self,
-        slot_box: tuple[int, int, int, int],
+        slot_shape: tuple[int, int, int, int] | SlotGeometry,
         vehicle_box: tuple[int, int, int, int],
     ) -> float:
         score = 0.0
-        if self._slot_contains_vehicle_anchor(slot_box, vehicle_box):
+        if self._slot_contains_vehicle_anchor(slot_shape, vehicle_box):
             score += 1.0
 
         center_x, center_y = self._box_center(vehicle_box)
-        if self._slot_contains_point(slot_box, center_x, center_y):
+        if self._slot_contains_point(slot_shape, center_x, center_y):
             score += 0.7
 
-        overlap_slot = self._box_overlap_ratio(slot_box, vehicle_box)
-        overlap_vehicle = self._box_overlap_ratio(vehicle_box, slot_box)
+        overlap_slot = self._slot_box_overlap_ratio(slot_shape, vehicle_box)
+        overlap_vehicle = self._vehicle_overlap_with_slot_ratio(vehicle_box, slot_shape)
         score += min(0.8, overlap_slot * 1.8)
         score += min(0.4, overlap_vehicle * 0.8)
         return score
 
     def _slot_contains_point(
         self,
-        slot_box: tuple[int, int, int, int],
+        slot_shape: tuple[int, int, int, int] | SlotGeometry,
         point_x: float,
         point_y: float,
     ) -> bool:
-        slot_x1, slot_y1, slot_x2, slot_y2 = slot_box
-        return slot_x1 <= point_x <= slot_x2 and slot_y1 <= point_y <= slot_y2
+        cv2 = _require_cv2()
+        polygon = self._slot_polygon(slot_shape)
+        return cv2.pointPolygonTest(polygon, (float(point_x), float(point_y)), False) >= 0
 
     def _slot_contains_vehicle_anchor(
         self,
-        slot_box: tuple[int, int, int, int],
+        slot_shape: tuple[int, int, int, int] | SlotGeometry,
         vehicle_box: tuple[int, int, int, int],
     ) -> bool:
         anchor_x, anchor_y = self._vehicle_anchor_point(vehicle_box)
-        return self._slot_contains_point(slot_box, anchor_x, anchor_y)
+        return self._slot_contains_point(slot_shape, anchor_x, anchor_y)
+
+    def _vehicle_overlap_with_slot_ratio(
+        self,
+        vehicle_box: tuple[int, int, int, int],
+        slot_shape: tuple[int, int, int, int] | SlotGeometry,
+    ) -> float:
+        vehicle_area = max(1.0, (vehicle_box[2] - vehicle_box[0]) * (vehicle_box[3] - vehicle_box[1]))
+        return self._slot_box_intersection_area(slot_shape, vehicle_box) / vehicle_area
+
+    def _slot_box_overlap_ratio(
+        self,
+        slot_shape: tuple[int, int, int, int] | SlotGeometry,
+        box: tuple[int, int, int, int],
+    ) -> float:
+        return self._slot_box_intersection_area(slot_shape, box) / self._slot_area(slot_shape)
+
+    def _slot_box_intersection_area(
+        self,
+        slot_shape: tuple[int, int, int, int] | SlotGeometry,
+        box: tuple[int, int, int, int],
+    ) -> float:
+        cv2 = _require_cv2()
+        np = _require_numpy()
+        slot_polygon = self._slot_polygon(slot_shape).astype(np.float32)
+        box_polygon = np.array(
+            [
+                [box[0], box[1]],
+                [box[2], box[1]],
+                [box[2], box[3]],
+                [box[0], box[3]],
+            ],
+            dtype=np.float32,
+        )
+        try:
+            area, _intersection = cv2.intersectConvexConvex(slot_polygon, box_polygon)
+        except cv2.error:
+            return 0.0
+        return max(0.0, float(area))
 
     def _vehicle_anchor_point(
         self,

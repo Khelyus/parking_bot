@@ -2,7 +2,7 @@ from types import SimpleNamespace
 
 from parking_bot.service import CameraMonitorService
 from parking_bot.slot_classifier import SlotPrediction
-from parking_bot.types import Detection
+from parking_bot.types import Detection, SlotGeometry
 
 
 def _build_service() -> CameraMonitorService:
@@ -39,6 +39,22 @@ def test_match_vehicle_to_slot_accepts_center_and_overlap_support() -> None:
     matched = service._match_vehicle_to_slot(slot_box, [overlap_match])
 
     assert matched == overlap_match
+
+
+def test_match_vehicle_to_rotated_slot_prefers_vehicle_inside_rotated_geometry() -> None:
+    service = _build_service()
+    rotated_slot = SlotGeometry(
+        bounds=(100, 100, 200, 200),
+        center=(150.0, 150.0),
+        size=(80.0, 40.0),
+        angle_degrees=30.0,
+    )
+    outside = Detection(label="car", confidence=0.96, box=(85, 140, 120, 190))
+    inside = Detection(label="car", confidence=0.71, box=(135, 130, 182, 182))
+
+    matched = service._match_vehicle_to_slot(rotated_slot, [outside, inside])
+
+    assert matched == inside
 
 
 def test_free_detection_requires_same_row_vehicle_support() -> None:
