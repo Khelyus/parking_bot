@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 from dataclasses import dataclass
+import json
 import math
 from pathlib import Path
 import sys
@@ -148,6 +149,10 @@ def _load_camera(project_root: Path, camera_id: str) -> tuple[Any, list[ParkingS
     raise RuntimeError(f"Camera {camera_id!r} was not found in the configured cameras list")
 
 
+def _editor_state_path(output_dir: Path, camera_id: str) -> Path:
+    return output_dir / f"{camera_id}.editor_state.json"
+
+
 def _collect_image_paths(project_root: Path, camera_id: str, frame_arg: str | None, frames_dir_arg: str) -> list[Path]:
     if frame_arg:
         path = Path(frame_arg)
@@ -202,6 +207,56 @@ def _pixels_to_normalized(box: tuple[int, int, int, int], image_width: int, imag
         round(x2 / image_width, 3),
         round(y2 / image_height, 3),
     )
+
+
+def _load_editor_slots(
+    output_dir: Path,
+    camera_id: str,
+    image_width: int,
+    image_height: int,
+) -> list[EditableSlot] | None:
+    state_path = _editor_state_path(output_dir, camera_id)
+    if not state_path.exists():
+        return None
+
+    try:
+        payload = json.loads(state_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        print(f"Warning: could not load saved editor state from {state_path}: {exc}")
+        return None
+
+    raw_slots = payload.get("slots")
+    if not isinstance(raw_slots, list):
+        return None
+
+    slots: list[EditableSlot] = []
+    for index, item in enumerate(raw_slots, start=1):
+        if not isinstance(item, dict):
+            continue
+        slot_id = str(item.get("id") or f"slot_{index}")
+        raw_box = item.get("box")
+        if not isinstance(raw_box, (list, tuple)) or len(raw_box) != 4:
+            continue
+        try:
+            x1, y1, x2, y2 = [float(value) for value in raw_box]
+            angle_degrees = float(item.get("angle_degrees", 0.0))
+        except (TypeError, ValueError):
+            continue
+        normalized_box = (
+            max(0.0, min(1.0, x1)),
+            max(0.0, min(1.0, y1)),
+            max(0.0, min(1.0, x2)),
+            max(0.0, min(1.0, y2)),
+        )
+        slots.append(
+            _normalized_to_pixels(
+                ParkingSlot(id=slot_id, box=normalized_box, angle_degrees=angle_degrees),
+                image_width,
+                image_height,
+            )
+        )
+
+    return slots or None
 
 
 def _fit_scale(image_width: int, image_height: int, max_width: int, max_height: int) -> float:
@@ -295,6 +350,26 @@ def _next_slot_id(slots: list[EditableSlot]) -> str:
     while f"slot_{index}" in used:
         index += 1
     return f"slot_{index}"
+
+
+def _duplicate_slot(
+    slot: EditableSlot,
+    slots: list[EditableSlot],
+    image_width: int,
+    image_height: int,
+) -> EditableSlot:
+    x1, y1, x2, y2 = slot.box
+    width = x2 - x1
+    height = y2 - y1
+    offset_x = max(8, round(width * 0.18))
+    offset_y = max(8, round(height * 0.12))
+    new_x1 = _clamp(x1 + offset_x, 0, image_width - width)
+    new_y1 = _clamp(y1 + offset_y, 0, image_height - height)
+    return EditableSlot(
+        id=_next_slot_id(slots),
+        box=(new_x1, new_y1, new_x1 + width, new_y1 + height),
+        angle_degrees=slot.angle_degrees,
+    )
 
 
 def _normalize_pixel_box(
@@ -436,7 +511,7 @@ def _render(
 
     help_lines = [
         "Mouse: drag inside slot to move, drag corners to resize, shift+drag to create",
-        "Keys: [ ] prev/next frame | tab next slot | ,/. rotate | d delete | s save | h help | q quit",
+        "Keys: left/right frame | tab next slot | c clone | ,/. rotate | d delete | s save | h help | q quit",
     ]
     y = 24
     for line in lines:
@@ -470,8 +545,10 @@ def _save_outputs(
     output_dir.mkdir(parents=True, exist_ok=True)
     snippet_path = output_dir / f"{camera_id}.parking_slots.yaml"
     preview_path = output_dir / f"{camera_id}.preview.jpg"
+    state_path = _editor_state_path(output_dir, camera_id)
 
     lines = [f"  - id: {camera_id}", "    parking_slots:"]
+    serialized_slots: list[dict[str, object]] = []
     for slot in state.slots:
         x1, y1, x2, y2 = _pixels_to_normalized(slot.box, state.image_shape[1], state.image_shape[0])
         lines.extend(
@@ -482,7 +559,26 @@ def _save_outputs(
         )
         if abs(slot.angle_degrees) >= 0.05:
             lines.append(f"        angle: {slot.angle_degrees:.1f}")
+        serialized_slots.append(
+            {
+                "id": slot.id,
+                "box": [x1, y1, x2, y2],
+                "angle_degrees": round(slot.angle_degrees, 1),
+            }
+        )
     snippet_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    state_path.write_text(
+        json.dumps(
+            {
+                "camera_id": camera_id,
+                "image_shape": [state.image_shape[0], state.image_shape[1]],
+                "slots": serialized_slots,
+            },
+            ensure_ascii=False,
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
 
     preview = _render(state, image, camera_id, scale=1.0, max_width=state.image_shape[1], max_height=state.image_shape[0])
     cv2.imwrite(str(preview_path), preview)
@@ -572,24 +668,30 @@ def main() -> None:
     image = _load_image(image_paths[0])
     image_height, image_width = image.shape[:2]
     scale = _fit_scale(image_width, image_height, args.max_width, args.max_height)
+    output_dir = (project_root / args.output_dir).resolve()
+    initial_slots = _load_editor_slots(output_dir, camera_id, image_width, image_height)
+    if initial_slots is None:
+        initial_slots = [_normalized_to_pixels(slot, image_width, image_height) for slot in camera_slots]
 
     state = EditorState(
         image_paths=image_paths,
         image_index=0,
         image_shape=(image_height, image_width),
-        slots=[_normalized_to_pixels(slot, image_width, image_height) for slot in camera_slots],
-        selected_index=0 if camera_slots else -1,
+        slots=initial_slots,
+        selected_index=0 if initial_slots else -1,
     )
 
     cv2 = _require_cv2()
     cv2.namedWindow("Parking Slot Editor", cv2.WINDOW_NORMAL)
     _install_mouse_handler(state, scale)
-    output_dir = (project_root / args.output_dir).resolve()
 
     print(
         f"Loaded camera={camera.id} display_name={camera.display_name or camera.id} "
         f"frames={len(image_paths)} slots={len(state.slots)} output_dir={output_dir}"
     )
+
+    left_arrow_keys = {81, 2424832}
+    right_arrow_keys = {83, 2555904}
 
     while True:
         current_path = state.image_paths[state.image_index]
@@ -601,6 +703,11 @@ def main() -> None:
             )
         preview = _render(state, image, camera.id, scale, args.max_width, args.max_height)
         cv2.imshow("Parking Slot Editor", preview)
+        try:
+            if cv2.getWindowProperty("Parking Slot Editor", cv2.WND_PROP_VISIBLE) < 1:
+                break
+        except cv2.error:
+            break
         key = cv2.waitKeyEx(30)
         if key < 0:
             continue
@@ -610,10 +717,10 @@ def main() -> None:
         if key == ord("h"):
             state.show_help = not state.show_help
             continue
-        if key in (ord("]"),):
+        if key in right_arrow_keys:
             state.image_index = (state.image_index + 1) % len(state.image_paths)
             continue
-        if key in (ord("["),):
+        if key in left_arrow_keys:
             state.image_index = (state.image_index - 1) % len(state.image_paths)
             continue
         if key in (9, ord("\t"), ord("n")) and state.slots:
@@ -621,6 +728,17 @@ def main() -> None:
             continue
         if key == ord("p") and state.slots:
             state.selected_index = (state.selected_index - 1) % len(state.slots)
+            continue
+        if key == ord("c") and 0 <= state.selected_index < len(state.slots):
+            duplicated = _duplicate_slot(
+                state.slots[state.selected_index],
+                state.slots,
+                state.image_shape[1],
+                state.image_shape[0],
+            )
+            state.slots.append(duplicated)
+            state.selected_index = len(state.slots) - 1
+            state.dirty = True
             continue
         if key in (ord(","), ord("<")) and 0 <= state.selected_index < len(state.slots):
             step = 5.0 if key == ord("<") else 1.0
