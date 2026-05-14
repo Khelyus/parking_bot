@@ -1,0 +1,8 @@
+  - id: ufa_arena_1
+    parking_slots:
+      - id: gate_row_3
+        box: 0.419,0.332,0.441,0.388
+        angle: -8.0
+      - id: slot_1
+        box: 0.441,0.329,0.462,0.384
+        angle: -13.0

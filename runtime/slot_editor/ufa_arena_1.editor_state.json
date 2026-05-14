@@ -1,0 +1,29 @@
+{
+  "camera_id": "ufa_arena_1",
+  "image_shape": [
+    1080,
+    1920
+  ],
+  "slots": [
+    {
+      "id": "gate_row_3",
+      "box": [
+        0.419,
+        0.332,
+        0.441,
+        0.388
+      ],
+      "angle_degrees": -8.0
+    },
+    {
+      "id": "slot_1",
+      "box": [
+        0.441,
+        0.329,
+        0.462,
+        0.384
+      ],
+      "angle_degrees": -13.0
+    }
+  ]
+}
