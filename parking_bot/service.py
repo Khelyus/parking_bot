@@ -402,8 +402,10 @@ class CameraMonitorService:
                 logger.warning("Vehicle-based slot detection failed for %s: %s", camera.id, exc)
 
         slot_detections: list[Detection] = []
+        slot_geometries: list[SlotGeometry] = []
         for slot in camera.parking_slots:
             slot_geometry = self._resolve_slot_geometry(image.shape[:2], slot)
+            slot_geometries.append(slot_geometry)
             matched_vehicle = self._match_vehicle_to_slot(slot_geometry, vehicle_detections)
             slot_prediction = self._predict_slot_status(image, slot_geometry)
             vehicle_score = (
@@ -444,7 +446,12 @@ class CameraMonitorService:
             occupied_count=occupied_count,
             availability=availability,
             detections=slot_detections,
-            annotated_frame=self._annotate_slot_detection(image, slot_detections, vehicle_detections),
+            annotated_frame=self._annotate_slot_detection(
+                image,
+                slot_detections,
+                slot_geometries=slot_geometries,
+                vehicle_detections=vehicle_detections,
+            ),
         )
 
     def _predict_slot_status(
@@ -1206,25 +1213,45 @@ class CameraMonitorService:
         self,
         image: Any,
         slot_detections: list[Detection],
+        *,
+        slot_geometries: list[SlotGeometry] | None,
         vehicle_detections: list[Detection],
     ) -> Any:
         cv2 = _require_cv2()
+        np = _require_numpy()
         annotated = image.copy()
         overlay = image.copy()
 
-        for detection in slot_detections:
+        geometry_map: list[SlotGeometry | None]
+        if slot_geometries is not None and len(slot_geometries) == len(slot_detections):
+            geometry_map = list(slot_geometries)
+        else:
+            geometry_map = [None] * len(slot_detections)
+
+        for detection, geometry in zip(slot_detections, geometry_map):
             is_free = detection.label == "space-empty"
             color = (0, 190, 90) if is_free else (0, 90, 220)
-            x1, y1, x2, y2 = detection.box
-            cv2.rectangle(overlay, (x1, y1), (x2, y2), color, -1)
+            if geometry is not None:
+                polygon = np.round(self._slot_polygon(geometry)).astype(np.int32)
+                cv2.fillConvexPoly(overlay, polygon, color)
+            else:
+                x1, y1, x2, y2 = detection.box
+                cv2.rectangle(overlay, (x1, y1), (x2, y2), color, -1)
         cv2.addWeighted(overlay, 0.15, annotated, 0.85, 0, annotated)
 
-        for detection in slot_detections:
+        for detection, geometry in zip(slot_detections, geometry_map):
             is_free = detection.label == "space-empty"
             color = (0, 190, 90) if is_free else (0, 90, 220)
-            x1, y1, x2, y2 = detection.box
-            cv2.rectangle(annotated, (x1, y1), (x2, y2), color, 2)
+            if geometry is not None:
+                polygon = np.round(self._slot_polygon(geometry)).astype(np.int32)
+                cv2.polylines(annotated, [polygon], isClosed=True, color=color, thickness=2)
+                label_bounds = geometry.bounds
+            else:
+                x1, y1, x2, y2 = detection.box
+                cv2.rectangle(annotated, (x1, y1), (x2, y2), color, 2)
+                label_bounds = detection.box
             text = "FREE" if is_free else "OCC"
+            x1, y1, _x2, _y2 = label_bounds
             cv2.putText(
                 annotated,
                 text,
