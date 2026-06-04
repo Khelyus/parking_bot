@@ -497,10 +497,10 @@ def _slot_contains(slot: EditableSlot, x: int, y: int) -> bool:
 
 
 def _find_slot_index(slots: list[EditableSlot], x: int, y: int) -> int:
-    matches = [index for index, slot in enumerate(slots) if _slot_contains(slot, x, y)]
-    if not matches:
-        return -1
-    return min(matches, key=lambda index: _slot_area(slots[index].box))
+    for index in range(len(slots) - 1, -1, -1):
+        if _slot_contains(slots[index], x, y):
+            return index
+    return -1
 
 
 def _corner_hit(slot: EditableSlot, x: int, y: int, radius: int = 14) -> str | None:
