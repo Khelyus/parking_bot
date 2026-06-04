@@ -1,0 +1,251 @@
+{
+  "camera_id": "sports_palace_square",
+  "image_shape": [
+    1080,
+    1920
+  ],
+  "slots": [
+    {
+      "id": "slot_1",
+      "box": [
+        0.174,
+        0.434,
+        0.23,
+        0.469
+      ],
+      "angle_degrees": -7.0,
+      "included": true
+    },
+    {
+      "id": "slot_3",
+      "box": [
+        0.168,
+        0.402,
+        0.223,
+        0.436
+      ],
+      "angle_degrees": -7.0,
+      "included": true
+    },
+    {
+      "id": "slot_4",
+      "box": [
+        0.159,
+        0.369,
+        0.214,
+        0.403
+      ],
+      "angle_degrees": -7.0,
+      "included": true
+    },
+    {
+      "id": "slot_5",
+      "box": [
+        0.148,
+        0.337,
+        0.203,
+        0.371
+      ],
+      "angle_degrees": -11.0,
+      "included": true
+    },
+    {
+      "id": "slot_2",
+      "box": [
+        0.617,
+        0.391,
+        0.639,
+        0.454
+      ],
+      "angle_degrees": -50.0,
+      "included": true
+    },
+    {
+      "id": "slot_6",
+      "box": [
+        0.596,
+        0.396,
+        0.618,
+        0.459
+      ],
+      "angle_degrees": -50.0,
+      "included": true
+    },
+    {
+      "id": "slot_8",
+      "box": [
+        0.644,
+        0.399,
+        0.662,
+        0.459
+      ],
+      "angle_degrees": -50.0,
+      "included": true
+    },
+    {
+      "id": "slot_10",
+      "box": [
+        0.66,
+        0.393,
+        0.678,
+        0.447
+      ],
+      "angle_degrees": -50.0,
+      "included": true
+    },
+    {
+      "id": "slot_11",
+      "box": [
+        0.681,
+        0.39,
+        0.698,
+        0.444
+      ],
+      "angle_degrees": -50.0,
+      "included": true
+    },
+    {
+      "id": "slot_12",
+      "box": [
+        0.699,
+        0.386,
+        0.715,
+        0.443
+      ],
+      "angle_degrees": -50.0,
+      "included": true
+    },
+    {
+      "id": "slot_13",
+      "box": [
+        0.717,
+        0.38,
+        0.735,
+        0.436
+      ],
+      "angle_degrees": -50.0,
+      "included": true
+    },
+    {
+      "id": "slot_14",
+      "box": [
+        0.572,
+        0.419,
+        0.594,
+        0.482
+      ],
+      "angle_degrees": -30.0,
+      "included": true
+    },
+    {
+      "id": "slot_15",
+      "box": [
+        0.527,
+        0.428,
+        0.548,
+        0.492
+      ],
+      "angle_degrees": -30.0,
+      "included": true
+    },
+    {
+      "id": "slot_16",
+      "box": [
+        0.247,
+        0.459,
+        0.274,
+        0.529
+      ],
+      "angle_degrees": -17.0,
+      "included": true
+    },
+    {
+      "id": "slot_7",
+      "box": [
+        0.504,
+        0.431,
+        0.526,
+        0.494
+      ],
+      "angle_degrees": -30.0,
+      "included": true
+    },
+    {
+      "id": "slot_17",
+      "box": [
+        0.481,
+        0.433,
+        0.502,
+        0.497
+      ],
+      "angle_degrees": -30.0,
+      "included": true
+    },
+    {
+      "id": "slot_19",
+      "box": [
+        0.385,
+        0.453,
+        0.411,
+        0.522
+      ],
+      "angle_degrees": -21.0,
+      "included": true
+    },
+    {
+      "id": "slot_20",
+      "box": [
+        0.357,
+        0.457,
+        0.383,
+        0.527
+      ],
+      "angle_degrees": -17.0,
+      "included": true
+    },
+    {
+      "id": "slot_21",
+      "box": [
+        0.33,
+        0.459,
+        0.356,
+        0.529
+      ],
+      "angle_degrees": -17.0,
+      "included": true
+    },
+    {
+      "id": "slot_22",
+      "box": [
+        0.305,
+        0.459,
+        0.332,
+        0.529
+      ],
+      "angle_degrees": -17.0,
+      "included": true
+    },
+    {
+      "id": "slot_23",
+      "box": [
+        0.28,
+        0.465,
+        0.306,
+        0.534
+      ],
+      "angle_degrees": -17.0,
+      "included": true
+    },
+    {
+      "id": "slot_9",
+      "box": [
+        0.551,
+        0.425,
+        0.572,
+        0.489
+      ],
+      "angle_degrees": -30.0,
+      "included": true
+    }
+  ]
+}

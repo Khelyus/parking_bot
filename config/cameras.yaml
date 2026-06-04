@@ -131,9 +131,232 @@ cameras:
     source_transport: hls
     min_confidence: 0.05
     detection_image_size: 1280
-    detection_roi: 0.28,0.17,0.95,0.63
-    detection_exclude_rois:
-      - 0.82,0.10,1.00,0.34
+    parking_slots:
+      - id: slot_1
+        box: 0.597,0.525,0.619,0.599
+        angle: 70.0
+      - id: slot_2
+        box: 0.586,0.506,0.606,0.581
+        angle: 71.0
+      - id: slot_4
+        box: 0.577,0.490,0.594,0.557
+        angle: 70.0
+      - id: slot_6
+        box: 0.567,0.470,0.584,0.538
+        angle: 71.0
+      - id: slot_7
+        box: 0.552,0.454,0.570,0.521
+        angle: 73.0
+      - id: slot_3
+        box: 0.546,0.442,0.560,0.506
+        angle: 72.0
+      - id: slot_5
+        box: 0.536,0.424,0.550,0.488
+        angle: 72.0
+      - id: slot_9
+        box: 0.527,0.410,0.541,0.474
+        angle: 73.0
+      - id: slot_10
+        box: 0.516,0.395,0.530,0.459
+        angle: 75.0
+      - id: slot_11
+        box: 0.509,0.382,0.523,0.446
+        angle: 75.0
+      - id: slot_12
+        box: 0.501,0.370,0.512,0.433
+        angle: 76.0
+      - id: slot_13
+        box: 0.491,0.359,0.503,0.422
+        angle: 76.0
+      - id: slot_14
+        box: 0.487,0.348,0.498,0.411
+        angle: 76.0
+      - id: slot_15
+        box: 0.478,0.341,0.489,0.404
+        angle: 77.0
+      - id: slot_17
+        box: 0.470,0.332,0.482,0.385
+        angle: 76.0
+      - id: slot_18
+        box: 0.462,0.326,0.474,0.370
+        angle: 76.0
+      - id: slot_19
+        box: 0.456,0.310,0.466,0.363
+        angle: 76.0
+      - id: slot_8
+        box: 0.451,0.301,0.460,0.354
+        angle: 76.0
+      - id: slot_20
+        box: 0.446,0.296,0.456,0.343
+        angle: 76.0
+      - id: slot_22
+        box: 0.443,0.288,0.451,0.331
+        angle: 77.0
+      - id: slot_23
+        box: 0.434,0.277,0.444,0.320
+        angle: 77.0
+      - id: slot_25
+        box: 0.635,0.498,0.657,0.572
+        angle: 70.0
+      - id: slot_29
+        box: 0.624,0.479,0.644,0.554
+        angle: 71.0
+      - id: slot_30
+        box: 0.616,0.466,0.633,0.533
+        angle: 70.0
+      - id: slot_31
+        box: 0.604,0.448,0.621,0.516
+        angle: 71.0
+      - id: slot_32
+        box: 0.593,0.432,0.610,0.500
+        angle: 73.0
+      - id: slot_33
+        box: 0.582,0.422,0.596,0.486
+        angle: 72.0
+      - id: slot_34
+        box: 0.573,0.406,0.587,0.469
+        angle: 72.0
+      - id: slot_35
+        box: 0.564,0.389,0.578,0.453
+        angle: 73.0
+      - id: slot_36
+        box: 0.553,0.376,0.567,0.440
+        angle: 70.0
+      - id: slot_37
+        box: 0.543,0.367,0.557,0.431
+        angle: 75.0
+      - id: slot_38
+        box: 0.537,0.357,0.548,0.420
+        angle: 77.0
+      - id: slot_39
+        box: 0.529,0.345,0.541,0.408
+        angle: 76.0
+      - id: slot_40
+        box: 0.522,0.333,0.533,0.396
+        angle: 76.0
+      - id: slot_41
+        box: 0.512,0.320,0.523,0.383
+        angle: 77.0
+      - id: slot_42
+        box: 0.502,0.313,0.514,0.366
+        angle: 76.0
+      - id: slot_43
+        box: 0.492,0.310,0.504,0.355
+        angle: 76.0
+      - id: slot_44
+        box: 0.490,0.299,0.499,0.352
+        angle: 76.0
+      - id: slot_45
+        box: 0.482,0.282,0.491,0.335
+        angle: 76.0
+      - id: slot_46
+        box: 0.470,0.275,0.480,0.321
+        angle: 76.0
+      - id: slot_48
+        box: 0.458,0.262,0.468,0.306
+        angle: 77.0
+      - id: slot_16
+        box: 0.455,0.478,0.468,0.551
+        angle: 75.0
+      - id: slot_24
+        box: 0.449,0.456,0.463,0.530
+        angle: 75.0
+      - id: slot_26
+        box: 0.442,0.443,0.454,0.510
+        angle: 75.0
+      - id: slot_21
+        box: 0.433,0.431,0.444,0.490
+        angle: 75.0
+      - id: slot_28
+        box: 0.427,0.417,0.438,0.476
+        angle: 75.0
+      - id: slot_47
+        box: 0.418,0.404,0.429,0.463
+        angle: 75.0
+      - id: slot_49
+        box: 0.412,0.389,0.423,0.448
+        angle: 76.0
+      - id: slot_50
+        box: 0.407,0.379,0.416,0.432
+        angle: 77.0
+      - id: slot_52
+        box: 0.400,0.368,0.408,0.421
+        angle: 77.0
+      - id: slot_53
+        box: 0.397,0.355,0.405,0.408
+        angle: 77.0
+      - id: slot_54
+        box: 0.391,0.343,0.399,0.396
+        angle: 77.0
+      - id: slot_55
+        box: 0.386,0.332,0.395,0.386
+        angle: 77.0
+      - id: slot_56
+        box: 0.382,0.321,0.390,0.375
+        angle: 77.0
+      - id: slot_27
+        box: 0.707,0.473,0.721,0.532
+        angle: 70.0
+      - id: slot_57
+        box: 0.695,0.456,0.709,0.516
+        angle: 70.0
+      - id: slot_58
+        box: 0.684,0.444,0.698,0.504
+        angle: 70.0
+      - id: slot_59
+        box: 0.671,0.431,0.685,0.490
+        angle: 70.0
+      - id: slot_60
+        box: 0.659,0.416,0.673,0.475
+        angle: 70.0
+      - id: slot_51
+        box: 0.648,0.403,0.660,0.460
+        angle: 70.0
+      - id: slot_62
+        box: 0.639,0.390,0.651,0.447
+        angle: 70.0
+      - id: slot_63
+        box: 0.628,0.379,0.640,0.436
+        angle: 70.0
+      - id: slot_64
+        box: 0.618,0.365,0.630,0.422
+        angle: 70.0
+      - id: slot_61
+        box: 0.609,0.354,0.619,0.407
+        angle: 76.0
+      - id: slot_66
+        box: 0.599,0.344,0.609,0.397
+        angle: 76.0
+      - id: slot_67
+        box: 0.593,0.331,0.603,0.384
+        angle: 76.0
+      - id: slot_68
+        box: 0.582,0.322,0.592,0.376
+        angle: 76.0
+      - id: slot_69
+        box: 0.572,0.313,0.582,0.367
+        angle: 76.0
+      - id: slot_70
+        box: 0.565,0.304,0.574,0.357
+        angle: 76.0
+      - id: slot_71
+        box: 0.558,0.294,0.568,0.347
+        angle: 76.0
+      - id: slot_72
+        box: 0.525,0.254,0.533,0.301
+        angle: 76.0
+      - id: slot_73
+        box: 0.554,0.286,0.561,0.333
+        angle: 76.0
+      - id: slot_65
+        box: 0.542,0.280,0.550,0.327
+        angle: 76.0
+      - id: slot_74
+        box: 0.537,0.272,0.545,0.319
+        angle: 76.0
+      - id: slot_75
+        box: 0.532,0.264,0.540,0.311
+        angle: 76.0
     stable_cycles: 2
 
   - id: sports_palace_square
@@ -141,7 +364,73 @@ cameras:
     source_transport: hls
     min_confidence: 0.05
     detection_image_size: 1280
-    detection_roi: 0.00,0.18,0.24,0.66
+    parking_slots:
+      - id: slot_1
+        box: 0.174,0.434,0.230,0.469
+        angle: -7.0
+      - id: slot_3
+        box: 0.168,0.402,0.223,0.436
+        angle: -7.0
+      - id: slot_4
+        box: 0.159,0.369,0.214,0.403
+        angle: -7.0
+      - id: slot_5
+        box: 0.148,0.337,0.203,0.371
+        angle: -11.0
+      - id: slot_2
+        box: 0.617,0.391,0.639,0.454
+        angle: -50.0
+      - id: slot_6
+        box: 0.596,0.396,0.618,0.459
+        angle: -50.0
+      - id: slot_8
+        box: 0.644,0.399,0.662,0.459
+        angle: -50.0
+      - id: slot_10
+        box: 0.660,0.393,0.678,0.447
+        angle: -50.0
+      - id: slot_11
+        box: 0.681,0.390,0.698,0.444
+        angle: -50.0
+      - id: slot_12
+        box: 0.699,0.386,0.715,0.443
+        angle: -50.0
+      - id: slot_13
+        box: 0.717,0.380,0.735,0.436
+        angle: -50.0
+      - id: slot_14
+        box: 0.572,0.419,0.594,0.482
+        angle: -30.0
+      - id: slot_15
+        box: 0.527,0.428,0.548,0.492
+        angle: -30.0
+      - id: slot_16
+        box: 0.247,0.459,0.274,0.529
+        angle: -17.0
+      - id: slot_7
+        box: 0.504,0.431,0.526,0.494
+        angle: -30.0
+      - id: slot_17
+        box: 0.481,0.433,0.502,0.497
+        angle: -30.0
+      - id: slot_19
+        box: 0.385,0.453,0.411,0.522
+        angle: -21.0
+      - id: slot_20
+        box: 0.357,0.457,0.383,0.527
+        angle: -17.0
+      - id: slot_21
+        box: 0.330,0.459,0.356,0.529
+        angle: -17.0
+      - id: slot_22
+        box: 0.305,0.459,0.332,0.529
+        angle: -17.0
+      - id: slot_23
+        box: 0.280,0.465,0.306,0.534
+        angle: -17.0
+      - id: slot_9
+        box: 0.551,0.425,0.572,0.489
+        angle: -30.0
     stable_cycles: 2
 
   - id: park_pobedy
@@ -149,7 +438,55 @@ cameras:
     source_transport: hls
     min_confidence: 0.05
     detection_image_size: 1280
-    detection_roi: 0.76,0.04,0.99,0.30
+    parking_slots:
+      - id: slot_1
+        box: 0.510,0.277,0.525,0.384
+        angle: -61.0
+      - id: slot_2
+        box: 0.209,0.311,0.238,0.370
+        angle: -27.0
+      - id: slot_3
+        box: 0.242,0.295,0.272,0.369
+        angle: -35.0
+      - id: slot_4
+        box: 0.379,0.289,0.398,0.375
+        angle: -58.0
+      - id: slot_5
+        box: 0.414,0.289,0.433,0.375
+        angle: -58.0
+      - id: slot_7
+        box: 0.446,0.278,0.465,0.380
+        angle: -58.0
+      - id: slot_6
+        box: 0.481,0.279,0.496,0.386
+        angle: -61.0
+      - id: slot_8
+        box: 0.543,0.281,0.558,0.388
+        angle: -61.0
+      - id: slot_9
+        box: 0.570,0.282,0.585,0.390
+        angle: -61.0
+      - id: slot_11
+        box: 0.596,0.286,0.608,0.394
+        angle: -61.0
+      - id: slot_13
+        box: 0.622,0.290,0.634,0.397
+        angle: -61.0
+      - id: slot_12
+        box: 0.649,0.298,0.661,0.398
+        angle: -61.0
+      - id: slot_14
+        box: 0.670,0.297,0.683,0.399
+        angle: -61.0
+      - id: slot_10
+        box: 0.685,0.295,0.699,0.397
+        angle: -61.0
+      - id: slot_15
+        box: 0.699,0.292,0.713,0.394
+        angle: -61.0
+      - id: slot_16
+        box: 0.719,0.297,0.733,0.399
+        angle: -61.0
     stable_cycles: 2
 
   - id: ufa_arena_1

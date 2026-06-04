@@ -1,0 +1,834 @@
+{
+  "camera_id": "salavat_square",
+  "image_shape": [
+    1080,
+    1920
+  ],
+  "slots": [
+    {
+      "id": "slot_1",
+      "box": [
+        0.597,
+        0.525,
+        0.619,
+        0.599
+      ],
+      "angle_degrees": 70.0,
+      "included": true
+    },
+    {
+      "id": "slot_2",
+      "box": [
+        0.586,
+        0.506,
+        0.606,
+        0.581
+      ],
+      "angle_degrees": 71.0,
+      "included": true
+    },
+    {
+      "id": "slot_4",
+      "box": [
+        0.577,
+        0.49,
+        0.594,
+        0.557
+      ],
+      "angle_degrees": 70.0,
+      "included": true
+    },
+    {
+      "id": "slot_6",
+      "box": [
+        0.567,
+        0.47,
+        0.584,
+        0.538
+      ],
+      "angle_degrees": 71.0,
+      "included": true
+    },
+    {
+      "id": "slot_7",
+      "box": [
+        0.552,
+        0.454,
+        0.57,
+        0.521
+      ],
+      "angle_degrees": 73.0,
+      "included": true
+    },
+    {
+      "id": "slot_3",
+      "box": [
+        0.546,
+        0.442,
+        0.56,
+        0.506
+      ],
+      "angle_degrees": 72.0,
+      "included": true
+    },
+    {
+      "id": "slot_5",
+      "box": [
+        0.536,
+        0.424,
+        0.55,
+        0.488
+      ],
+      "angle_degrees": 72.0,
+      "included": true
+    },
+    {
+      "id": "slot_9",
+      "box": [
+        0.527,
+        0.41,
+        0.541,
+        0.474
+      ],
+      "angle_degrees": 73.0,
+      "included": true
+    },
+    {
+      "id": "slot_10",
+      "box": [
+        0.516,
+        0.395,
+        0.53,
+        0.459
+      ],
+      "angle_degrees": 75.0,
+      "included": true
+    },
+    {
+      "id": "slot_11",
+      "box": [
+        0.509,
+        0.382,
+        0.523,
+        0.446
+      ],
+      "angle_degrees": 75.0,
+      "included": true
+    },
+    {
+      "id": "slot_12",
+      "box": [
+        0.501,
+        0.37,
+        0.512,
+        0.433
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_13",
+      "box": [
+        0.491,
+        0.359,
+        0.503,
+        0.422
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_14",
+      "box": [
+        0.487,
+        0.348,
+        0.498,
+        0.411
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_15",
+      "box": [
+        0.478,
+        0.341,
+        0.489,
+        0.404
+      ],
+      "angle_degrees": 77.0,
+      "included": true
+    },
+    {
+      "id": "slot_17",
+      "box": [
+        0.47,
+        0.332,
+        0.482,
+        0.385
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_18",
+      "box": [
+        0.462,
+        0.326,
+        0.474,
+        0.37
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_19",
+      "box": [
+        0.456,
+        0.31,
+        0.466,
+        0.363
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_8",
+      "box": [
+        0.451,
+        0.301,
+        0.46,
+        0.354
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_20",
+      "box": [
+        0.446,
+        0.296,
+        0.456,
+        0.343
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_22",
+      "box": [
+        0.443,
+        0.288,
+        0.451,
+        0.331
+      ],
+      "angle_degrees": 77.0,
+      "included": true
+    },
+    {
+      "id": "slot_23",
+      "box": [
+        0.434,
+        0.277,
+        0.444,
+        0.32
+      ],
+      "angle_degrees": 77.0,
+      "included": true
+    },
+    {
+      "id": "slot_25",
+      "box": [
+        0.635,
+        0.498,
+        0.657,
+        0.572
+      ],
+      "angle_degrees": 70.0,
+      "included": true
+    },
+    {
+      "id": "slot_29",
+      "box": [
+        0.624,
+        0.479,
+        0.644,
+        0.554
+      ],
+      "angle_degrees": 71.0,
+      "included": true
+    },
+    {
+      "id": "slot_30",
+      "box": [
+        0.616,
+        0.466,
+        0.633,
+        0.533
+      ],
+      "angle_degrees": 70.0,
+      "included": true
+    },
+    {
+      "id": "slot_31",
+      "box": [
+        0.604,
+        0.448,
+        0.621,
+        0.516
+      ],
+      "angle_degrees": 71.0,
+      "included": true
+    },
+    {
+      "id": "slot_32",
+      "box": [
+        0.593,
+        0.432,
+        0.61,
+        0.5
+      ],
+      "angle_degrees": 73.0,
+      "included": true
+    },
+    {
+      "id": "slot_33",
+      "box": [
+        0.582,
+        0.422,
+        0.596,
+        0.486
+      ],
+      "angle_degrees": 72.0,
+      "included": true
+    },
+    {
+      "id": "slot_34",
+      "box": [
+        0.573,
+        0.406,
+        0.587,
+        0.469
+      ],
+      "angle_degrees": 72.0,
+      "included": true
+    },
+    {
+      "id": "slot_35",
+      "box": [
+        0.564,
+        0.389,
+        0.578,
+        0.453
+      ],
+      "angle_degrees": 73.0,
+      "included": true
+    },
+    {
+      "id": "slot_36",
+      "box": [
+        0.553,
+        0.376,
+        0.567,
+        0.44
+      ],
+      "angle_degrees": 70.0,
+      "included": true
+    },
+    {
+      "id": "slot_37",
+      "box": [
+        0.543,
+        0.367,
+        0.557,
+        0.431
+      ],
+      "angle_degrees": 75.0,
+      "included": true
+    },
+    {
+      "id": "slot_38",
+      "box": [
+        0.537,
+        0.357,
+        0.548,
+        0.42
+      ],
+      "angle_degrees": 77.0,
+      "included": true
+    },
+    {
+      "id": "slot_39",
+      "box": [
+        0.529,
+        0.345,
+        0.541,
+        0.408
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_40",
+      "box": [
+        0.522,
+        0.333,
+        0.533,
+        0.396
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_41",
+      "box": [
+        0.512,
+        0.32,
+        0.523,
+        0.383
+      ],
+      "angle_degrees": 77.0,
+      "included": true
+    },
+    {
+      "id": "slot_42",
+      "box": [
+        0.502,
+        0.313,
+        0.514,
+        0.366
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_43",
+      "box": [
+        0.492,
+        0.31,
+        0.504,
+        0.355
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_44",
+      "box": [
+        0.49,
+        0.299,
+        0.499,
+        0.352
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_45",
+      "box": [
+        0.482,
+        0.282,
+        0.491,
+        0.335
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_46",
+      "box": [
+        0.47,
+        0.275,
+        0.48,
+        0.321
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_48",
+      "box": [
+        0.458,
+        0.262,
+        0.468,
+        0.306
+      ],
+      "angle_degrees": 77.0,
+      "included": true
+    },
+    {
+      "id": "slot_16",
+      "box": [
+        0.455,
+        0.478,
+        0.468,
+        0.551
+      ],
+      "angle_degrees": 75.0,
+      "included": true
+    },
+    {
+      "id": "slot_24",
+      "box": [
+        0.449,
+        0.456,
+        0.463,
+        0.53
+      ],
+      "angle_degrees": 75.0,
+      "included": true
+    },
+    {
+      "id": "slot_26",
+      "box": [
+        0.442,
+        0.443,
+        0.454,
+        0.51
+      ],
+      "angle_degrees": 75.0,
+      "included": true
+    },
+    {
+      "id": "slot_21",
+      "box": [
+        0.433,
+        0.431,
+        0.444,
+        0.49
+      ],
+      "angle_degrees": 75.0,
+      "included": true
+    },
+    {
+      "id": "slot_28",
+      "box": [
+        0.427,
+        0.417,
+        0.438,
+        0.476
+      ],
+      "angle_degrees": 75.0,
+      "included": true
+    },
+    {
+      "id": "slot_47",
+      "box": [
+        0.418,
+        0.404,
+        0.429,
+        0.463
+      ],
+      "angle_degrees": 75.0,
+      "included": true
+    },
+    {
+      "id": "slot_49",
+      "box": [
+        0.412,
+        0.389,
+        0.423,
+        0.448
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_50",
+      "box": [
+        0.407,
+        0.379,
+        0.416,
+        0.432
+      ],
+      "angle_degrees": 77.0,
+      "included": true
+    },
+    {
+      "id": "slot_52",
+      "box": [
+        0.4,
+        0.368,
+        0.408,
+        0.421
+      ],
+      "angle_degrees": 77.0,
+      "included": true
+    },
+    {
+      "id": "slot_53",
+      "box": [
+        0.397,
+        0.355,
+        0.405,
+        0.408
+      ],
+      "angle_degrees": 77.0,
+      "included": true
+    },
+    {
+      "id": "slot_54",
+      "box": [
+        0.391,
+        0.343,
+        0.399,
+        0.396
+      ],
+      "angle_degrees": 77.0,
+      "included": true
+    },
+    {
+      "id": "slot_55",
+      "box": [
+        0.386,
+        0.332,
+        0.395,
+        0.386
+      ],
+      "angle_degrees": 77.0,
+      "included": true
+    },
+    {
+      "id": "slot_56",
+      "box": [
+        0.382,
+        0.321,
+        0.39,
+        0.375
+      ],
+      "angle_degrees": 77.0,
+      "included": true
+    },
+    {
+      "id": "slot_27",
+      "box": [
+        0.707,
+        0.473,
+        0.721,
+        0.532
+      ],
+      "angle_degrees": 70.0,
+      "included": true
+    },
+    {
+      "id": "slot_57",
+      "box": [
+        0.695,
+        0.456,
+        0.709,
+        0.516
+      ],
+      "angle_degrees": 70.0,
+      "included": true
+    },
+    {
+      "id": "slot_58",
+      "box": [
+        0.684,
+        0.444,
+        0.698,
+        0.504
+      ],
+      "angle_degrees": 70.0,
+      "included": true
+    },
+    {
+      "id": "slot_59",
+      "box": [
+        0.671,
+        0.431,
+        0.685,
+        0.49
+      ],
+      "angle_degrees": 70.0,
+      "included": true
+    },
+    {
+      "id": "slot_60",
+      "box": [
+        0.659,
+        0.416,
+        0.673,
+        0.475
+      ],
+      "angle_degrees": 70.0,
+      "included": true
+    },
+    {
+      "id": "slot_51",
+      "box": [
+        0.648,
+        0.403,
+        0.66,
+        0.46
+      ],
+      "angle_degrees": 70.0,
+      "included": true
+    },
+    {
+      "id": "slot_62",
+      "box": [
+        0.639,
+        0.39,
+        0.651,
+        0.447
+      ],
+      "angle_degrees": 70.0,
+      "included": true
+    },
+    {
+      "id": "slot_63",
+      "box": [
+        0.628,
+        0.379,
+        0.64,
+        0.436
+      ],
+      "angle_degrees": 70.0,
+      "included": true
+    },
+    {
+      "id": "slot_64",
+      "box": [
+        0.618,
+        0.365,
+        0.63,
+        0.422
+      ],
+      "angle_degrees": 70.0,
+      "included": true
+    },
+    {
+      "id": "slot_61",
+      "box": [
+        0.609,
+        0.354,
+        0.619,
+        0.407
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_66",
+      "box": [
+        0.599,
+        0.344,
+        0.609,
+        0.397
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_67",
+      "box": [
+        0.593,
+        0.331,
+        0.603,
+        0.384
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_68",
+      "box": [
+        0.582,
+        0.322,
+        0.592,
+        0.376
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_69",
+      "box": [
+        0.572,
+        0.313,
+        0.582,
+        0.367
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_70",
+      "box": [
+        0.565,
+        0.304,
+        0.574,
+        0.357
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_71",
+      "box": [
+        0.558,
+        0.294,
+        0.568,
+        0.347
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_72",
+      "box": [
+        0.525,
+        0.254,
+        0.533,
+        0.301
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_73",
+      "box": [
+        0.554,
+        0.286,
+        0.561,
+        0.333
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_65",
+      "box": [
+        0.542,
+        0.28,
+        0.55,
+        0.327
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_74",
+      "box": [
+        0.537,
+        0.272,
+        0.545,
+        0.319
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    },
+    {
+      "id": "slot_75",
+      "box": [
+        0.532,
+        0.264,
+        0.54,
+        0.311
+      ],
+      "angle_degrees": 76.0,
+      "included": true
+    }
+  ]
+}

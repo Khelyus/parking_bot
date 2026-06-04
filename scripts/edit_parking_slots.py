@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import argparse
-from dataclasses import dataclass
+import ctypes
+from dataclasses import dataclass, field
 import json
 import math
 from pathlib import Path
@@ -50,14 +51,21 @@ class EditorState:
     image_paths: list[Path]
     image_index: int
     image_shape: tuple[int, int]
+    preview_shape: tuple[int, int]
     slots: list[EditableSlot]
     selected_index: int = -1
+    selected_indices: list[int] = field(default_factory=list)
     show_help: bool = True
     dirty: bool = False
+    zoom_level: float = 1.0
+    viewport_origin: tuple[int, int] = (0, 0)
     drag_mode: str | None = None
     drag_anchor: tuple[int, int] | None = None
     drag_origin_box: tuple[int, int, int, int] | None = None
+    drag_origin_boxes: dict[int, tuple[int, int, int, int]] | None = None
     draft_box: tuple[int, int, int, int] | None = None
+    selection_box: tuple[int, int, int, int] | None = None
+    selection_mode: str = "replace"
 
 
 def parse_args() -> argparse.Namespace:
@@ -266,6 +274,146 @@ def _fit_scale(image_width: int, image_height: int, max_width: int, max_height: 
     return max(scale, 0.1)
 
 
+def _preview_shape(image_width: int, image_height: int, max_width: int, max_height: int) -> tuple[int, int]:
+    scale = _fit_scale(image_width, image_height, max_width, max_height)
+    return (
+        min(max_height, max(1, round(image_height * scale))),
+        min(max_width, max(1, round(image_width * scale))),
+    )
+
+
+def _set_single_selection(state: EditorState, index: int) -> None:
+    if 0 <= index < len(state.slots):
+        state.selected_index = index
+        state.selected_indices = [index]
+        return
+    state.selected_index = -1
+    state.selected_indices = []
+
+
+def _toggle_selection(state: EditorState, index: int) -> None:
+    if not (0 <= index < len(state.slots)):
+        return
+    if index in state.selected_indices:
+        state.selected_indices = [item for item in state.selected_indices if item != index]
+        state.selected_index = state.selected_indices[-1] if state.selected_indices else -1
+        return
+    state.selected_indices = sorted({*state.selected_indices, index})
+    state.selected_index = index
+
+
+def _selected_slot_indices(state: EditorState) -> list[int]:
+    valid = sorted(index for index in state.selected_indices if 0 <= index < len(state.slots))
+    if valid:
+        return valid
+    if 0 <= state.selected_index < len(state.slots):
+        return [state.selected_index]
+    return []
+
+
+def _selected_slot_set(state: EditorState) -> set[int]:
+    return set(_selected_slot_indices(state))
+
+
+def _has_multi_selection(state: EditorState) -> bool:
+    return len(_selected_slot_indices(state)) > 1
+
+
+def _clamp_viewport_origin(
+    origin_x: int,
+    origin_y: int,
+    viewport_width: int,
+    viewport_height: int,
+    image_width: int,
+    image_height: int,
+) -> tuple[int, int]:
+    max_x = max(0, image_width - viewport_width)
+    max_y = max(0, image_height - viewport_height)
+    return (_clamp(origin_x, 0, max_x), _clamp(origin_y, 0, max_y))
+
+
+def _viewport_box(state: EditorState) -> tuple[int, int, int, int]:
+    image_height, image_width = state.image_shape
+    viewport_width = max(1, min(image_width, round(image_width / state.zoom_level)))
+    viewport_height = max(1, min(image_height, round(image_height / state.zoom_level)))
+    origin_x, origin_y = _clamp_viewport_origin(
+        state.viewport_origin[0],
+        state.viewport_origin[1],
+        viewport_width,
+        viewport_height,
+        image_width,
+        image_height,
+    )
+    state.viewport_origin = (origin_x, origin_y)
+    return (origin_x, origin_y, viewport_width, viewport_height)
+
+
+def _set_zoom(state: EditorState, zoom_level: float, *, focus: tuple[int, int] | None = None) -> None:
+    image_height, image_width = state.image_shape
+    current_left, current_top, current_width, current_height = _viewport_box(state)
+    if focus is None:
+        focus_x = current_left + (current_width / 2)
+        focus_y = current_top + (current_height / 2)
+    else:
+        focus_x = focus[0]
+        focus_y = focus[1]
+
+    clamped_zoom = max(1.0, min(8.0, zoom_level))
+    new_width = max(1, min(image_width, round(image_width / clamped_zoom)))
+    new_height = max(1, min(image_height, round(image_height / clamped_zoom)))
+    new_left = round(focus_x - (new_width / 2))
+    new_top = round(focus_y - (new_height / 2))
+    state.zoom_level = clamped_zoom
+    state.viewport_origin = _clamp_viewport_origin(
+        new_left,
+        new_top,
+        new_width,
+        new_height,
+        image_width,
+        image_height,
+    )
+
+
+def _pan_viewport(state: EditorState, delta_x: int, delta_y: int) -> None:
+    left, top, viewport_width, viewport_height = _viewport_box(state)
+    image_height, image_width = state.image_shape
+    state.viewport_origin = _clamp_viewport_origin(
+        left + delta_x,
+        top + delta_y,
+        viewport_width,
+        viewport_height,
+        image_width,
+        image_height,
+    )
+
+
+def _window_to_image_coords(state: EditorState, x: int, y: int) -> tuple[int, int]:
+    left, top, viewport_width, viewport_height = _viewport_box(state)
+    preview_height, preview_width = state.preview_shape
+    image_x = left + round((x / max(1, preview_width)) * viewport_width)
+    image_y = top + round((y / max(1, preview_height)) * viewport_height)
+    return (
+        _clamp(image_x, 0, state.image_shape[1] - 1),
+        _clamp(image_y, 0, state.image_shape[0] - 1),
+    )
+
+
+def _boxes_intersect(first: tuple[int, int, int, int], second: tuple[int, int, int, int]) -> bool:
+    return not (
+        first[2] <= second[0]
+        or second[2] <= first[0]
+        or first[3] <= second[1]
+        or second[3] <= first[1]
+    )
+
+
+def _mouse_wheel_delta(flags: int, cv2_module: Any) -> int:
+    if hasattr(cv2_module, "getMouseWheelDelta"):
+        return int(cv2_module.getMouseWheelDelta(flags))
+
+    return int(ctypes.c_short((int(flags) >> 16) & 0xFFFF).value)
+
+
 def _slot_area(box: tuple[int, int, int, int]) -> int:
     return max(1, box[2] - box[0]) * max(1, box[3] - box[1])
 
@@ -317,6 +465,28 @@ def _slot_bounds(slot: EditableSlot) -> tuple[int, int, int, int]:
     xs = [point[0] for point in polygon]
     ys = [point[1] for point in polygon]
     return (min(xs), min(ys), max(xs), max(ys))
+
+
+def _select_slots_in_box(
+    state: EditorState,
+    selection_box: tuple[int, int, int, int],
+    *,
+    mode: str,
+) -> None:
+    normalized_box = _normalize_pixel_box(selection_box, state.image_shape[1], state.image_shape[0])
+    matched_indices = [
+        index for index, slot in enumerate(state.slots) if _boxes_intersect(_slot_bounds(slot), normalized_box)
+    ]
+    if mode == "add":
+        merged = sorted({*state.selected_indices, *matched_indices})
+        state.selected_indices = merged
+        state.selected_index = merged[-1] if merged else -1
+        return
+    if matched_indices:
+        state.selected_indices = matched_indices
+        state.selected_index = matched_indices[-1]
+        return
+    _set_single_selection(state, -1)
 
 
 def _slot_contains(slot: EditableSlot, x: int, y: int) -> bool:
@@ -389,6 +559,63 @@ def _duplicate_slot(
         angle_degrees=slot.angle_degrees,
         included=True,
     )
+
+
+def _translate_boxes(
+    boxes_by_index: dict[int, tuple[int, int, int, int]],
+    dx: int,
+    dy: int,
+    image_width: int,
+    image_height: int,
+) -> dict[int, tuple[int, int, int, int]]:
+    if not boxes_by_index:
+        return {}
+
+    max_left_shift = min(box[0] for box in boxes_by_index.values())
+    max_up_shift = min(box[1] for box in boxes_by_index.values())
+    max_right_shift = min(image_width - box[2] for box in boxes_by_index.values())
+    max_down_shift = min(image_height - box[3] for box in boxes_by_index.values())
+    clamped_dx = _clamp(dx, -max_left_shift, max_right_shift)
+    clamped_dy = _clamp(dy, -max_up_shift, max_down_shift)
+    return {
+        index: (box[0] + clamped_dx, box[1] + clamped_dy, box[2] + clamped_dx, box[3] + clamped_dy)
+        for index, box in boxes_by_index.items()
+    }
+
+
+def _duplicate_selected_slots(state: EditorState) -> None:
+    selected_indices = _selected_slot_indices(state)
+    if not selected_indices:
+        return
+    duplicates: list[EditableSlot] = []
+    for index in selected_indices:
+        duplicates.append(
+            _duplicate_slot(
+                state.slots[index],
+                state.slots + duplicates,
+                state.image_shape[1],
+                state.image_shape[0],
+            )
+        )
+    insert_start = len(state.slots)
+    state.slots.extend(duplicates)
+    state.selected_indices = list(range(insert_start, len(state.slots)))
+    state.selected_index = state.selected_indices[-1]
+    state.dirty = True
+
+
+def _delete_selected_slots(state: EditorState) -> None:
+    selected_indices = _selected_slot_indices(state)
+    if not selected_indices:
+        return
+    first_removed_index = selected_indices[0]
+    for index in reversed(selected_indices):
+        del state.slots[index]
+    if not state.slots:
+        _set_single_selection(state, -1)
+    else:
+        _set_single_selection(state, min(first_removed_index, len(state.slots) - 1))
+    state.dirty = True
 
 
 def _normalize_pixel_box(
@@ -481,17 +708,15 @@ def _render(
     state: EditorState,
     image: Any,
     camera_id: str,
-    scale: float,
-    max_width: int,
-    max_height: int,
 ) -> Any:
     cv2 = _require_cv2()
     np = _require_numpy()
     canvas = image.copy()
     overlay = image.copy()
+    selected_indices = _selected_slot_set(state)
 
     for index, slot in enumerate(state.slots):
-        selected = index == state.selected_index
+        selected = index in selected_indices
         if slot.included:
             color = (0, 220, 90) if selected else (0, 140, 255)
             fill_color = color
@@ -520,13 +745,16 @@ def _render(
             cv2.FONT_HERSHEY_SIMPLEX,
             0.55,
             color,
-            2,
+            2 if index == state.selected_index else 1,
             cv2.LINE_AA,
         )
 
     if state.draft_box is not None:
         x1, y1, x2, y2 = _normalize_pixel_box(state.draft_box, state.image_shape[1], state.image_shape[0])
         cv2.rectangle(canvas, (x1, y1), (x2, y2), (255, 255, 0), 2)
+    if state.selection_box is not None:
+        x1, y1, x2, y2 = _normalize_pixel_box(state.selection_box, state.image_shape[1], state.image_shape[0])
+        cv2.rectangle(canvas, (x1, y1), (x2, y2), (255, 220, 0), 2)
 
     cv2.addWeighted(overlay, 0.12, canvas, 0.88, 0, canvas)
 
@@ -534,20 +762,27 @@ def _render(
         f"camera={camera_id}",
         f"frame={state.image_index + 1}/{len(state.image_paths)}",
         f"slots={sum(1 for slot in state.slots if slot.included)}/{len(state.slots)} active",
+        f"zoom={state.zoom_level:.2f}x",
         "dirty=yes" if state.dirty else "dirty=no",
     ]
-    if 0 <= state.selected_index < len(state.slots):
-        slot = state.slots[state.selected_index]
-        norm_box = _pixels_to_normalized(slot.box, state.image_shape[1], state.image_shape[0])
-        lines.append(
-            "selected="
-            f"{slot.id} {norm_box[0]:.3f},{norm_box[1]:.3f},{norm_box[2]:.3f},{norm_box[3]:.3f}"
-            f" angle={slot.angle_degrees:.1f} included={'yes' if slot.included else 'no'}"
-        )
+    selected_indices_for_text = _selected_slot_indices(state)
+    if selected_indices_for_text:
+        if len(selected_indices_for_text) == 1:
+            slot = state.slots[selected_indices_for_text[0]]
+            norm_box = _pixels_to_normalized(slot.box, state.image_shape[1], state.image_shape[0])
+            lines.append(
+                "selected="
+                f"{slot.id} {norm_box[0]:.3f},{norm_box[1]:.3f},{norm_box[2]:.3f},{norm_box[3]:.3f}"
+                f" angle={slot.angle_degrees:.1f} included={'yes' if slot.included else 'no'}"
+            )
+        else:
+            lines.append(f"selected={len(selected_indices_for_text)} slots")
 
     help_lines = [
         "Mouse: drag inside slot to move, drag corners to resize, shift+drag to create",
-        "Keys: left/right frame | tab next slot | c clone | x include/exclude | ,/. rotate | d delete | s save | h help | q quit",
+        "Drag empty area: box select | ctrl+click/drag: add selection | ctrl+wheel: zoom",
+        "Wheel: pan vertically | shift+wheel: pan horizontally",
+        "Keys: left/right frame | tab next slot | c clone | x include/exclude | +/- zoom | ,/. rotate | d delete | s save | h help | q quit",
     ]
     y = 24
     for line in lines:
@@ -560,14 +795,12 @@ def _render(
             cv2.putText(canvas, line, (12, y), cv2.FONT_HERSHEY_SIMPLEX, 0.58, (240, 240, 240), 2, cv2.LINE_AA)
             y += 24
 
-    if scale != 1.0:
-        resized = cv2.resize(
-            canvas,
-            (min(max_width, round(state.image_shape[1] * scale)), min(max_height, round(state.image_shape[0] * scale))),
-            interpolation=cv2.INTER_AREA,
-        )
-        return resized
-    return canvas
+    left, top, viewport_width, viewport_height = _viewport_box(state)
+    cropped = canvas[top : top + viewport_height, left : left + viewport_width]
+    preview_height, preview_width = state.preview_shape
+    if cropped.shape[0] != preview_height or cropped.shape[1] != preview_width:
+        return cv2.resize(cropped, (preview_width, preview_height), interpolation=cv2.INTER_LINEAR)
+    return cropped
 
 
 def _serialize_slot(slot: EditableSlot, image_width: int, image_height: int) -> dict[str, object]:
@@ -698,48 +931,96 @@ def _save_outputs(
     )
     camera_config_path.write_text(updated_yaml, encoding="utf-8")
 
-    preview = _render(state, image, camera_id, scale=1.0, max_width=state.image_shape[1], max_height=state.image_shape[0])
+    previous_preview_shape = state.preview_shape
+    previous_zoom_level = state.zoom_level
+    previous_viewport_origin = state.viewport_origin
+    state.preview_shape = state.image_shape
+    state.zoom_level = 1.0
+    state.viewport_origin = (0, 0)
+    preview = _render(state, image, camera_id)
+    state.preview_shape = previous_preview_shape
+    state.zoom_level = previous_zoom_level
+    state.viewport_origin = previous_viewport_origin
     cv2.imwrite(str(preview_path), preview)
     state.dirty = False
     return prod_slots_state_path, camera_config_path, preview_path
 
 
-def _install_mouse_handler(state: EditorState, scale: float) -> None:
+def _install_mouse_handler(state: EditorState) -> None:
     cv2 = _require_cv2()
 
     def handle(event: int, x: int, y: int, flags: int, _param: object) -> None:
-        image_x = _clamp(round(x / scale), 0, state.image_shape[1] - 1)
-        image_y = _clamp(round(y / scale), 0, state.image_shape[0] - 1)
+        image_x, image_y = _window_to_image_coords(state, x, y)
 
         if event == cv2.EVENT_LBUTTONDOWN:
             shift_pressed = bool(flags & cv2.EVENT_FLAG_SHIFTKEY)
+            ctrl_pressed = bool(flags & cv2.EVENT_FLAG_CTRLKEY)
             slot_index = _find_slot_index(state.slots, image_x, image_y)
             if shift_pressed:
-                state.selected_index = -1
+                _set_single_selection(state, -1)
                 state.drag_mode = "create"
                 state.drag_anchor = (image_x, image_y)
                 state.draft_box = (image_x, image_y, image_x, image_y)
                 return
 
-            if slot_index >= 0:
-                state.selected_index = slot_index
-                hit = _corner_hit(state.slots[slot_index], image_x, image_y) or "move"
-                state.drag_mode = hit
-                state.drag_anchor = (image_x, image_y)
-                state.drag_origin_box = state.slots[slot_index].box
+            if ctrl_pressed:
+                if slot_index >= 0:
+                    _toggle_selection(state, slot_index)
                 return
 
-            state.selected_index = -1
+            if slot_index >= 0:
+                if slot_index not in _selected_slot_set(state):
+                    _set_single_selection(state, slot_index)
+                hit = _corner_hit(state.slots[slot_index], image_x, image_y)
+                if _has_multi_selection(state):
+                    state.drag_mode = "move_selection"
+                    state.drag_origin_boxes = {
+                        index: state.slots[index].box for index in _selected_slot_indices(state)
+                    }
+                else:
+                    state.drag_mode = hit or "move"
+                    state.drag_origin_box = state.slots[slot_index].box
+                state.drag_anchor = (image_x, image_y)
+                return
+
+            state.drag_mode = "select"
+            state.drag_anchor = (image_x, image_y)
+            state.selection_mode = "add" if ctrl_pressed else "replace"
+            state.selection_box = (image_x, image_y, image_x, image_y)
+            if not ctrl_pressed:
+                _set_single_selection(state, -1)
 
         elif event == cv2.EVENT_MOUSEMOVE:
             if state.drag_mode == "create" and state.drag_anchor is not None:
                 anchor_x, anchor_y = state.drag_anchor
                 state.draft_box = (anchor_x, anchor_y, image_x, image_y)
                 return
+            if state.drag_mode == "select" and state.drag_anchor is not None:
+                anchor_x, anchor_y = state.drag_anchor
+                state.selection_box = (anchor_x, anchor_y, image_x, image_y)
+                return
+
+            if (
+                state.drag_mode == "move_selection"
+                and state.drag_anchor is not None
+                and state.drag_origin_boxes is not None
+            ):
+                moved_boxes = _translate_boxes(
+                    state.drag_origin_boxes,
+                    image_x - state.drag_anchor[0],
+                    image_y - state.drag_anchor[1],
+                    state.image_shape[1],
+                    state.image_shape[0],
+                )
+                for index, moved_box in moved_boxes.items():
+                    state.slots[index].box = moved_box
+                state.dirty = True
+                return
 
             if (
                 state.drag_mode is not None
                 and state.drag_mode != "create"
+                and state.drag_mode != "move_selection"
                 and state.drag_anchor is not None
                 and state.drag_origin_box is not None
                 and 0 <= state.selected_index < len(state.slots)
@@ -774,13 +1055,35 @@ def _install_mouse_handler(state: EditorState, scale: float) -> None:
                             included=True,
                         )
                     )
-                    state.selected_index = len(state.slots) - 1
+                    _set_single_selection(state, len(state.slots) - 1)
                     state.dirty = True
                 state.draft_box = None
+            elif state.drag_mode == "select" and state.selection_box is not None:
+                _select_slots_in_box(state, state.selection_box, mode=state.selection_mode)
+                state.selection_box = None
 
             state.drag_mode = None
             state.drag_anchor = None
             state.drag_origin_box = None
+            state.drag_origin_boxes = None
+
+        elif event in {cv2.EVENT_MOUSEWHEEL, getattr(cv2, "EVENT_MOUSEHWHEEL", -1)}:
+            wheel_delta = _mouse_wheel_delta(flags, cv2)
+            if wheel_delta == 0:
+                return
+            _left, _top, viewport_width, viewport_height = _viewport_box(state)
+            if flags & cv2.EVENT_FLAG_CTRLKEY:
+                zoom_factor = 1.2 if wheel_delta > 0 else (1 / 1.2)
+                _set_zoom(state, state.zoom_level * zoom_factor, focus=(image_x, image_y))
+                return
+            if state.zoom_level <= 1.0:
+                return
+            if flags & cv2.EVENT_FLAG_SHIFTKEY:
+                step_x = max(24, round(viewport_width * 0.12))
+                _pan_viewport(state, -step_x if wheel_delta > 0 else step_x, 0)
+            else:
+                step_y = max(24, round(viewport_height * 0.12))
+                _pan_viewport(state, 0, -step_y if wheel_delta > 0 else step_y)
 
     cv2.setMouseCallback("Parking Slot Editor", handle)
 
@@ -794,7 +1097,7 @@ def main() -> None:
     image_paths = _collect_image_paths(project_root, camera_id, args.frame, args.frames_dir)
     image = _load_image(image_paths[0])
     image_height, image_width = image.shape[:2]
-    scale = _fit_scale(image_width, image_height, args.max_width, args.max_height)
+    preview_shape = _preview_shape(image_width, image_height, args.max_width, args.max_height)
     output_dir = (project_root / args.output_dir).resolve()
     initial_slots = _load_editor_slots(
         [
@@ -811,13 +1114,15 @@ def main() -> None:
         image_paths=image_paths,
         image_index=0,
         image_shape=(image_height, image_width),
+        preview_shape=preview_shape,
         slots=initial_slots,
-        selected_index=0 if initial_slots else -1,
     )
+    _set_single_selection(state, 0 if initial_slots else -1)
 
     cv2 = _require_cv2()
     cv2.namedWindow("Parking Slot Editor", cv2.WINDOW_NORMAL)
-    _install_mouse_handler(state, scale)
+    cv2.resizeWindow("Parking Slot Editor", state.preview_shape[1], state.preview_shape[0])
+    _install_mouse_handler(state)
 
     print(
         f"Loaded camera={camera.id} display_name={camera.display_name or camera.id} "
@@ -834,7 +1139,7 @@ def main() -> None:
                 f"Frame shape changed from {state.image_shape} to {image.shape[:2]} for {current_path}. "
                 "Use frames from the same camera/resolution."
             )
-        preview = _render(state, image, camera.id, scale, args.max_width, args.max_height)
+        preview = _render(state, image, camera.id)
         cv2.imshow("Parking Slot Editor", preview)
         try:
             if cv2.getWindowProperty("Parking Slot Editor", cv2.WND_PROP_VISIBLE) < 1:
@@ -851,6 +1156,12 @@ def main() -> None:
         if key_char == "h":
             state.show_help = not state.show_help
             continue
+        if key_char in {"+", "="}:
+            _set_zoom(state, state.zoom_level * 1.25)
+            continue
+        if key_char in {"-", "_"}:
+            _set_zoom(state, state.zoom_level / 1.25)
+            continue
         if key in right_arrow_keys:
             state.image_index = (state.image_index + 1) % len(state.image_paths)
             continue
@@ -858,43 +1169,37 @@ def main() -> None:
             state.image_index = (state.image_index - 1) % len(state.image_paths)
             continue
         if (key in (9, ord("\t")) or key_char == "n") and state.slots:
-            state.selected_index = (state.selected_index + 1) % len(state.slots)
+            current_index = state.selected_index if 0 <= state.selected_index < len(state.slots) else -1
+            _set_single_selection(state, (current_index + 1) % len(state.slots))
             continue
         if key_char == "p" and state.slots:
-            state.selected_index = (state.selected_index - 1) % len(state.slots)
+            current_index = state.selected_index if 0 <= state.selected_index < len(state.slots) else 0
+            _set_single_selection(state, (current_index - 1) % len(state.slots))
             continue
-        if key_char == "c" and 0 <= state.selected_index < len(state.slots):
-            duplicated = _duplicate_slot(
-                state.slots[state.selected_index],
-                state.slots,
-                state.image_shape[1],
-                state.image_shape[0],
-            )
-            state.slots.append(duplicated)
-            state.selected_index = len(state.slots) - 1
+        if key_char == "c" and _selected_slot_indices(state):
+            _duplicate_selected_slots(state)
+            continue
+        if key_char == "x" and _selected_slot_indices(state):
+            selected_indices = _selected_slot_indices(state)
+            target_value = not all(state.slots[index].included for index in selected_indices)
+            for index in selected_indices:
+                state.slots[index].included = target_value
             state.dirty = True
             continue
-        if key_char == "x" and 0 <= state.selected_index < len(state.slots):
-            state.slots[state.selected_index].included = not state.slots[state.selected_index].included
-            state.dirty = True
-            continue
-        if key_char in {",", "<"} and 0 <= state.selected_index < len(state.slots):
+        if key_char in {",", "<"} and _selected_slot_indices(state):
             step = 5.0 if key_char == "<" else 1.0
-            state.slots[state.selected_index].angle_degrees -= step
+            for index in _selected_slot_indices(state):
+                state.slots[index].angle_degrees -= step
             state.dirty = True
             continue
-        if key_char in {".", ">"} and 0 <= state.selected_index < len(state.slots):
+        if key_char in {".", ">"} and _selected_slot_indices(state):
             step = 5.0 if key_char == ">" else 1.0
-            state.slots[state.selected_index].angle_degrees += step
+            for index in _selected_slot_indices(state):
+                state.slots[index].angle_degrees += step
             state.dirty = True
             continue
-        if key_char == "d" and 0 <= state.selected_index < len(state.slots):
-            del state.slots[state.selected_index]
-            if not state.slots:
-                state.selected_index = -1
-            else:
-                state.selected_index = min(state.selected_index, len(state.slots) - 1)
-            state.dirty = True
+        if key_char == "d" and _selected_slot_indices(state):
+            _delete_selected_slots(state)
             continue
         if key_char == "s":
             prod_json_path, prod_yaml_path, preview_path = _save_outputs(
