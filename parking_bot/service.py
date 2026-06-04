@@ -1333,10 +1333,10 @@ class CameraMonitorService:
 
     def _fetch_hls_frame(self, camera: ResolvedCamera) -> tuple[Path, datetime | None]:
         ffmpeg_exe = _require_ffmpeg_exe()
-        playlist_url = camera.hls_master_url()
         raw_frame_path = self._frame_path(camera.id, "raw")
         last_error = "unknown error"
-        for _attempt in range(2):
+        for attempt in range(2):
+            playlist_url = camera.hls_master_url()
             source_updated_at: datetime | None = None
             try:
                 source_updated_at = self._fetch_hls_source_timestamp(playlist_url)
@@ -1367,16 +1367,29 @@ class CameraMonitorService:
                 "1",
                 str(raw_frame_path),
             ]
-            result = subprocess.run(
-                command,
-                capture_output=True,
-                text=True,
-                timeout=max(30, self.settings.request_timeout_seconds * 3),
-                **self._subprocess_no_window_kwargs(),
-            )
+            try:
+                result = subprocess.run(
+                    command,
+                    capture_output=True,
+                    text=True,
+                    timeout=max(30, self.settings.request_timeout_seconds * 3),
+                    **self._subprocess_no_window_kwargs(),
+                )
+            except Exception as exc:
+                last_error = str(exc) or exc.__class__.__name__
+                if attempt == 0:
+                    self._refresh_camera_credentials(camera)
+                    time.sleep(1)
+                    continue
+                raise RuntimeError(
+                    f"ffmpeg could not extract a frame from HLS for {camera.id}: {last_error}"
+                ) from exc
+
             if result.returncode == 0 and raw_frame_path.exists() and raw_frame_path.stat().st_size > 0:
                 return raw_frame_path, source_updated_at
             last_error = (result.stderr or "").strip() or "unknown error"
+            if attempt == 0:
+                self._refresh_camera_credentials(camera)
             time.sleep(1)
 
         raise RuntimeError(
