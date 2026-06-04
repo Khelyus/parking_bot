@@ -423,7 +423,7 @@ cameras:
         box: 0.590,0.312,0.613,0.388
         angle: -41.0
       - id: slot_3
-        box: 0.571,0.337,0.594,0.413
+        box: 0.568,0.325,0.591,0.415
         angle: -41.0
       - id: slot_4
         box: 0.609,0.304,0.628,0.378
@@ -458,6 +458,12 @@ cameras:
       - id: slot_14
         box: 0.763,0.220,0.782,0.294
         angle: -47.0
+      - id: slot_15
+        box: 0.545,0.331,0.567,0.412
+        angle: -45.0
+      - id: slot_2
+        box: 0.525,0.350,0.552,0.428
+        angle: -46.0
     stable_cycles: 2
 
   - id: bakalinskaya_27_vk6

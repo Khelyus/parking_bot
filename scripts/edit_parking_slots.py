@@ -42,6 +42,7 @@ class EditableSlot:
     id: str
     box: tuple[int, int, int, int]
     angle_degrees: float = 0.0
+    included: bool = True
 
 
 @dataclass
@@ -93,7 +94,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--output-dir",
         default="runtime/slot_editor",
-        help="Directory for exported YAML snippets and preview images.",
+        help="Directory for preview images and legacy editor artifacts.",
     )
     return parser.parse_args()
 
@@ -116,11 +117,9 @@ def _choose_camera_interactively(project_root: Path, explicit_camera_id: str | N
         return explicit_camera_id
 
     settings, configs = _load_camera_configs(project_root)
-    selectable = [camera for camera in configs if camera.enabled and camera.parking_slots]
+    selectable = [camera for camera in configs if camera.enabled]
     if not selectable:
-        raise RuntimeError(
-            f"No enabled cameras with parking_slots were found in {settings.camera_config_path}"
-        )
+        raise RuntimeError(f"No enabled cameras were found in {settings.camera_config_path}")
 
     print("Select camera:")
     for index, camera in enumerate(selectable, start=1):
@@ -151,6 +150,10 @@ def _load_camera(project_root: Path, camera_id: str) -> tuple[Any, list[ParkingS
 
 def _editor_state_path(output_dir: Path, camera_id: str) -> Path:
     return output_dir / f"{camera_id}.editor_state.json"
+
+
+def _prod_slots_path(camera_config_path: Path, camera_id: str) -> Path:
+    return camera_config_path.parent / "parking_slots" / f"{camera_id}.json"
 
 
 def _collect_image_paths(project_root: Path, camera_id: str, frame_arg: str | None, frames_dir_arg: str) -> list[Path]:
@@ -210,53 +213,52 @@ def _pixels_to_normalized(box: tuple[int, int, int, int], image_width: int, imag
 
 
 def _load_editor_slots(
-    output_dir: Path,
-    camera_id: str,
+    state_paths: list[Path],
     image_width: int,
     image_height: int,
 ) -> list[EditableSlot] | None:
-    state_path = _editor_state_path(output_dir, camera_id)
-    if not state_path.exists():
-        return None
-
-    try:
-        payload = json.loads(state_path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
-        print(f"Warning: could not load saved editor state from {state_path}: {exc}")
-        return None
-
-    raw_slots = payload.get("slots")
-    if not isinstance(raw_slots, list):
-        return None
-
-    slots: list[EditableSlot] = []
-    for index, item in enumerate(raw_slots, start=1):
-        if not isinstance(item, dict):
+    for state_path in state_paths:
+        if not state_path.exists():
             continue
-        slot_id = str(item.get("id") or f"slot_{index}")
-        raw_box = item.get("box")
-        if not isinstance(raw_box, (list, tuple)) or len(raw_box) != 4:
-            continue
+
         try:
-            x1, y1, x2, y2 = [float(value) for value in raw_box]
-            angle_degrees = float(item.get("angle_degrees", 0.0))
-        except (TypeError, ValueError):
+            payload = json.loads(state_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            print(f"Warning: could not load saved editor state from {state_path}: {exc}")
             continue
-        normalized_box = (
-            max(0.0, min(1.0, x1)),
-            max(0.0, min(1.0, y1)),
-            max(0.0, min(1.0, x2)),
-            max(0.0, min(1.0, y2)),
-        )
-        slots.append(
-            _normalized_to_pixels(
+
+        raw_slots = payload.get("slots")
+        if not isinstance(raw_slots, list):
+            continue
+
+        slots: list[EditableSlot] = []
+        for index, item in enumerate(raw_slots, start=1):
+            if not isinstance(item, dict):
+                continue
+            slot_id = str(item.get("id") or f"slot_{index}")
+            raw_box = item.get("box")
+            if not isinstance(raw_box, (list, tuple)) or len(raw_box) != 4:
+                continue
+            try:
+                x1, y1, x2, y2 = [float(value) for value in raw_box]
+                angle_degrees = float(item.get("angle_degrees", 0.0))
+            except (TypeError, ValueError):
+                continue
+            normalized_box = (
+                max(0.0, min(1.0, x1)),
+                max(0.0, min(1.0, y1)),
+                max(0.0, min(1.0, x2)),
+                max(0.0, min(1.0, y2)),
+            )
+            slot = _normalized_to_pixels(
                 ParkingSlot(id=slot_id, box=normalized_box, angle_degrees=angle_degrees),
                 image_width,
                 image_height,
             )
-        )
-
-    return slots or None
+            slot.included = bool(item.get("included", True))
+            slots.append(slot)
+        return slots
+    return None
 
 
 def _fit_scale(image_width: int, image_height: int, max_width: int, max_height: int) -> float:
@@ -385,6 +387,7 @@ def _duplicate_slot(
         id=_next_slot_id(slots),
         box=(new_x1, new_y1, new_x1 + width, new_y1 + height),
         angle_degrees=slot.angle_degrees,
+        included=True,
     )
 
 
@@ -423,6 +426,7 @@ def _update_slot_from_drag(
             id=origin_slot.id,
             box=(new_x1, new_y1, new_x1 + width, new_y1 + height),
             angle_degrees=origin_slot.angle_degrees,
+            included=origin_slot.included,
         )
 
     center_x, center_y = _slot_center(origin_slot.box)
@@ -465,7 +469,12 @@ def _update_slot_from_drag(
         image_width,
         image_height,
     )
-    return EditableSlot(id=origin_slot.id, box=new_box, angle_degrees=origin_slot.angle_degrees)
+    return EditableSlot(
+        id=origin_slot.id,
+        box=new_box,
+        angle_degrees=origin_slot.angle_degrees,
+        included=origin_slot.included,
+    )
 
 
 def _render(
@@ -483,9 +492,20 @@ def _render(
 
     for index, slot in enumerate(state.slots):
         selected = index == state.selected_index
-        color = (0, 220, 90) if selected else (0, 140, 255)
+        if slot.included:
+            color = (0, 220, 90) if selected else (0, 140, 255)
+            fill_color = color
+            fill_alpha = 0.12
+            label = slot.id
+        else:
+            color = (0, 120, 255) if selected else (140, 140, 140)
+            fill_color = (90, 90, 90)
+            fill_alpha = 0.05
+            label = f"{slot.id} [off]"
         polygon = np.array(_slot_polygon(slot), dtype=np.int32)
-        cv2.fillConvexPoly(overlay, polygon, color)
+        tinted_overlay = overlay.copy()
+        cv2.fillConvexPoly(tinted_overlay, polygon, fill_color)
+        cv2.addWeighted(tinted_overlay, fill_alpha, overlay, 1.0 - fill_alpha, 0, overlay)
         cv2.polylines(canvas, [polygon], isClosed=True, color=color, thickness=2 if selected else 1)
         handle_radius = 5 if selected else 3
         for point in polygon:
@@ -495,7 +515,7 @@ def _render(
         label_y = bounds[1] - 8 if bounds[1] > 24 else bounds[1] + 18
         cv2.putText(
             canvas,
-            slot.id,
+            label,
             (label_x, label_y),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.55,
@@ -513,7 +533,7 @@ def _render(
     lines = [
         f"camera={camera_id}",
         f"frame={state.image_index + 1}/{len(state.image_paths)}",
-        f"slots={len(state.slots)}",
+        f"slots={sum(1 for slot in state.slots if slot.included)}/{len(state.slots)} active",
         "dirty=yes" if state.dirty else "dirty=no",
     ]
     if 0 <= state.selected_index < len(state.slots):
@@ -522,12 +542,12 @@ def _render(
         lines.append(
             "selected="
             f"{slot.id} {norm_box[0]:.3f},{norm_box[1]:.3f},{norm_box[2]:.3f},{norm_box[3]:.3f}"
-            f" angle={slot.angle_degrees:.1f}"
+            f" angle={slot.angle_degrees:.1f} included={'yes' if slot.included else 'no'}"
         )
 
     help_lines = [
         "Mouse: drag inside slot to move, drag corners to resize, shift+drag to create",
-        "Keys: left/right frame | tab next slot | c clone | ,/. rotate | d delete | s save | h help | q quit",
+        "Keys: left/right frame | tab next slot | c clone | x include/exclude | ,/. rotate | d delete | s save | h help | q quit",
     ]
     y = 24
     for line in lines:
@@ -550,23 +570,34 @@ def _render(
     return canvas
 
 
-def _save_outputs(
-    *,
-    state: EditorState,
-    image: Any,
-    camera_id: str,
-    output_dir: Path,
-) -> tuple[Path, Path]:
-    cv2 = _require_cv2()
-    output_dir.mkdir(parents=True, exist_ok=True)
-    snippet_path = output_dir / f"{camera_id}.parking_slots.yaml"
-    preview_path = output_dir / f"{camera_id}.preview.jpg"
-    state_path = _editor_state_path(output_dir, camera_id)
+def _serialize_slot(slot: EditableSlot, image_width: int, image_height: int) -> dict[str, object]:
+    x1, y1, x2, y2 = _pixels_to_normalized(slot.box, image_width, image_height)
+    return {
+        "id": slot.id,
+        "box": [x1, y1, x2, y2],
+        "angle_degrees": round(slot.angle_degrees, 1),
+        "included": slot.included,
+    }
 
-    lines = [f"  - id: {camera_id}", "    parking_slots:"]
-    serialized_slots: list[dict[str, object]] = []
-    for slot in state.slots:
-        x1, y1, x2, y2 = _pixels_to_normalized(slot.box, state.image_shape[1], state.image_shape[0])
+
+def _serialize_prod_slots_payload(state: EditorState, camera_id: str) -> dict[str, object]:
+    return {
+        "camera_id": camera_id,
+        "image_shape": [state.image_shape[0], state.image_shape[1]],
+        "slots": [
+            _serialize_slot(slot, state.image_shape[1], state.image_shape[0])
+            for slot in state.slots
+        ],
+    }
+
+
+def _format_slot_yaml_lines(slots: list[EditableSlot], image_width: int, image_height: int) -> list[str]:
+    if not slots:
+        return []
+
+    lines = ["    parking_slots:"]
+    for slot in slots:
+        x1, y1, x2, y2 = _pixels_to_normalized(slot.box, image_width, image_height)
         lines.extend(
             [
                 f"      - id: {slot.id}",
@@ -575,31 +606,102 @@ def _save_outputs(
         )
         if abs(slot.angle_degrees) >= 0.05:
             lines.append(f"        angle: {slot.angle_degrees:.1f}")
-        serialized_slots.append(
-            {
-                "id": slot.id,
-                "box": [x1, y1, x2, y2],
-                "angle_degrees": round(slot.angle_degrees, 1),
-            }
-        )
-    snippet_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    state_path.write_text(
-        json.dumps(
-            {
-                "camera_id": camera_id,
-                "image_shape": [state.image_shape[0], state.image_shape[1]],
-                "slots": serialized_slots,
-            },
-            ensure_ascii=False,
-            indent=2,
-        ),
-        encoding="utf-8",
+    return lines
+
+
+def _normalize_scalar_text(value: str) -> str:
+    value = value.strip()
+    if len(value) >= 2 and value[0] == value[-1] and value[0] in {'"', "'"}:
+        return value[1:-1]
+    return value
+
+
+def _replace_camera_parking_slots(config_text: str, camera_id: str, slot_lines: list[str]) -> str:
+    lines = config_text.splitlines()
+    camera_start = -1
+    camera_end = len(lines)
+    for index, line in enumerate(lines):
+        if not line.startswith("  - id:"):
+            continue
+        stripped = line.strip()
+        current_camera_id = _normalize_scalar_text(stripped.split(":", 1)[1])
+        if current_camera_id == camera_id:
+            camera_start = index
+            continue
+        if camera_start >= 0:
+            camera_end = index
+            break
+
+    if camera_start < 0:
+        raise RuntimeError(f"Camera {camera_id!r} was not found in the YAML config")
+
+    parking_start = -1
+    parking_end = camera_end
+    stable_cycles_index = -1
+    for index in range(camera_start + 1, camera_end):
+        line = lines[index]
+        stripped = line.strip()
+        indent = len(line) - len(line.lstrip(" "))
+        if indent == 4 and stripped == "parking_slots:":
+            parking_start = index
+            parking_end = index + 1
+            while parking_end < camera_end:
+                nested_line = lines[parking_end]
+                if not nested_line.strip():
+                    parking_end += 1
+                    continue
+                nested_indent = len(nested_line) - len(nested_line.lstrip(" "))
+                if nested_indent <= 4:
+                    break
+                parking_end += 1
+            break
+        if indent == 4 and stripped.startswith("stable_cycles:") and stable_cycles_index < 0:
+            stable_cycles_index = index
+
+    new_lines = list(lines)
+    if parking_start >= 0:
+        new_lines[parking_start:parking_end] = slot_lines
+    elif slot_lines:
+        insert_at = stable_cycles_index if stable_cycles_index >= 0 else camera_end
+        new_lines[insert_at:insert_at] = slot_lines
+
+    trailing_newline = "\n" if config_text.endswith("\n") else ""
+    return "\n".join(new_lines) + trailing_newline
+
+
+def _save_outputs(
+    *,
+    state: EditorState,
+    image: Any,
+    camera_id: str,
+    output_dir: Path,
+    camera_config_path: Path,
+) -> tuple[Path, Path, Path]:
+    cv2 = _require_cv2()
+    output_dir.mkdir(parents=True, exist_ok=True)
+    preview_path = output_dir / f"{camera_id}.preview.jpg"
+    state_path = _editor_state_path(output_dir, camera_id)
+    prod_slots_state_path = _prod_slots_path(camera_config_path, camera_id)
+
+    prod_slots_state_path.parent.mkdir(parents=True, exist_ok=True)
+    payload = _serialize_prod_slots_payload(state, camera_id)
+    serialized_payload = json.dumps(payload, ensure_ascii=False, indent=2)
+    prod_slots_state_path.write_text(serialized_payload, encoding="utf-8")
+    state_path.write_text(serialized_payload, encoding="utf-8")
+
+    active_slots = [slot for slot in state.slots if slot.included]
+    slot_lines = _format_slot_yaml_lines(active_slots, state.image_shape[1], state.image_shape[0])
+    updated_yaml = _replace_camera_parking_slots(
+        camera_config_path.read_text(encoding="utf-8"),
+        camera_id,
+        slot_lines,
     )
+    camera_config_path.write_text(updated_yaml, encoding="utf-8")
 
     preview = _render(state, image, camera_id, scale=1.0, max_width=state.image_shape[1], max_height=state.image_shape[0])
     cv2.imwrite(str(preview_path), preview)
     state.dirty = False
-    return snippet_path, preview_path
+    return prod_slots_state_path, camera_config_path, preview_path
 
 
 def _install_mouse_handler(state: EditorState, scale: float) -> None:
@@ -647,6 +749,7 @@ def _install_mouse_handler(state: EditorState, scale: float) -> None:
                         id=state.slots[state.selected_index].id,
                         box=state.drag_origin_box,
                         angle_degrees=state.slots[state.selected_index].angle_degrees,
+                        included=state.slots[state.selected_index].included,
                     ),
                     state.drag_mode,
                     state.drag_anchor[0],
@@ -663,7 +766,14 @@ def _install_mouse_handler(state: EditorState, scale: float) -> None:
             if state.drag_mode == "create" and state.draft_box is not None:
                 box = _normalize_pixel_box(state.draft_box, state.image_shape[1], state.image_shape[0])
                 if box[2] - box[0] >= 8 and box[3] - box[1] >= 8:
-                    state.slots.append(EditableSlot(id=_next_slot_id(state.slots), box=box, angle_degrees=0.0))
+                    state.slots.append(
+                        EditableSlot(
+                            id=_next_slot_id(state.slots),
+                            box=box,
+                            angle_degrees=0.0,
+                            included=True,
+                        )
+                    )
                     state.selected_index = len(state.slots) - 1
                     state.dirty = True
                 state.draft_box = None
@@ -678,6 +788,7 @@ def _install_mouse_handler(state: EditorState, scale: float) -> None:
 def main() -> None:
     args = parse_args()
     project_root = _resolve_project_root(args.project_root)
+    settings, _ = _load_camera_configs(project_root)
     camera_id = _choose_camera_interactively(project_root, args.camera_id)
     camera, camera_slots = _load_camera(project_root, camera_id)
     image_paths = _collect_image_paths(project_root, camera_id, args.frame, args.frames_dir)
@@ -685,7 +796,14 @@ def main() -> None:
     image_height, image_width = image.shape[:2]
     scale = _fit_scale(image_width, image_height, args.max_width, args.max_height)
     output_dir = (project_root / args.output_dir).resolve()
-    initial_slots = _load_editor_slots(output_dir, camera_id, image_width, image_height)
+    initial_slots = _load_editor_slots(
+        [
+            _prod_slots_path(settings.camera_config_path, camera_id),
+            _editor_state_path(output_dir, camera_id),
+        ],
+        image_width,
+        image_height,
+    )
     if initial_slots is None:
         initial_slots = [_normalized_to_pixels(slot, image_width, image_height) for slot in camera_slots]
 
@@ -756,6 +874,10 @@ def main() -> None:
             state.selected_index = len(state.slots) - 1
             state.dirty = True
             continue
+        if key_char == "x" and 0 <= state.selected_index < len(state.slots):
+            state.slots[state.selected_index].included = not state.slots[state.selected_index].included
+            state.dirty = True
+            continue
         if key_char in {",", "<"} and 0 <= state.selected_index < len(state.slots):
             step = 5.0 if key_char == "<" else 1.0
             state.slots[state.selected_index].angle_degrees -= step
@@ -775,13 +897,15 @@ def main() -> None:
             state.dirty = True
             continue
         if key_char == "s":
-            snippet_path, preview_path = _save_outputs(
+            prod_json_path, prod_yaml_path, preview_path = _save_outputs(
                 state=state,
                 image=image,
                 camera_id=camera.id,
                 output_dir=output_dir,
+                camera_config_path=settings.camera_config_path,
             )
-            print(f"Saved snippet to {snippet_path}")
+            print(f"Saved prod JSON to {prod_json_path}")
+            print(f"Updated prod YAML at {prod_yaml_path}")
             print(f"Saved preview to {preview_path}")
             continue
 
