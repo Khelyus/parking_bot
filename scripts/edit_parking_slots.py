@@ -352,6 +352,22 @@ def _next_slot_id(slots: list[EditableSlot]) -> str:
     return f"slot_{index}"
 
 
+def _key_char(key: int) -> str | None:
+    if 0 <= key <= 0xFF:
+        char = chr(key)
+        if char.isprintable():
+            return char.lower()
+    return None
+
+
+def _arrow_key_codes() -> tuple[set[int], set[int]]:
+    if sys.platform.startswith("win"):
+        # On Windows `waitKeyEx` reports arrow keys as extended virtual-key values.
+        # Plain letters such as `S` must remain available for editor shortcuts.
+        return ({2424832}, {2555904})
+    return ({81, 65361}, {83, 65363})
+
+
 def _duplicate_slot(
     slot: EditableSlot,
     slots: list[EditableSlot],
@@ -690,8 +706,7 @@ def main() -> None:
         f"frames={len(image_paths)} slots={len(state.slots)} output_dir={output_dir}"
     )
 
-    left_arrow_keys = {81, 2424832}
-    right_arrow_keys = {83, 2555904}
+    left_arrow_keys, right_arrow_keys = _arrow_key_codes()
 
     while True:
         current_path = state.image_paths[state.image_index]
@@ -711,10 +726,11 @@ def main() -> None:
         key = cv2.waitKeyEx(30)
         if key < 0:
             continue
+        key_char = _key_char(key)
 
-        if key in (ord("q"), 27):
+        if key == 27 or key_char == "q":
             break
-        if key == ord("h"):
+        if key_char == "h":
             state.show_help = not state.show_help
             continue
         if key in right_arrow_keys:
@@ -723,13 +739,13 @@ def main() -> None:
         if key in left_arrow_keys:
             state.image_index = (state.image_index - 1) % len(state.image_paths)
             continue
-        if key in (9, ord("\t"), ord("n")) and state.slots:
+        if (key in (9, ord("\t")) or key_char == "n") and state.slots:
             state.selected_index = (state.selected_index + 1) % len(state.slots)
             continue
-        if key == ord("p") and state.slots:
+        if key_char == "p" and state.slots:
             state.selected_index = (state.selected_index - 1) % len(state.slots)
             continue
-        if key == ord("c") and 0 <= state.selected_index < len(state.slots):
+        if key_char == "c" and 0 <= state.selected_index < len(state.slots):
             duplicated = _duplicate_slot(
                 state.slots[state.selected_index],
                 state.slots,
@@ -740,17 +756,17 @@ def main() -> None:
             state.selected_index = len(state.slots) - 1
             state.dirty = True
             continue
-        if key in (ord(","), ord("<")) and 0 <= state.selected_index < len(state.slots):
-            step = 5.0 if key == ord("<") else 1.0
+        if key_char in {",", "<"} and 0 <= state.selected_index < len(state.slots):
+            step = 5.0 if key_char == "<" else 1.0
             state.slots[state.selected_index].angle_degrees -= step
             state.dirty = True
             continue
-        if key in (ord("."), ord(">")) and 0 <= state.selected_index < len(state.slots):
-            step = 5.0 if key == ord(">") else 1.0
+        if key_char in {".", ">"} and 0 <= state.selected_index < len(state.slots):
+            step = 5.0 if key_char == ">" else 1.0
             state.slots[state.selected_index].angle_degrees += step
             state.dirty = True
             continue
-        if key == ord("d") and 0 <= state.selected_index < len(state.slots):
+        if key_char == "d" and 0 <= state.selected_index < len(state.slots):
             del state.slots[state.selected_index]
             if not state.slots:
                 state.selected_index = -1
@@ -758,7 +774,7 @@ def main() -> None:
                 state.selected_index = min(state.selected_index, len(state.slots) - 1)
             state.dirty = True
             continue
-        if key == ord("s"):
+        if key_char == "s":
             snippet_path, preview_path = _save_outputs(
                 state=state,
                 image=image,
