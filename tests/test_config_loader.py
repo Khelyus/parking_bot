@@ -46,6 +46,7 @@ def test_load_camera_configs_supports_parking_slots(tmp_path: Path) -> None:
                 "    parking_slots:",
                 "      - id: upper_1",
                 "        box: 0.10,0.20,0.30,0.40",
+                "        angle: 17.5",
                 "      - box: 0.40,0.20,0.50,0.45",
             ]
         ),
@@ -58,5 +59,7 @@ def test_load_camera_configs_supports_parking_slots(tmp_path: Path) -> None:
     assert len(configs[0].parking_slots) == 2
     assert configs[0].parking_slots[0].id == "upper_1"
     assert configs[0].parking_slots[0].box == (0.1, 0.2, 0.3, 0.4)
+    assert configs[0].parking_slots[0].angle_degrees == 17.5
     assert configs[0].parking_slots[1].id == "slot_2"
     assert configs[0].parking_slots[1].box == (0.4, 0.2, 0.5, 0.45)
+    assert configs[0].parking_slots[1].angle_degrees == 0.0

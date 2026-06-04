@@ -179,7 +179,7 @@ def main() -> None:
         )
 
         for slot in camera.parking_slots:
-            slot_box = service._resolve_roi_bounds(image.shape[:2], slot.box)
+            slot_box = service._resolve_slot_geometry(image.shape[:2], slot)
             labeled = _pseudo_label_slot(
                 service=service,
                 image=image,
@@ -196,8 +196,7 @@ def main() -> None:
 
             label, confidence, metrics = labeled
             crop_box = service._expand_slot_crop_box(slot_box, image.shape[:2])
-            x1, y1, x2, y2 = crop_box
-            crop = image[y1:y2, x1:x2]
+            crop = service._extract_slot_crop(image, slot_box)
             if crop.size == 0:
                 skipped += 1
                 continue
@@ -216,8 +215,9 @@ def main() -> None:
                     "exported_path": str(target_path),
                     "label": label,
                     "confidence": confidence,
-                    "slot_box": slot_box,
+                    "slot_box": slot_box.bounds,
                     "crop_box": crop_box,
+                    "angle_degrees": slot.angle_degrees,
                     **metrics,
                 }
             )

@@ -112,7 +112,7 @@ def _parse_parking_slots(value: object, camera_id: str) -> tuple[ParkingSlot, ..
             )
             if box is None:
                 continue
-            slots.append(ParkingSlot(id=slot_id, box=box))
+            slots.append(ParkingSlot(id=slot_id, box=box, angle_degrees=0.0))
         return tuple(slots)
 
     if not isinstance(value, (list, tuple)):
@@ -126,6 +126,9 @@ def _parse_parking_slots(value: object, camera_id: str) -> tuple[ParkingSlot, ..
         if isinstance(item, dict):
             slot_id = str(item.get("id") or slot_id)
             box_source = item.get("box", item.get("bounds"))
+            raw_angle = item.get("angle", item.get("angle_degrees", 0.0))
+        else:
+            raw_angle = 0.0
         box = _parse_normalized_box(
             box_source,
             camera_id,
@@ -133,7 +136,13 @@ def _parse_parking_slots(value: object, camera_id: str) -> tuple[ParkingSlot, ..
         )
         if box is None:
             continue
-        slots.append(ParkingSlot(id=slot_id, box=box))
+        try:
+            angle_degrees = float(raw_angle)
+        except (TypeError, ValueError) as exc:
+            raise RuntimeError(
+                f"Camera {camera_id!r} parking_slots[{slot_id}] contains an invalid angle"
+            ) from exc
+        slots.append(ParkingSlot(id=slot_id, box=box, angle_degrees=angle_degrees))
     return tuple(slots)
 
 

@@ -1,0 +1,29 @@
+  - id: mendeleeva_130_cam_5
+    parking_slots:
+      - id: upper_1
+        box: 0.584,0.251,0.651,0.535
+        angle: 65.0
+      - id: slot_1
+        box: 0.501,0.000,0.549,0.281
+        angle: 67.0
+      - id: slot_2
+        box: 0.536,0.059,0.584,0.341
+        angle: 67.0
+      - id: slot_3
+        box: 0.553,0.145,0.619,0.430
+        angle: 65.0
+      - id: slot_5
+        box: 0.617,0.349,0.694,0.658
+        angle: 65.0
+      - id: slot_4
+        box: 0.670,0.441,0.770,0.805
+        angle: 61.0
+      - id: slot_7
+        box: 0.718,0.601,0.818,0.965
+        angle: 61.0
+      - id: slot_8
+        box: 0.893,0.139,0.959,0.387
+        angle: 57.0
+      - id: slot_9
+        box: 0.852,0.042,0.919,0.290
+        angle: 57.0
