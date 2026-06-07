@@ -16,6 +16,8 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urljoin
 from urllib.request import Request, urlopen
 
+from telegram.error import Forbidden, NetworkError, RetryAfter, TelegramError, TimedOut
+
 from parking_bot.camera_catalog import UfanetCatalogClient
 from parking_bot.detector import DetectionSummary, ParkingSpaceDetector, VehicleDetector
 from parking_bot.repository import SQLiteRepository
@@ -110,6 +112,7 @@ class CameraMonitorService:
             thread_name_prefix="parking-monitor",
         )
         self._bot: Bot | None = None
+        self._telegram_notification_retry_delays = (0.0, 2.0, 5.0)
 
     @property
     def timezone(self) -> tzinfo:
@@ -1563,15 +1566,104 @@ class CameraMonitorService:
                 )
             if observation.annotated_frame_path and observation.annotated_frame_path.exists():
                 with observation.annotated_frame_path.open("rb") as frame:
-                    await self._bot.send_photo(
+                    sent = await self._send_notification_with_retries(
+                        camera=camera,
+                        subscription=subscription,
+                        method="send_photo",
                         chat_id=subscription.chat_id,
                         photo=frame,
                         caption=caption,
                     )
             else:
-                await self._bot.send_message(chat_id=subscription.chat_id, text=caption)
+                sent = await self._send_notification_with_retries(
+                    camera=camera,
+                    subscription=subscription,
+                    method="send_message",
+                    chat_id=subscription.chat_id,
+                    text=caption,
+                )
+            if not sent:
+                continue
             self.repository.mark_notification(
                 subscription_id=subscription.id,
                 availability=Availability.FREE,
                 sent_at=now,
             )
+
+    async def _send_notification_with_retries(
+        self,
+        *,
+        camera: ResolvedCamera,
+        subscription: Any,
+        method: str,
+        **kwargs: Any,
+    ) -> bool:
+        if self._bot is None:
+            return False
+
+        delays = self._telegram_notification_retry_delays
+        for attempt, delay in enumerate(delays, start=1):
+            if delay > 0:
+                await asyncio.sleep(delay)
+            try:
+                photo = kwargs.get("photo")
+                if hasattr(photo, "seek"):
+                    photo.seek(0)
+                await getattr(self._bot, method)(**kwargs)
+                return True
+            except RetryAfter as exc:
+                retry_after = min(float(exc.retry_after), 30.0)
+                logger.warning(
+                    "Telegram notification throttled for camera %s subscription %s chat %s "
+                    "attempt %s/%s: retry after %.1f seconds",
+                    camera.id,
+                    subscription.id,
+                    subscription.chat_id,
+                    attempt,
+                    len(delays),
+                    retry_after,
+                )
+                if attempt < len(delays):
+                    await asyncio.sleep(retry_after)
+                continue
+            except (TimedOut, NetworkError) as exc:
+                logger.warning(
+                    "Telegram notification failed for camera %s subscription %s chat %s "
+                    "attempt %s/%s: %s: %s",
+                    camera.id,
+                    subscription.id,
+                    subscription.chat_id,
+                    attempt,
+                    len(delays),
+                    exc.__class__.__name__,
+                    exc,
+                )
+                continue
+            except Forbidden as exc:
+                logger.warning(
+                    "Telegram notification rejected for camera %s subscription %s chat %s: %s",
+                    camera.id,
+                    subscription.id,
+                    subscription.chat_id,
+                    exc,
+                )
+                return False
+            except TelegramError as exc:
+                logger.warning(
+                    "Telegram notification failed for camera %s subscription %s chat %s: %s: %s",
+                    camera.id,
+                    subscription.id,
+                    subscription.chat_id,
+                    exc.__class__.__name__,
+                    exc,
+                )
+                return False
+
+        logger.warning(
+            "Telegram notification skipped for camera %s subscription %s chat %s after %s attempts",
+            camera.id,
+            subscription.id,
+            subscription.chat_id,
+            len(delays),
+        )
+        return False
