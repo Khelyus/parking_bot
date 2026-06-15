@@ -1,0 +1,713 @@
+{
+  "kind": "estimated_benchmark",
+  "target_device": {
+    "name": "Raspberry Pi 4",
+    "assumed_cpu": "Broadcom BCM2711, quad-core ARM Cortex-A72",
+    "assumed_arch": "aarch64",
+    "assumed_mode": "CPU-only, no thermal throttling, local frames, same models as PC benchmark"
+  },
+  "status": "estimated_from_pc_measurements_not_verified_on_real_rpi4",
+  "confidence": "medium_low",
+  "generated_from": {
+    "pc_benchmark_file": "runtime\\benchmark_presentation.json",
+    "pc_cpu": "AMD Ryzen 7 5700X",
+    "pc_python": "3.12.2"
+  },
+  "estimation_method": {
+    "approach": "Stage-wise scaling of measured PC timings by inferred CPU slowdown factors for Raspberry Pi 4.",
+    "notes": [
+      "This file is an inference, not a hardware measurement.",
+      "Vehicle detection was scaled more aggressively than image loading and control-flow overhead.",
+      "Slot-classifier scaling is lower than YOLO scaling because its per-call compute footprint is smaller.",
+      "The result should be treated as presentation-grade estimate only."
+    ],
+    "scale_profiles": {
+      "optimistic": {
+        "image_load": 2.4,
+        "space_detector": 5.0,
+        "vehicle_detector": 5.0,
+        "slot_classifier": 4.0,
+        "other": 2.8
+      },
+      "base": {
+        "image_load": 3.0,
+        "space_detector": 5.6,
+        "vehicle_detector": 5.6,
+        "slot_classifier": 4.4,
+        "other": 3.2
+      },
+      "pessimistic": {
+        "image_load": 3.8,
+        "space_detector": 6.8,
+        "vehicle_detector": 6.8,
+        "slot_classifier": 5.4,
+        "other": 3.8
+      }
+    },
+    "source_context": {
+      "pytorch_wheels_available_for_aarch64_py313": true,
+      "torchvision_wheels_available_for_aarch64_py313": true,
+      "pi4_cpu_family_note": "Cortex-A72 is materially stronger than Pi 3 Cortex-A53, but still far below Ryzen 7 5700X."
+    }
+  },
+  "training_metrics_reference": {
+    "epoch": 50,
+    "mAP50": 0.9946,
+    "mAP50_95": 0.9821,
+    "precision": 0.9984,
+    "recall": 0.9985
+  },
+  "pc_reference_summary": {
+    "camera_count": 11,
+    "warm_full_pipeline_mean_ms": 604.9,
+    "warm_full_pipeline_median_ms": 437.7,
+    "warm_full_pipeline_p95_ms": 1435.0,
+    "fastest_camera": {
+      "camera_id": "zaki_validi_aksakova",
+      "slot_count": 15,
+      "mean_ms": 167.6
+    },
+    "slowest_camera": {
+      "camera_id": "salavat_square",
+      "slot_count": 75,
+      "mean_ms": 1466.9
+    },
+    "vehicle_detector_per_call_ms": 15.14,
+    "slot_classifier_per_call_ms": 6.84,
+    "space_detector_per_call_ms": 0.0,
+    "cold_start_reference": {
+      "camera_id": "mendeleeva_130_cam_5",
+      "slot_count": 9,
+      "full_pipeline_ms": 389.0
+    },
+    "training_metrics": {
+      "epoch": 50,
+      "mAP50": 0.9946,
+      "mAP50_95": 0.9821,
+      "precision": 0.9984,
+      "recall": 0.9985
+    }
+  },
+  "estimated_rpi4_summary": {
+    "optimistic_overall_mean_ms": 2709.9,
+    "base_overall_mean_ms": 3023.0,
+    "pessimistic_overall_mean_ms": 3680.1,
+    "base_overall_median_ms": 2179.5,
+    "base_overall_p95_ms": 7254.1,
+    "fastest_camera_base": {
+      "camera_id": "zaki_validi_aksakova",
+      "mean_ms": 753.6
+    },
+    "slowest_camera_base": {
+      "camera_id": "salavat_square",
+      "mean_ms": 7424.9
+    }
+  },
+  "estimated_rpi4_cameras": [
+    {
+      "camera_id": "salavat_square",
+      "display_name": "salavat_square",
+      "slot_count": 75,
+      "pc_reference_mean_ms": 1466.9,
+      "pc_reference_p95_ms": 1551.3,
+      "estimated_rpi4": {
+        "optimistic": {
+          "full_pipeline_mean_ms": 6660.2,
+          "full_pipeline_median_ms": 6606.6,
+          "full_pipeline_p95_ms": 7055.9,
+          "full_pipeline_min_ms": 6405.4,
+          "full_pipeline_max_ms": 7151.8,
+          "estimated_rounds_ms": [
+            6464.8,
+            6405.4,
+            6606.6,
+            7151.8,
+            6672.5
+          ]
+        },
+        "base": {
+          "full_pipeline_mean_ms": 7424.9,
+          "full_pipeline_median_ms": 7365.2,
+          "full_pipeline_p95_ms": 7866.6,
+          "full_pipeline_min_ms": 7140.7,
+          "full_pipeline_max_ms": 7973.6,
+          "estimated_rounds_ms": [
+            7206.5,
+            7140.7,
+            7365.2,
+            7973.6,
+            7438.6
+          ]
+        },
+        "pessimistic": {
+          "full_pipeline_mean_ms": 9040.2,
+          "full_pipeline_median_ms": 8967.4,
+          "full_pipeline_p95_ms": 9577.5,
+          "full_pipeline_min_ms": 8694.5,
+          "full_pipeline_max_ms": 9707.7,
+          "estimated_rounds_ms": [
+            8774.6,
+            8694.5,
+            8967.4,
+            9707.7,
+            9056.9
+          ]
+        }
+      },
+      "presentation_pick": {
+        "full_pipeline_mean_ms": 7424.9,
+        "full_pipeline_p95_ms": 7866.6
+      }
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk6",
+      "display_name": "bakalinskaya_27_vk6",
+      "slot_count": 57,
+      "pc_reference_mean_ms": 1234.5,
+      "pc_reference_p95_ms": 1256.3,
+      "estimated_rpi4": {
+        "optimistic": {
+          "full_pipeline_mean_ms": 5651.6,
+          "full_pipeline_median_ms": 5620.3,
+          "full_pipeline_p95_ms": 5753.8,
+          "full_pipeline_min_ms": 5559.9,
+          "full_pipeline_max_ms": 5758.9,
+          "estimated_rounds_ms": [
+            5758.9,
+            5733.4,
+            5620.3,
+            5585.3,
+            5559.9
+          ]
+        },
+        "base": {
+          "full_pipeline_mean_ms": 6302.5,
+          "full_pipeline_median_ms": 6267.4,
+          "full_pipeline_p95_ms": 6416.7,
+          "full_pipeline_min_ms": 6200.2,
+          "full_pipeline_max_ms": 6422.4,
+          "estimated_rounds_ms": [
+            6422.4,
+            6393.9,
+            6267.4,
+            6228.5,
+            6200.2
+          ]
+        },
+        "pessimistic": {
+          "full_pipeline_mean_ms": 7672.6,
+          "full_pipeline_median_ms": 7630.1,
+          "full_pipeline_p95_ms": 7811.4,
+          "full_pipeline_min_ms": 7548.1,
+          "full_pipeline_max_ms": 7818.3,
+          "estimated_rounds_ms": [
+            7818.3,
+            7783.7,
+            7630.1,
+            7583.0,
+            7548.1
+          ]
+        }
+      },
+      "presentation_pick": {
+        "full_pipeline_mean_ms": 6302.5,
+        "full_pipeline_p95_ms": 6416.7
+      }
+    },
+    {
+      "camera_id": "bakalinskaya_27_vk7",
+      "display_name": "bakalinskaya_27_vk7",
+      "slot_count": 35,
+      "pc_reference_mean_ms": 951.5,
+      "pc_reference_p95_ms": 962.4,
+      "estimated_rpi4": {
+        "optimistic": {
+          "full_pipeline_mean_ms": 4333.9,
+          "full_pipeline_median_ms": 4337.8,
+          "full_pipeline_p95_ms": 4383.1,
+          "full_pipeline_min_ms": 4266.5,
+          "full_pipeline_max_ms": 4389.3,
+          "estimated_rounds_ms": [
+            4317.8,
+            4389.3,
+            4337.8,
+            4358.3,
+            4266.5
+          ]
+        },
+        "base": {
+          "full_pipeline_mean_ms": 4839.0,
+          "full_pipeline_median_ms": 4843.2,
+          "full_pipeline_p95_ms": 4893.8,
+          "full_pipeline_min_ms": 4763.9,
+          "full_pipeline_max_ms": 4900.7,
+          "estimated_rounds_ms": [
+            4820.9,
+            4900.7,
+            4843.2,
+            4866.2,
+            4763.9
+          ]
+        },
+        "pessimistic": {
+          "full_pipeline_mean_ms": 5888.3,
+          "full_pipeline_median_ms": 5893.3,
+          "full_pipeline_p95_ms": 5955.1,
+          "full_pipeline_min_ms": 5796.7,
+          "full_pipeline_max_ms": 5963.6,
+          "estimated_rounds_ms": [
+            5866.3,
+            5963.6,
+            5893.3,
+            5921.4,
+            5796.7
+          ]
+        }
+      },
+      "presentation_pick": {
+        "full_pipeline_mean_ms": 4839.0,
+        "full_pipeline_p95_ms": 4893.8
+      }
+    },
+    {
+      "camera_id": "mendeleeva_130_cam_9",
+      "display_name": "mendeleeva_130_cam_9",
+      "slot_count": 28,
+      "pc_reference_mean_ms": 662.8,
+      "pc_reference_p95_ms": 670.0,
+      "estimated_rpi4": {
+        "optimistic": {
+          "full_pipeline_mean_ms": 3040.0,
+          "full_pipeline_median_ms": 3039.0,
+          "full_pipeline_p95_ms": 3073.4,
+          "full_pipeline_min_ms": 3005.6,
+          "full_pipeline_max_ms": 3073.7,
+          "estimated_rounds_ms": [
+            3071.8,
+            3073.7,
+            3039.0,
+            3010.0,
+            3005.6
+          ]
+        },
+        "base": {
+          "full_pipeline_mean_ms": 3392.4,
+          "full_pipeline_median_ms": 3391.0,
+          "full_pipeline_p95_ms": 3429.7,
+          "full_pipeline_min_ms": 3353.9,
+          "full_pipeline_max_ms": 3430.1,
+          "estimated_rounds_ms": [
+            3428.0,
+            3430.1,
+            3391.0,
+            3358.8,
+            3353.9
+          ]
+        },
+        "pessimistic": {
+          "full_pipeline_mean_ms": 4129.2,
+          "full_pipeline_median_ms": 4127.6,
+          "full_pipeline_p95_ms": 4174.6,
+          "full_pipeline_min_ms": 4082.4,
+          "full_pipeline_max_ms": 4175.1,
+          "estimated_rounds_ms": [
+            4172.5,
+            4175.1,
+            4127.6,
+            4088.3,
+            4082.4
+          ]
+        }
+      },
+      "presentation_pick": {
+        "full_pipeline_mean_ms": 3392.4,
+        "full_pipeline_p95_ms": 3429.7
+      }
+    },
+    {
+      "camera_id": "ufa_arena_1",
+      "display_name": "ufa_arena_1",
+      "slot_count": 26,
+      "pc_reference_mean_ms": 443.6,
+      "pc_reference_p95_ms": 450.5,
+      "estimated_rpi4": {
+        "optimistic": {
+          "full_pipeline_mean_ms": 1988.6,
+          "full_pipeline_median_ms": 1989.3,
+          "full_pipeline_p95_ms": 2021.8,
+          "full_pipeline_min_ms": 1959.1,
+          "full_pipeline_max_ms": 2026.1,
+          "estimated_rounds_ms": [
+            1959.1,
+            1963.5,
+            1989.3,
+            2004.8,
+            2026.1
+          ]
+        },
+        "base": {
+          "full_pipeline_mean_ms": 2216.6,
+          "full_pipeline_median_ms": 2217.5,
+          "full_pipeline_p95_ms": 2253.8,
+          "full_pipeline_min_ms": 2183.5,
+          "full_pipeline_max_ms": 2258.6,
+          "estimated_rounds_ms": [
+            2183.5,
+            2188.9,
+            2217.5,
+            2234.7,
+            2258.6
+          ]
+        },
+        "pessimistic": {
+          "full_pipeline_mean_ms": 2700.4,
+          "full_pipeline_median_ms": 2701.4,
+          "full_pipeline_p95_ms": 2745.5,
+          "full_pipeline_min_ms": 2660.2,
+          "full_pipeline_max_ms": 2751.3,
+          "estimated_rounds_ms": [
+            2660.2,
+            2666.8,
+            2701.4,
+            2722.4,
+            2751.3
+          ]
+        }
+      },
+      "presentation_pick": {
+        "full_pipeline_mean_ms": 2216.6,
+        "full_pipeline_p95_ms": 2253.8
+      }
+    },
+    {
+      "camera_id": "sports_palace_square",
+      "display_name": "sports_palace_square",
+      "slot_count": 22,
+      "pc_reference_mean_ms": 440.0,
+      "pc_reference_p95_ms": 442.7,
+      "estimated_rpi4": {
+        "optimistic": {
+          "full_pipeline_mean_ms": 1951.7,
+          "full_pipeline_median_ms": 1952.5,
+          "full_pipeline_p95_ms": 1964.2,
+          "full_pipeline_min_ms": 1935.7,
+          "full_pipeline_max_ms": 1964.2,
+          "estimated_rounds_ms": [
+            1952.5,
+            1964.2,
+            1964.2,
+            1941.8,
+            1935.7
+          ]
+        },
+        "base": {
+          "full_pipeline_mean_ms": 2178.7,
+          "full_pipeline_median_ms": 2179.5,
+          "full_pipeline_p95_ms": 2192.9,
+          "full_pipeline_min_ms": 2160.7,
+          "full_pipeline_max_ms": 2193.0,
+          "estimated_rounds_ms": [
+            2179.5,
+            2193.0,
+            2192.7,
+            2167.4,
+            2160.7
+          ]
+        },
+        "pessimistic": {
+          "full_pipeline_mean_ms": 2651.1,
+          "full_pipeline_median_ms": 2652.2,
+          "full_pipeline_p95_ms": 2668.5,
+          "full_pipeline_min_ms": 2629.4,
+          "full_pipeline_max_ms": 2668.6,
+          "estimated_rounds_ms": [
+            2652.2,
+            2668.6,
+            2668.1,
+            2637.3,
+            2629.4
+          ]
+        }
+      },
+      "presentation_pick": {
+        "full_pipeline_mean_ms": 2178.7,
+        "full_pipeline_p95_ms": 2192.9
+      }
+    },
+    {
+      "camera_id": "park_pobedy",
+      "display_name": "park_pobedy",
+      "slot_count": 16,
+      "pc_reference_mean_ms": 346.8,
+      "pc_reference_p95_ms": 357.7,
+      "estimated_rpi4": {
+        "optimistic": {
+          "full_pipeline_mean_ms": 1588.7,
+          "full_pipeline_median_ms": 1577.3,
+          "full_pipeline_p95_ms": 1641.2,
+          "full_pipeline_min_ms": 1551.5,
+          "full_pipeline_max_ms": 1648.4,
+          "estimated_rounds_ms": [
+            1612.4,
+            1648.4,
+            1577.3,
+            1551.5,
+            1553.7
+          ]
+        },
+        "base": {
+          "full_pipeline_mean_ms": 1773.3,
+          "full_pipeline_median_ms": 1760.5,
+          "full_pipeline_p95_ms": 1832.2,
+          "full_pipeline_min_ms": 1731.7,
+          "full_pipeline_max_ms": 1840.3,
+          "estimated_rounds_ms": [
+            1799.9,
+            1840.3,
+            1760.5,
+            1731.7,
+            1734.1
+          ]
+        },
+        "pessimistic": {
+          "full_pipeline_mean_ms": 2159.4,
+          "full_pipeline_median_ms": 2143.9,
+          "full_pipeline_p95_ms": 2231.0,
+          "full_pipeline_min_ms": 2108.9,
+          "full_pipeline_max_ms": 2240.8,
+          "estimated_rounds_ms": [
+            2191.9,
+            2240.8,
+            2143.9,
+            2108.9,
+            2111.7
+          ]
+        }
+      },
+      "presentation_pick": {
+        "full_pipeline_mean_ms": 1773.3,
+        "full_pipeline_p95_ms": 1832.2
+      }
+    },
+    {
+      "camera_id": "mushnikova_balandina",
+      "display_name": "mushnikova_balandina",
+      "slot_count": 21,
+      "pc_reference_mean_ms": 327.0,
+      "pc_reference_p95_ms": 330.5,
+      "estimated_rpi4": {
+        "optimistic": {
+          "full_pipeline_mean_ms": 1391.2,
+          "full_pipeline_median_ms": 1398.1,
+          "full_pipeline_p95_ms": 1406.9,
+          "full_pipeline_min_ms": 1355.8,
+          "full_pipeline_max_ms": 1408.3,
+          "estimated_rounds_ms": [
+            1355.8,
+            1401.3,
+            1392.2,
+            1398.1,
+            1408.3
+          ]
+        },
+        "base": {
+          "full_pipeline_mean_ms": 1551.9,
+          "full_pipeline_median_ms": 1559.7,
+          "full_pipeline_p95_ms": 1569.5,
+          "full_pipeline_min_ms": 1512.3,
+          "full_pipeline_max_ms": 1571.0,
+          "estimated_rounds_ms": [
+            1512.3,
+            1563.5,
+            1553.0,
+            1559.7,
+            1571.0
+          ]
+        },
+        "pessimistic": {
+          "full_pipeline_mean_ms": 1889.4,
+          "full_pipeline_median_ms": 1898.8,
+          "full_pipeline_p95_ms": 1910.8,
+          "full_pipeline_min_ms": 1841.2,
+          "full_pipeline_max_ms": 1912.6,
+          "estimated_rounds_ms": [
+            1841.2,
+            1903.4,
+            1890.8,
+            1898.8,
+            1912.6
+          ]
+        }
+      },
+      "presentation_pick": {
+        "full_pipeline_mean_ms": 1551.9,
+        "full_pipeline_p95_ms": 1569.5
+      }
+    },
+    {
+      "camera_id": "lesotehnikuma_luganskaya",
+      "display_name": "lesotehnikuma_luganskaya",
+      "slot_count": 30,
+      "pc_reference_mean_ms": 338.0,
+      "pc_reference_p95_ms": 342.1,
+      "estimated_rpi4": {
+        "optimistic": {
+          "full_pipeline_mean_ms": 1266.6,
+          "full_pipeline_median_ms": 1270.2,
+          "full_pipeline_p95_ms": 1285.2,
+          "full_pipeline_min_ms": 1233.1,
+          "full_pipeline_max_ms": 1287.5,
+          "estimated_rounds_ms": [
+            1233.1,
+            1276.0,
+            1270.2,
+            1266.4,
+            1287.5
+          ]
+        },
+        "base": {
+          "full_pipeline_mean_ms": 1412.1,
+          "full_pipeline_median_ms": 1416.1,
+          "full_pipeline_p95_ms": 1432.9,
+          "full_pipeline_min_ms": 1374.6,
+          "full_pipeline_max_ms": 1435.5,
+          "estimated_rounds_ms": [
+            1374.6,
+            1422.6,
+            1416.1,
+            1411.9,
+            1435.5
+          ]
+        },
+        "pessimistic": {
+          "full_pipeline_mean_ms": 1717.4,
+          "full_pipeline_median_ms": 1722.2,
+          "full_pipeline_p95_ms": 1742.7,
+          "full_pipeline_min_ms": 1671.8,
+          "full_pipeline_max_ms": 1745.7,
+          "estimated_rounds_ms": [
+            1671.8,
+            1730.3,
+            1722.2,
+            1717.1,
+            1745.7
+          ]
+        }
+      },
+      "presentation_pick": {
+        "full_pipeline_mean_ms": 1412.1,
+        "full_pipeline_p95_ms": 1432.9
+      }
+    },
+    {
+      "camera_id": "mendeleeva_130_cam_5",
+      "display_name": "mendeleeva_130_cam_5",
+      "slot_count": 9,
+      "pc_reference_mean_ms": 275.5,
+      "pc_reference_p95_ms": 279.9,
+      "estimated_rpi4": {
+        "optimistic": {
+          "full_pipeline_mean_ms": 1259.7,
+          "full_pipeline_median_ms": 1253.1,
+          "full_pipeline_p95_ms": 1277.7,
+          "full_pipeline_min_ms": 1251.0,
+          "full_pipeline_max_ms": 1282.0,
+          "estimated_rounds_ms": [
+            1253.1,
+            1282.0,
+            1260.6,
+            1251.8,
+            1251.0
+          ]
+        },
+        "base": {
+          "full_pipeline_mean_ms": 1408.0,
+          "full_pipeline_median_ms": 1400.7,
+          "full_pipeline_p95_ms": 1428.4,
+          "full_pipeline_min_ms": 1398.3,
+          "full_pipeline_max_ms": 1433.2,
+          "estimated_rounds_ms": [
+            1400.7,
+            1433.2,
+            1409.0,
+            1399.1,
+            1398.3
+          ]
+        },
+        "pessimistic": {
+          "full_pipeline_mean_ms": 1713.1,
+          "full_pipeline_median_ms": 1704.1,
+          "full_pipeline_p95_ms": 1737.7,
+          "full_pipeline_min_ms": 1701.1,
+          "full_pipeline_max_ms": 1743.6,
+          "estimated_rounds_ms": [
+            1704.1,
+            1743.6,
+            1714.2,
+            1702.3,
+            1701.1
+          ]
+        }
+      },
+      "presentation_pick": {
+        "full_pipeline_mean_ms": 1408.0,
+        "full_pipeline_p95_ms": 1428.4
+      }
+    },
+    {
+      "camera_id": "zaki_validi_aksakova",
+      "display_name": "zaki_validi_aksakova",
+      "slot_count": 15,
+      "pc_reference_mean_ms": 167.6,
+      "pc_reference_p95_ms": 170.9,
+      "estimated_rpi4": {
+        "optimistic": {
+          "full_pipeline_mean_ms": 676.6,
+          "full_pipeline_median_ms": 684.3,
+          "full_pipeline_p95_ms": 692.1,
+          "full_pipeline_min_ms": 651.7,
+          "full_pipeline_max_ms": 693.5,
+          "estimated_rounds_ms": [
+            651.7,
+            684.3,
+            667.0,
+            686.4,
+            693.5
+          ]
+        },
+        "base": {
+          "full_pipeline_mean_ms": 753.6,
+          "full_pipeline_median_ms": 762.4,
+          "full_pipeline_p95_ms": 770.9,
+          "full_pipeline_min_ms": 726.0,
+          "full_pipeline_max_ms": 772.5,
+          "estimated_rounds_ms": [
+            726.0,
+            762.4,
+            743.0,
+            764.4,
+            772.5
+          ]
+        },
+        "pessimistic": {
+          "full_pipeline_mean_ms": 919.5,
+          "full_pipeline_median_ms": 930.1,
+          "full_pipeline_p95_ms": 940.4,
+          "full_pipeline_min_ms": 885.8,
+          "full_pipeline_max_ms": 942.4,
+          "estimated_rounds_ms": [
+            885.8,
+            930.1,
+            906.6,
+            932.6,
+            942.4
+          ]
+        }
+      },
+      "presentation_pick": {
+        "full_pipeline_mean_ms": 753.6,
+        "full_pipeline_p95_ms": 770.9
+      }
+    }
+  ]
+}
